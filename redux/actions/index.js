@@ -65,11 +65,11 @@ export const getHotels = (hotel) => {
   }
 }
 
-export const getHotelSuccessAction = (receivedKeyword) => {
+export const getHotelSuccessAction = (data) => {
   return {
     type: ActionTypes.GET_HOTELS_SUCCEEDED,
     payload: {
-      receivedKeyword,
+      data,
     }
   }
 }
@@ -77,6 +77,34 @@ export const getHotelSuccessAction = (receivedKeyword) => {
 export const getHotelFaildAction = (error) => {
   return {
     type: ActionTypes.GET_HOTELS_FAILD,
+    payload: {
+      error,
+    }
+  }
+}
+
+export const getInforHotel = (hotel) => {
+  console.log('Get Infor Hotel');
+  return {
+    type: ActionTypes.GET_INFOR_HOTEL,
+    payload: {
+      hotel,
+    }
+  }
+}
+
+export const getInforHotelSuccessAction = (hotel) => {
+  return {
+    type: ActionTypes.GET_INFOR_HOTEL_SUCCEEDED,
+    payload: {
+      hotel,
+    }
+  }
+}
+
+export const getInforHotelFaildAction = (error) => {
+  return {
+    type: ActionTypes.GET_INFOR_HOTEL_FAILD,
     payload: {
       error,
     }

@@ -1,13 +1,18 @@
 import * as ActionTypes from '../actionTypes';
 
 const initialNoteState = [];
-
+// state = {
+//   isLoading: true,
+//   error: false,
+//   data: 
+// }
 export default function getHotelsReducer(state = initialNoteState, action) {
   switch(action.type) {
     case ActionTypes.GET_HOTELS_SUCCEEDED: 
-      console.log(action.payload); 
+      alert('123');
       console.log('get hotels succeeded');
-      return state;
+      console.log(action.payload); 
+      return action.payload;
     case ActionTypes.GET_HOTELS_FAILD: 
       console.log(action.payload); 
       console.log('faild');

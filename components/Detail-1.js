@@ -1,26 +1,43 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useState } from 'react'
-import { StyleSheet, Text, View,  ScrollView, Image, Dimensions, ActionSheetIOS } from 'react-native';
+import { StyleSheet, 
+  Text, 
+  View,  
+  ScrollView, 
+  Image, 
+  Dimensions, 
+  ActionSheetIOS,
+  Button,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { AntDesign } from 'react-native-vector-icons';
-import { MaterialCommunityIcons } from 'react-native-vector-icons';
-import { FontAwesome5 } from 'react-native-vector-icons';
-import { FontAwesome } from 'react-native-vector-icons';
+import { 
+  AntDesign, 
+  FontAwesome5, 
+  FontAwesome, 
+  MaterialCommunityIcons 
+} from 'react-native-vector-icons';
 import { Feather } from '@expo/vector-icons';
 import  { Color }  from './Color'; 
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import Animated from 'react-native-reanimated';
+import { TouchableWithoutFeedback, FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import BottomSheet from 'reanimated-bottom-sheet';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
+
+import { useSelector, useDispatch } from 'react-redux';
+import { getInforHotel } from '../redux/actions'
 
 export default function DetailsScreen({ navigation }) {
   const [multiSliderValue, setMultiSliderValue] = useState([0, 100])
   const multiSliderValuesChange = (values) => setMultiSliderValue(values)
   const [priceValue, setPriceValue] = useState([0, 50])
   const PriceValuesChange = (values) => setPriceValue(values)
-  
+
+  const dataHotels = useSelector(state => state.getHotel.data);
+  console.log('=============');
+  console.log(dataHotels);
+  console.log('=============');
+  const dispatch = useDispatch();
   const actioon = () =>
   ActionSheetIOS.showActionSheetWithOptions(
     {
@@ -284,6 +301,7 @@ export default function DetailsScreen({ navigation }) {
   const sheetRef = React.useRef(null);
 
     return (
+      <>
       <SafeAreaView style={{ flex: 1 }}>
         <StatusBar barStyle="dark-content" />
         <View style={styles.menu_chose}>
@@ -309,45 +327,55 @@ export default function DetailsScreen({ navigation }) {
           </View>
         </View>
         <View style={styles.flatList}>
-        <ScrollView style={styles.scrollView}>
-          <View style={styles.card}>
-            <View style={styles.card_Img}>
-              <Image style={styles.Image} source={require('../assets/Hotel1.jpg')}/>
-              <View style={styles.card_heart}>
-                <AntDesign name="hearto" size={14} color={Color.primary} style={{padding: 10}}/>
-              </View>
-            </View>
-             <View style={styles.card_Info}>
-              <View style={styles.card_row_1}>
-                <View>
-                  <Text numberOfLines= {2} style={{fontSize: 14, fontWeight: "bold", color: '#111',  textAlign: 'left', marginLeft: 10}}>Cozrum Homes Trương Định lalaadfàdfd ad adf adfa àdđlanlesterd richhhghghg</Text>
-                  <Text numberOfLines= {2} style={{fontSize: 11, color: 'grey', marginLeft: 10}}>73 Trương Định, Quận 3, Hồ Chí Minh lalaadfàdfd ad adf adfa àdđlanlesterd richhhghghg</Text>
+          <FlatList style={styles.scrollView}
+            data={dataHotels}
+            renderItem={({item}) => (
+              <View style={styles.card}>
+                <View style={styles.card_Img}>
+                  <Image style={styles.Image} source={{uri: item.logo ? item.logo : 'https://scontent.fhan2-2.fna.fbcdn.net/v/t1.0-0/p640x640/68401906_157744848700465_7740565304106811392_o.jpg?_nc_cat=111&_nc_sid=e3f864&_nc_ohc=K-qqLuKEe3QAX8rTOUz&_nc_ht=scontent.fhan2-2.fna&tp=6&oh=498085993b02cf8a7c1670bd50660e5c&oe=5F7D0E5C'}}/>
+                  <View style={styles.card_heart}>
+                    <AntDesign name="hearto" size={14} color={Color.primary} style={{padding: 10}}/>
+                  </View>
                 </View>
-                <View style={{flexDirection: 'row', marginLeft: 10}}>
-                  <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                  <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                  <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>    
-                  <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                  <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>    
-                  <Text style={{color:'white', marginLeft: 7, fontSize: 12,paddingLeft: 5,paddingRight: 5, borderColor: 'black',backgroundColor: Color.primary}}>9.0</Text>
-                </View>
-              </View>
-              <View style={styles.card_row_2}>
-                <Text style={{fontSize: 15, fontWeight: 'bold'}}>435.000 đ</Text>
-                <Text style={{}}>/Đêm</Text>
-              </View>
-            </View> 
-          </View> 
-        </ScrollView>
-        <BottomSheet
-              ref={sheetRef}
-              snapPoints={[550, 0]}
-              borderRadius={40}
-              renderContent={renderContent}
-              initialSnap={1}
-            />
+                  <View
+                    style={styles.card_Info}
+                    // onPress={() => dispatch(getInforHotel(item.id))}
+                  >
+                    <View style={styles.card_row_1}>
+                      <View>
+                        <Text numberOfLines= {2} style={{fontSize: 14, fontWeight: "bold", color: '#111',  textAlign: 'left', marginLeft: 10}}> { item.name } </Text>
+                        <Text numberOfLines= {2} style={{fontSize: 11, color: 'grey', marginLeft: 10}}> { item.address } </Text>
+                      </View>
+                      <View style={{flexDirection: 'row', marginLeft: 10}}>
+                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>
+                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>
+                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>    
+                        <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>
+                        <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>    
+                        <Text style={{color:'white', marginLeft: 7, fontSize: 12,paddingLeft: 5,paddingRight: 5, borderColor: 'black',backgroundColor: Color.primary}}> { item.overall_score } </Text>
+                      </View>
+                    </View>
+                    <View style={styles.card_row_2}>
+                      <Text style={{fontSize: 15, fontWeight: 'bold'}}>435.000 đ</Text>
+                      <Text style={{}}>/Đêm</Text>
+                    </View>
+                  </View> 
+              </View> 
+            )}
+            keyExtractor={item => item.hotel_id}
+          >
+            
+          </FlatList>
+          <BottomSheet
+                ref={sheetRef}
+                snapPoints={[550, 0]}
+                borderRadius={40}
+                renderContent={renderContent}
+                initialSnap={1}
+              />
         </View>
       </SafeAreaView>
+      </>
     );
   }
 

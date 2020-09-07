@@ -4,10 +4,10 @@ import { GET_HOTELS, GET_HOTELS_FAILD, GET_HOTELS_SUCCEEDED } from '../redux/act
 import { put, takeLatest } from 'redux-saga/effects';
 
 function* getHotels({payload}) {
-  console.log('hotels', payload);
   try {
-    const receivedHotels = yield Api.getHotels(payload.hotel);
-    yield put({ type: GET_HOTELS_SUCCEEDED, payload: { data: receivedHotels } });  
+    const hotels = yield Api.getHotels(payload.hotel);
+    // console.log(hotels);
+    yield put({ type: GET_HOTELS_SUCCEEDED, payload: { data: hotels } });  
   } 
   catch(err) {
     console.log('err');

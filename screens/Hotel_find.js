@@ -5,7 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import { FontAwesome } from '@expo/vector-icons';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { keyWordSuggestion, getHotels } from '../redux/actions'
+import { keyWordSuggestion, getHotels, getInforHotel } from '../redux/actions'
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function Hotel_find({ navigation }) {
@@ -30,13 +30,9 @@ export default function Hotel_find({ navigation }) {
               data={dataKeyWords}
               renderItem={({ item }) => (
                 <TouchableOpacity
-                  onPress={() => { 
-                    if( item.type_code === 1 || item.type_code === 2 ) {
-                      dispath(getHotels(item)); 
-                      navigation.navigate('Detail')
-                    } else {
-                      navigation.navigate('Hotel')
-                    }
+                  onPress={ async () => {
+                    await dispath(getHotels(item)); 
+                    navigation.navigate('Detail', {});
                   }}
                   style={{padding: 8, backgroundColor: '#ccc'}}
                 >
