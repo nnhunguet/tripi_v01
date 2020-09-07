@@ -55,3 +55,30 @@ export const fetchFaildAction = (error) => {
     }
   }
 }
+
+export const getHotels = (hotel) => {
+  return {
+    type: ActionTypes.GET_HOTELS,
+    payload: {
+      hotel,
+    }
+  }
+}
+
+export const getHotelSuccessAction = (receivedKeyword) => {
+  return {
+    type: ActionTypes.GET_HOTELS_SUCCEEDED,
+    payload: {
+      receivedKeyword,
+    }
+  }
+}
+
+export const getHotelFaildAction = (error) => {
+  return {
+    type: ActionTypes.GET_HOTELS_FAILD,
+    payload: {
+      error,
+    }
+  }
+}

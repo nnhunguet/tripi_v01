@@ -1,4 +1,4 @@
-import { Api }  from './Api';
+import { Api }  from './ApiKeyWord';
 import { FETCH_FAILD, FETCH_SUCCEEDED, FETCH_KEYWORD } from '../redux/actionTypes';
 
 import { put, takeLatest, delay } from 'redux-saga/effects';
@@ -8,7 +8,6 @@ function* fetchKeyWord({payload}) {
   console.log('fetch key word', payload);
   try {
     const receivedKeyWord = yield Api.getKeyWordSuggestion(payload.keyword);
-    console.log(receivedKeyWord);
     yield put({ type: FETCH_SUCCEEDED, payload: { data: receivedKeyWord } });  
   } 
   catch(err) {

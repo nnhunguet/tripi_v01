@@ -5,13 +5,12 @@ import { StatusBar } from 'expo-status-bar';
 import { FontAwesome } from '@expo/vector-icons';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { keyWordSuggestion } from '../redux/actions'
+import { keyWordSuggestion, getHotels } from '../redux/actions'
+import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 
-export default function Hotel_find() {
+export default function Hotel_find({ navigation }) {
   const dispath = useDispatch();
-  
-  const [inputText, setInputText] = useState('');
-  console.log(inputText);
+  const dataKeyWords = useSelector(state => state.keyWordReducer);
   return(
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" />
@@ -21,10 +20,35 @@ export default function Hotel_find() {
           </ImageBackground> 
         </View>
         <View style={styles.Input_container}>
-        <TextInput
-          style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: '80%', borderRadius: 8, paddingLeft: 8 }}
-          onChangeText={text => dispath(keyWordSuggestion(text))}
-        />
+          <TextInput
+            style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: '80%', borderRadius: 8, paddingLeft: 8 }}
+            onChangeText={text => dispath(keyWordSuggestion(text))}
+          />
+          {
+            dataKeyWords.length > 0?
+            <FlatList
+              data={dataKeyWords}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  onPress={() => { 
+                    if( item.type_code === 1 || item.type_code === 2 ) {
+                      dispath(getHotels(item)); 
+                      navigation.navigate('Detail')
+                    } else {
+                      navigation.navigate('Hotel')
+                    }
+                  }}
+                  style={{padding: 8, backgroundColor: '#ccc'}}
+                >
+                  <Text>{item.name}</Text>
+                </TouchableOpacity>
+              )}
+              keyExtractor={(item) => item.search_id}
+            >
+
+            </FlatList> 
+            : <View></View>
+          }
           <View style={styles.info_Container}>
             <View style={styles.info_date}>
               <Text style={styles.info_date_title}>CHỌN NGÀY</Text>

@@ -82,8 +82,8 @@ function ExploreStackScreen() {
       }}
     >
       <ExploreStack.Screen name="Home" component={Hotel_find} />
-      <ExploreStack.Screen name="Detail" component={Home} />
-      <ExploreStack.Screen name="Hotel" component={Detail} />
+      <ExploreStack.Screen name="Detail" component={Detail} />
+      <ExploreStack.Screen name="Hotel" component={Hotel} />
     </ExploreStack.Navigator>
   );
 }
