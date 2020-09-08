@@ -1,6 +1,6 @@
 import * as ActionTypes from '../actionTypes';
 
-const initialNoteState = null;
+const initialNoteState = {};
 
 export default function getInforHotelReducer(state = initialNoteState, action) {
   switch(action.type) {

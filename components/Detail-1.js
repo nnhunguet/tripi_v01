@@ -44,12 +44,19 @@ export default function DetailsScreen({ navigation }) {
       tintColor: Color.primary
     },
     buttonIndex => {
-      if (buttonIndex === 0) {
-        // cancel action
-      } else if (buttonIndex === 1) {
-        console.log(1)
-      } else if (buttonIndex === 2) {
-        console.log(2)
+      switch(buttonIndex) {
+        case 0:
+          console.log('Cancel');
+          break;
+        case 1: 
+          console.log(1);
+          break;
+        case 2: 
+          console.log(2);
+          break;
+        case 3: 
+          console.log(3);
+          break; 
       }
     }
   );
@@ -137,7 +144,11 @@ export default function DetailsScreen({ navigation }) {
             <Text style={{fontSize: 16, fontWeight: 'bold'}}>Hạng khách sạn</Text>
             <View style={{ height: HEIGHT/9, marginTop: 10, justifyContent: "space-around"}}>
             <View style={{flexDirection: 'row', width: WIDTH/1.9, justifyContent: 'space-between'}}>
+                <TouchableOpacity
+                  onPress={() => dispatch.starHotel}
+                >
                   <FontAwesome name="star" size={13} color={'grey'} style={{paddingHorizontal: 15, paddingVertical: 7,  borderColor: 'grey', borderWidth: 1, borderRadius: 5}}/>
+                </TouchableOpacity>
                   <View style={styles.star_ratting}>
                     <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
                     <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 

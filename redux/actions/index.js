@@ -127,3 +127,39 @@ export const hideLoading = () => {
     }
   }
 }
+
+export const priceOneNight = (price) => {
+  return {
+    type: ActionTypes.PRICE_ONE_NIGTH,
+    payload: {
+      price,
+    }
+  }
+}
+
+export const starHotel = (star) => {
+  return {
+    type: ActionTypes.PRICE_ONE_NIGTH,
+    payload: {
+      star,
+    }
+  }
+}
+
+export const overallScore = (score) => {
+  return {
+    type: ActionTypes.PRICE_ONE_NIGTH,
+    payload: {
+      score,
+    }
+  }
+}
+
+export const serViceHotel = (service) => {
+  return {
+    type: ActionTypes.SERVICE_HOTEL,
+    payload: {
+      service
+    }
+  }
+}

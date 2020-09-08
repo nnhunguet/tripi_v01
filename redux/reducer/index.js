@@ -5,6 +5,7 @@ import keyWordReducer from './keyWordReducer';
 import getHotelReducer from './getHotelReducer';
 import getInforHotelReducer from './getInforHotelReducer';
 import loadingReducer from './loadingReducer';
+import filterReducer from './filterReducer';
 
 const reducer = combineReducers({
   loginReducer,
@@ -12,6 +13,7 @@ const reducer = combineReducers({
   getHotelReducer,
   getInforHotelReducer,
   loadingReducer,
+  filterReducer,
 })
 
 export default reducer;

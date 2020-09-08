@@ -9,6 +9,7 @@ function* getInforHotel({ payload }) {
   try {
     yield put(showLoading());
     const inforHotel = yield Api.getInforHotel(hotel_id);
+    console.log(inforHotel);
     yield put({ type: GET_INFOR_HOTEL_SUCCEEDED, payload: { data: inforHotel } });  
     yield put(hideLoading());
   } 

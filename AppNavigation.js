@@ -26,7 +26,6 @@ import Welcome from './screens/Welcome';
 import Login from './screens/Login';
 import SignUp from './screens/SignUp';
 
-import Home from './screens/Home';
 import Hotel from './components/Hotel-1';
 import Detail from './components/Detail-1';
 
@@ -79,7 +78,7 @@ function ExploreStackScreen() {
     <ExploreStack.Navigator
       screenOptions={{
         headerTitle: null,
-        headerTransparent: true,
+        // headerTransparent: true,
       }}
     >
       <ExploreStack.Screen name="Home" component={Hotel_find} />
@@ -93,8 +92,8 @@ function AppNavigation() {
   const isLogin = useSelector(state => state.loginReducer.isLogin);
   console.log(isLogin);
   return (
-    isLogin ? 
-    ( <NavigationContainer>
+    // isLogin ? 
+     <NavigationContainer>
       <Loading />
       <Tab.Navigator
         screenOptions={({ route }) => ({
@@ -131,9 +130,10 @@ function AppNavigation() {
         <Tab.Screen name="Trips" component={Trips} />
         <Tab.Screen name="Profile" component={ProfileStackScreen}/>
       </Tab.Navigator>
-    </NavigationContainer> ) : (
-      <LoginStackScreen />
-    )
+    </NavigationContainer> 
+    // : (
+    //   <LoginStackScreen />
+    // )
   );
 }
 
