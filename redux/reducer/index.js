@@ -2,14 +2,16 @@ import { combineReducers } from 'redux';
 
 import loginReducer from './loginReducer';
 import keyWordReducer from './keyWordReducer';
-import getHotel from './getHotelReducer';
-import getInforHotel from './getInforHotelReducer';
+import getHotelReducer from './getHotelReducer';
+import getInforHotelReducer from './getInforHotelReducer';
+import loadingReducer from './loadingReducer';
 
 const reducer = combineReducers({
   loginReducer,
   keyWordReducer,
-  getHotel,
-  getInforHotel,
+  getHotelReducer,
+  getInforHotelReducer,
+  loadingReducer,
 })
 
 export default reducer;

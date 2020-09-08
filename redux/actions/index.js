@@ -83,12 +83,11 @@ export const getHotelFaildAction = (error) => {
   }
 }
 
-export const getInforHotel = (hotel) => {
-  console.log('Get Infor Hotel');
+export const getInforHotel = (hotel_id) => {
   return {
     type: ActionTypes.GET_INFOR_HOTEL,
     payload: {
-      hotel,
+      hotel_id,
     }
   }
 }
@@ -107,6 +106,24 @@ export const getInforHotelFaildAction = (error) => {
     type: ActionTypes.GET_INFOR_HOTEL_FAILD,
     payload: {
       error,
+    }
+  }
+}
+
+export const showLoading = () => {
+  return {
+    type: ActionTypes.SHOW_LOADING,
+    payload: {
+      status: true,
+    }
+  }
+}
+
+export const hideLoading = () => {
+  return {
+    type: ActionTypes.HIDE_LOADING,
+    payload: {
+      status: false,
     }
   }
 }

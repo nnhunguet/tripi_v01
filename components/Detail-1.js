@@ -33,10 +33,7 @@ export default function DetailsScreen({ navigation }) {
   const [priceValue, setPriceValue] = useState([0, 50])
   const PriceValuesChange = (values) => setPriceValue(values)
 
-  const dataHotels = useSelector(state => state.getHotel.data);
-  console.log('=============');
-  console.log(dataHotels);
-  console.log('=============');
+  const dataHotels = useSelector(state => state.getHotelReducer.data);
   const dispatch = useDispatch();
   const actioon = () =>
   ActionSheetIOS.showActionSheetWithOptions(
@@ -330,6 +327,9 @@ export default function DetailsScreen({ navigation }) {
           <FlatList style={styles.scrollView}
             data={dataHotels}
             renderItem={({item}) => (
+            <TouchableOpacity
+              onPress={() => {dispatch(getInforHotel(item.hotel_id)); navigation.navigate('Hotel')}}
+            >
               <View style={styles.card}>
                 <View style={styles.card_Img}>
                   <Image style={styles.Image} source={{uri: item.logo ? item.logo : 'https://scontent.fhan2-2.fna.fbcdn.net/v/t1.0-0/p640x640/68401906_157744848700465_7740565304106811392_o.jpg?_nc_cat=111&_nc_sid=e3f864&_nc_ohc=K-qqLuKEe3QAX8rTOUz&_nc_ht=scontent.fhan2-2.fna&tp=6&oh=498085993b02cf8a7c1670bd50660e5c&oe=5F7D0E5C'}}/>
@@ -339,7 +339,6 @@ export default function DetailsScreen({ navigation }) {
                 </View>
                   <View
                     style={styles.card_Info}
-                    // onPress={() => dispatch(getInforHotel(item.id))}
                   >
                     <View style={styles.card_row_1}>
                       <View>
@@ -361,6 +360,7 @@ export default function DetailsScreen({ navigation }) {
                     </View>
                   </View> 
               </View> 
+            </TouchableOpacity>
             )}
             keyExtractor={item => item.hotel_id}
           >

@@ -2,15 +2,15 @@ import { Api }  from './ApiGetInforHotel';
 import { GET_INFOR_HOTEL, GET_INFOR_HOTEL_SUCCEEDED, GET_INFOR_HOTEL_FAILD } from '../redux/actionTypes';
 
 import { put, takeLatest } from 'redux-saga/effects';
+import { showLoading, hideLoading } from '../redux/actions';
 
-function* getInforHotel({payload}) {
-  console.log('getInfor');
-  console.log(payload);
-  const id = payload.hotel_id;
+function* getInforHotel({ payload }) {
+  const { hotel_id} = payload;
   try {
-    const inforHotel = yield Api.getInforHotel(id);
-    console.log(inforHotel);
+    yield put(showLoading());
+    const inforHotel = yield Api.getInforHotel(hotel_id);
     yield put({ type: GET_INFOR_HOTEL_SUCCEEDED, payload: { data: inforHotel } });  
+    yield put(hideLoading());
   } 
   catch(err) {
     console.log('err');

@@ -31,7 +31,8 @@ import Hotel from './components/Hotel-1';
 import Detail from './components/Detail-1';
 
 import Hotel_find from './screens/Hotel_find';
-import testDate from './components/testDate';
+
+import Loading from './components/GlobalLoading/index';
 
 function Trips() {
   return (
@@ -94,6 +95,7 @@ function AppNavigation() {
   return (
     isLogin ? 
     ( <NavigationContainer>
+      <Loading />
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {

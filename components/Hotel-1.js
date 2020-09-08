@@ -10,18 +10,23 @@ import { MaterialIcons } from 'react-native-vector-icons';
 import MapView, {Marker} from 'react-native-maps';
 const LATITUDE = 21.037814;
 const LONGITUDE = 105.781468;
+
+import { useSelector, useDispatch } from 'react-redux';
+ 
 export default function Hotel_info_screens() {
+  const inforHotel = useSelector(state => state.getInforHotelReducer.data[0]);
+  console.log(inforHotel);
     return(
         <View style={styles.container}>
             <StatusBar barStyle="dark-content" />
             <ScrollView>
                 <View style={styles.Img_Background}>
-                  <Image style={styles.background} source={require('../assets/Ha_Noi.jpg')} resizeMode={'cover'} >
+                  <Image style={styles.background} source={{uri: inforHotel.logo}} resizeMode={'cover'} >
                   </Image>   
                 </View>
                 <View style={styles.Info_container}> 
                   <View style={styles.Hotel_name}>
-                    <Text style={styles.Hotel_name_tittle}>Grand Royale Park Hotel</Text>
+                    <Text style={styles.Hotel_name_tittle}> {inforHotel.name} </Text>
                     <View style={{borderRadius: 50, backgroundColor: '#fff', height: 40}}>
                       <AntDesign name="hearto" size={20} color={Color.primary} style={{padding: 10}}/>
                     </View>
@@ -85,7 +90,7 @@ export default function Hotel_info_screens() {
                   <View style={styles.Rating}>
                     <View style={styles.Rating_tittle}>
                       <View style={{justifyContent: "center", alignItems: 'center', flex: 0.37}}> 
-                        <Text style={styles.Rating_score}>9.2</Text>
+                        <Text style={styles.Rating_score}> { parseFloat(inforHotel.overall_score).toFixed(1)} </Text>
                       </View>
                       <View style={styles.Rating_overall}>
                         <Text>Đánh giá chung</Text>
@@ -110,10 +115,10 @@ export default function Hotel_info_screens() {
                             <View style={{backgroundColor: Color.primary, width: '100%', height: 13, borderRadius: 20}}></View>
                           </View>
                           <View style={{backgroundColor: Color.grey, width: '100%', height: 13, borderRadius: 20}}>
-                            <View style={{backgroundColor: Color.primary, width: '80%', height: 13, borderRadius: 20}}></View>
+                            <View style={{backgroundColor: Color.primary, width: `${inforHotel.service_score*10}%`, height: 13, borderRadius: 20}}></View>
                           </View>
                           <View style={{backgroundColor: Color.grey, width: '100%', height: 13, borderRadius: 20}}>
-                            <View style={{backgroundColor: Color.primary, width: '75%', height: 13, borderRadius: 20}}></View>
+                            <View style={{backgroundColor: Color.primary, width: `${inforHotel.location_score*10}%`, height: 13, borderRadius: 20}}></View>
                           </View>
                           <View style={{backgroundColor: Color.grey, width: '100%', height: 13, borderRadius: 20}}>
                             <View style={{backgroundColor: Color.primary, width: '89%', height: 13, borderRadius: 20}}></View>
@@ -123,7 +128,7 @@ export default function Hotel_info_screens() {
                   </View>
                   <View style={{flex: 0.08, justifyContent: 'center'}}>
                       <Text style={{fontSize: 25, fontWeight: 'bold', marginBottom: 13}}>Giới Thiệu</Text>
-                      <Text numberOfLines={3}>While the reusability of automated tests is valued by software development companies, this property can also be viewed as a disadvantage. It leads to the so-called "Pesticide Paradox", where repeatedly executed scripts stop detecting errors that go beyond their frameworks. In such cases, manual testing may be a better investment. This ambiguity once again leads to the conclusion that the decision on test automation should be made individually, keeping in mind project requirements and peculiarities.</Text>
+                      <Text numberOfLines={3}> {inforHotel.description} </Text>
                       <Text style={{fontSize: 12, fontWeight: "bold", marginTop: 5}}>Xem thêm</Text>
                   </View>
                   <View style={styles.Review}> 
@@ -252,7 +257,7 @@ export default function Hotel_info_screens() {
                       />    
                     </MapView> 
                     <View style={{flex: 1}}>
-                      <Text style={{paddingTop: 20, paddingBottom: 5}}>260 Lý Tự Trọng Phường Bến Thành, Quận 1, Thành Phố Hồ Chí Minh Việt Nam</Text>
+                      <Text style={{paddingTop: 20, paddingBottom: 5}}> {inforHotel.address} </Text>
                       <Text style={{paddingTop: 5, paddingBottom: 5}}>0907512750</Text>
                       <Text style={{paddingTop: 5, paddingBottom: 5, color: Color.primary}}>Trang web của khách sạn</Text>
                     </View>
