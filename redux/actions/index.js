@@ -163,3 +163,12 @@ export const serViceHotel = (service) => {
     }
   }
 }
+
+export const Apply = () => {
+  return {
+    type: ActionTypes.APPLY,
+    payload: {
+      apply: true
+    }
+  }
+}

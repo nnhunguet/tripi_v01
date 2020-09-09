@@ -20,4 +20,5 @@ export const PRICE_ONE_NIGTH = 'PRICE_ONE_NIGTH';
 export const STAR_HOTEL = 'STAR_HOTEL';
 export const OVERALL_SCORE = 'OVERALL_SCORE';
 export const SERVICE_HOTEL = 'SERVICE_HOTEL';
+export const APPLY = 'APPLY';
  

@@ -32,7 +32,13 @@ export default function DetailsScreen({ navigation }) {
   const multiSliderValuesChange = (values) => setMultiSliderValue(values)
   const [priceValue, setPriceValue] = useState([0, 50])
   const PriceValuesChange = (values) => setPriceValue(values)
-
+  const [scrollEnabled, setScrollEnabled] = useState(false);
+  const enableScroll = () => {
+    setScrollEnabled(true);
+  }
+  const disableScroll = () => {
+    setScrollEnabled(false);
+  }
   const dataHotels = useSelector(state => state.getHotelReducer.data);
   const dispatch = useDispatch();
   const actioon = () =>
@@ -75,7 +81,7 @@ export default function DetailsScreen({ navigation }) {
           <Feather name="x" size={24} color={Color.primary} />
         </TouchableWithoutFeedback>
       </View>
-      <ScrollView style={{flex: 0.68}}>
+      <ScrollView style={{flex: 0.68}} scrollEnabled={scrollEnabled}>
         <View style={styles.BottomSheet_price}>
           <View style={styles.Bottom_warp}>
             <Text style={{fontSize: 16, fontWeight: 'bold'}}>Giá mỗi đêm</Text>
@@ -127,6 +133,10 @@ export default function DetailsScreen({ navigation }) {
           values={[priceValue[0], priceValue[1]]}
           sliderLength={WIDTH/1.2}
           onValuesChange={PriceValuesChange}
+          onValuesChangeStart={disableScroll}
+          onValuesChangeFinish={() => {
+            console.log(1);
+          }}
           min={0}
           max={50}
           allowOverlap={false}
@@ -145,34 +155,50 @@ export default function DetailsScreen({ navigation }) {
             <View style={{ height: HEIGHT/9, marginTop: 10, justifyContent: "space-around"}}>
             <View style={{flexDirection: 'row', width: WIDTH/1.9, justifyContent: 'space-between'}}>
                 <TouchableOpacity
-                  onPress={() => dispatch.starHotel}
+                  onPress={() => dispatch.starHotel(1)}
                 >
                   <FontAwesome name="star" size={13} color={'grey'} style={{paddingHorizontal: 15, paddingVertical: 7,  borderColor: 'grey', borderWidth: 1, borderRadius: 5}}/>
                 </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => dispatch.starHotel(2)}
+                >
                   <View style={styles.star_ratting}>
                     <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
                     <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
                   </View>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => dispatch.starHotel(3)}
+                >
                   <View style={styles.star_ratting}>
                     <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
                     <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
                     <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
                   </View>
+                </TouchableOpacity>
             </View>
             <View style={{flexDirection: 'row', width: WIDTH/1.9, justifyContent: 'space-between'}}>
-              <View style={styles.star_ratting}>
-                <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-                <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-                <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-                <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-              </View>
-              <View style={styles.star_ratting}>
-                <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-                <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-                <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-                <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-                <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-              </View>
+              <TouchableOpacity
+                  onPress={() => dispatch.starHotel(4)}
+              >
+                <View style={styles.star_ratting}>
+                  <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
+                  <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
+                  <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
+                  <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                  onPress={() => dispatch.starHotel(5)}
+              >
+                <View style={styles.star_ratting}>
+                  <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
+                  <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
+                  <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
+                  <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
+                  <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
+                </View>
+              </TouchableOpacity>
             </View>
             </View>
           </View>  
@@ -271,28 +297,73 @@ export default function DetailsScreen({ navigation }) {
             <Text style={{fontSize: 16, fontWeight: 'bold'}}>Tiện ích sẵn có</Text>
             <View style={{ height: HEIGHT/5, marginTop: 10, justifyContent: "space-around"}}>
               <View style={{flexDirection: 'row', width: WIDTH/1.42, justifyContent: 'space-between'}}>
+                <TouchableOpacity
+                  onPress={() => {
+                    dispatch.serViceHotel(5);
+                  }}
+                >
                   <View style={styles.star_ratting}>
-                    <Text style={{fontSize: 12}}>Bể bơi ngoài trời</Text>
+                    <Text style={{fontSize: 12}}>Dịch vụ giữ hành lý</Text>
                   </View>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    dispatch.serViceHotel(2);
+                  }}
+                >
                   <View style={styles.star_ratting}>
-                    <Text style={{fontSize: 12}}>Bể bơi trong nhà</Text>
+                    <Text style={{fontSize: 12}}>Dịch vụ phòng 24h</Text>
                   </View>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    dispatch.serViceHotel(13);
+                  }}
+                >
+                  <View style={styles.star_ratting}>
+                    <Text style={{fontSize: 12}}>Dịch vụ Tour</Text>
+                  </View>
+                </TouchableOpacity>
               </View>
               <View style={{flexDirection: 'row', width: WIDTH/1.42, justifyContent: 'space-between'}}>
+                <TouchableOpacity
+                  onPress={() => {
+                    dispatch.serViceHotel(12);
+                  }}
+                >
                   <View style={styles.star_ratting}>
-                    <Text style={{fontSize: 12}}>Phòng thể dục</Text>
+                    <Text style={{fontSize: 12}}>Wifi</Text>
                   </View>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    dispatch.serViceHotel(14);
+                  }}
+                >
                   <View style={styles.star_ratting}>
-                    <Text style={{fontSize: 12}}>Xông hơi</Text>
+                    <Text style={{fontSize: 12}}>Hồ Bơi</Text>
                   </View>
-                  <View style={styles.star_ratting}>
-                    <Text style={{fontSize: 12}}>Spa</Text>
-                  </View>
+                </TouchableOpacity>
               </View>
               <View style={{flexDirection: 'row', width: WIDTH/1.42, justifyContent: 'space-between'}}>
+                <TouchableOpacity
+                  onPress={() => {
+                    dispatch.serViceHotel(10);
+                  }}
+                >
                   <View style={styles.star_ratting}>
-                    <Text style={{fontSize: 12}}>Mát xa</Text>
+                    <Text style={{fontSize: 12}}>Quầy Bar</Text>
                   </View>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    dispatch.serViceHotel(7);
+                  }}
+                >
+                  <View style={styles.star_ratting}>
+                    <Text style={{fontSize: 12}}>Nhà Hàng</Text>
+                  </View>
+                </TouchableOpacity>
               </View>
             </View>
           </View>  

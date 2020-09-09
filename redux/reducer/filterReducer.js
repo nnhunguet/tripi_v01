@@ -5,6 +5,7 @@ const initialNoteState = {
   star: null,
   overallScore: null,
   service: null,
+  apply: false,
 };
 
 export default function filterReducer(state = initialNoteState, action) {
@@ -24,12 +25,23 @@ export default function filterReducer(state = initialNoteState, action) {
         ...initialNoteState,
         overallScore: action.payload.score,
       };
-    case ActionTypes.SERVICE_HOTEL: 
+    case ActionTypes.SERVICE_HOTEL:
+      let preService = state.service;
+      let curService;
+      if(preService !== null) {
+        curService = `${preService}_${action.payload.service}`
+      } else {
+        curService = `${preService}`;
+      }
       return {
         ...initialNoteState,
-        service: action.payload.service,
+        service: curService,
       };    
-
+    case ActionTypes.APPLY:
+      return {
+        ...initialNoteState,
+        apply: action.payload.apply,
+      }
     default:
       return state;
       break;

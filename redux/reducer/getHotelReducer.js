@@ -1,11 +1,5 @@
 import * as ActionTypes from '../actionTypes';
-
 const initialNoteState = [];
-// state = {
-//   isLoading: true,
-//   error: false,
-//   data: 
-// }
 export default function getHotelsReducer(state = initialNoteState, action) {
   switch(action.type) {
     case ActionTypes.GET_HOTELS_SUCCEEDED: 
