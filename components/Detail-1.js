@@ -24,13 +24,14 @@ const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
 import { useSelector, useDispatch } from 'react-redux';
-import { getInforHotel } from '../redux/actions'
+import { getInforHotelAction } from '../redux/actions'
 
 export default function DetailsScreen({ navigation }) {
   const [multiSliderValue, setMultiSliderValue] = useState([0, 100]);
   const multiSliderValuesChange = (values) => setMultiSliderValue(values);
   const [priceValue, setPriceValue] = useState([0, 50]);
   const PriceValuesChange = (values) => setPriceValue(values);
+  console.log('DataHotels')
   const dataHotels = useSelector(state => state.getHotelReducer.data);
   const dispatch = useDispatch();
   const action = () =>
@@ -345,7 +346,10 @@ export default function DetailsScreen({ navigation }) {
             data={dataHotels}
             renderItem={({item}) => (
             <TouchableOpacity
-              onPress={() => {dispatch(getInforHotel(item.hotel_id)); navigation.navigate('Hotel')}}
+              onPress={() => {
+                dispatch(getInforHotelAction(item.hotel_id)); 
+                navigation.navigate('Hotel');
+              }}
             >
               <View style={styles.card}>
                 <View style={styles.card_Img}>

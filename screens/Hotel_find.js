@@ -111,9 +111,9 @@ export default function Hotel_find({ navigation }) {
             style={{  height: 40, borderColor: '#fff', borderWidth: 1, width: wp*(8/10), borderRadius: 8, paddingLeft: 8, backgroundColor: '#fff'  }}
             onChangeText={text => dispath(keyWordSuggestion(text))}
           />
-          <View style={{justifyContent: 'center', alignItems:'center', position: 'relative', zIndex: 3, top: 50}}>
+          <View style={{justifyContent: 'center', alignItems:'center', position: 'absolute', zIndex: 3, top: 50}}>
           {
-            dataKeyWords.length > 0?
+            dataKeyWords.length > 0   ?
             <FlatList
               data={dataKeyWords}
               renderItem={({ item }) => (

@@ -10,6 +10,7 @@ function* getKeyWordSuggestion(keyword) {
   })
   .catch(function (error) {
     // handle error
+    response = error;
     console.log(error);
   })
   .then(function () {
