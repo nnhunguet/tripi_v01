@@ -15,7 +15,7 @@ import { SocialIcon } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Feather from 'react-native-vector-icons/Feather';
 
-export default function LoginScreen(){
+export default function LoginScreen({ navigation }){
 
   const [hidePassword, setHidePassword] = useState(true);
 
@@ -100,7 +100,10 @@ export default function LoginScreen(){
         </View>
       </View>
       <View>
-        <TouchableOpacity style={styles.buttonLogin}>
+        <TouchableOpacity 
+          style={styles.buttonLogin}
+          onPress={() => {alert('Đăng ký tài khoản')}}
+        >
           <Text style={{textAlign: 'center', color: '#fff'}}>
             Sign up
           </Text>
@@ -124,7 +127,11 @@ export default function LoginScreen(){
       <Text>
         Already have account?
       </Text>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('Login')
+        }}
+      >
         <Text style={styles.textLogin}>
           Login
         </Text>

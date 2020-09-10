@@ -5,6 +5,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 import { showLoading, hideLoading } from '../redux/actions';
 
 function* getInforHotel({ payload }) {
+  console.log(payload);
   const { hotel_id} = payload;
   try {
     yield put(showLoading());

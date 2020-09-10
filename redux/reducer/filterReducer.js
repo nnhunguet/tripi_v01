@@ -16,6 +16,7 @@ export default function filterReducer(state = initialNoteState, action) {
         price: action.payload.price,
       };
     case ActionTypes.STAR_HOTEL: 
+      console.log(action.payload.star);
       return {
         ...initialNoteState,
         star: action.payload.star,
@@ -33,11 +34,13 @@ export default function filterReducer(state = initialNoteState, action) {
       } else {
         curService = `${preService}`;
       }
+      console.log(curService);
       return {
         ...initialNoteState,
         service: curService,
       };    
     case ActionTypes.APPLY:
+      console.log(action.payload.apply);
       return {
         ...initialNoteState,
         apply: action.payload.apply,

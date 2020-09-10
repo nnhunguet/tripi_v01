@@ -78,11 +78,18 @@ function ExploreStackScreen() {
     <ExploreStack.Navigator
       screenOptions={{
         headerTitle: null,
-        // headerTransparent: true,
+        headerTransparent: true,
       }}
     >
       <ExploreStack.Screen name="Home" component={Hotel_find} />
-      <ExploreStack.Screen name="Detail" component={Detail} />
+      <ExploreStack.Screen 
+        name="Detail" 
+        component={Detail} 
+        options={{
+          headerTransparent: false,
+          headerTitle: null,
+        }}
+      />
       <ExploreStack.Screen name="Hotel" component={Hotel} />
     </ExploreStack.Navigator>
   );
@@ -92,8 +99,8 @@ function AppNavigation() {
   const isLogin = useSelector(state => state.loginReducer.isLogin);
   console.log(isLogin);
   return (
-    // isLogin ? 
-     <NavigationContainer>
+    isLogin ? 
+     ( <NavigationContainer>
       <Loading />
       <Tab.Navigator
         screenOptions={({ route }) => ({
@@ -130,10 +137,10 @@ function AppNavigation() {
         <Tab.Screen name="Trips" component={Trips} />
         <Tab.Screen name="Profile" component={ProfileStackScreen}/>
       </Tab.Navigator>
-    </NavigationContainer> 
-    // : (
-    //   <LoginStackScreen />
-    // )
+    </NavigationContainer> )
+    : (
+      <LoginStackScreen />
+    )
   );
 }
 

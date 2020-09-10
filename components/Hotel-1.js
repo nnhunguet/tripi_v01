@@ -12,8 +12,10 @@ const LATITUDE = 21.037814;
 const LONGITUDE = 105.781468;
 
 import { useSelector, useDispatch } from 'react-redux';
+import { TouchableOpacity } from 'react-native-gesture-handler';
  
 export default function Hotel_info_screens() {
+  const dispath = useDispatch();
   const inforHotel = useSelector(state => state.getInforHotelReducer.data[0]);
   console.log(inforHotel);
     return(
@@ -21,7 +23,7 @@ export default function Hotel_info_screens() {
             <StatusBar barStyle="dark-content" />
             <ScrollView>
                 <View style={styles.Img_Background}>
-                  <Image style={styles.background} source={{uri: inforHotel.logo}} resizeMode={'cover'} >
+                  <Image style={styles.background} source={{uri: inforHotel.logo || "https://scontent.fhan2-2.fna.fbcdn.net/v/t1.0-0/p640x640/68401906_157744848700465_7740565304106811392_o.jpg?_nc_cat=111&_nc_sid=e3f864&_nc_ohc=ALSx5Ro_F-cAX-Q4xwi&_nc_ht=scontent.fhan2-2.fna&tp=6&oh=6071894881c03d120497e3f8a844b4f1&oe=5F7D0E5C"}} resizeMode={'cover'} >
                   </Image>   
                 </View>
                 <View style={styles.Info_container}> 
@@ -82,6 +84,11 @@ export default function Hotel_info_screens() {
                         <View style={styles.Price_sell}>
                           <Text style={{fontSize: 16, fontWeight: "600"}}>Xem giảm giá</Text>
                         </View>
+                        <TouchableOpacity
+                          onPress={() => {
+                            dispath.getAllPrice(inforHotel.hotel_id);
+                          }}
+                        ></TouchableOpacity>
                         <View style={styles.Price_more}>
                           <Text style={{fontSize: 16, fontWeight: '600', color: Color.primary}}>Xem tất cả giảm giá</Text>
                         </View>
@@ -128,7 +135,7 @@ export default function Hotel_info_screens() {
                   </View>
                   <View style={{flex: 0.08, justifyContent: 'center'}}>
                       <Text style={{fontSize: 25, fontWeight: 'bold', marginBottom: 13}}>Giới Thiệu</Text>
-                      <Text numberOfLines={3}> {inforHotel.description} </Text>
+                      <Text numberOfLines={30}> {inforHotel.description} </Text>
                       <Text style={{fontSize: 12, fontWeight: "bold", marginTop: 5}}>Xem thêm</Text>
                   </View>
                   <View style={styles.Review}> 

@@ -7,15 +7,16 @@ import { showLoading, hideLoading } from '../redux/actions';
 function* getHotels({payload}) {
   try {
     yield put(showLoading());
+    console.log(payload);
     const hotels = yield Api.getHotels(payload.hotel);
-    // console.log(hotels);
+    console.log(hotels);
     yield put({ type: GET_HOTELS_SUCCEEDED, payload: { data: hotels } });  
-    yield put(hideLoading());
   } 
   catch(err) {
     console.log('err');
     yield put({ type: GET_HOTELS_FAILD, err });
   }
+  yield put(hideLoading());
 }
 
 export function *watchGetHotels() {

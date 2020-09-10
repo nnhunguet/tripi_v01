@@ -16,7 +16,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../redux/actions';
 
-export default function LoginScreen(){
+export default function LoginScreen({ navigation }){
   const isWrong = useSelector(state => state.loginReducer.isWrong);
   const dispatch = useDispatch();
   let [username, setUsername] = useState(null);
@@ -50,7 +50,7 @@ export default function LoginScreen(){
       <Text style={{textAlign: 'center', marginVertical: 12, color: "#aaa"}}>
         or login with email
       </Text>
-      { isWrong ? <Text>WrongPassWord</Text> : <Text></Text>}
+      { isWrong ? <Text style={{textAlign: 'center', marginVertical: 10, color: 'red', fontWeight: '600'}}>Sai tên đăng nhập hoặc mật khẩu</Text> : <Text></Text>}
       <View>
         <View style={styles.wrapTextInput}> 
           <TextInput 
@@ -107,7 +107,11 @@ export default function LoginScreen(){
       <Text>
         Don't have an account? 
       </Text>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.push('SignUp')
+        }}
+      >
         <Text style={styles.textSignup}>
           Sign up
         </Text>

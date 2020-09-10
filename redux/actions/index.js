@@ -138,6 +138,7 @@ export const priceOneNight = (price) => {
 }
 
 export const starHotel = (star) => {
+  console.log(star);
   return {
     type: ActionTypes.PRICE_ONE_NIGTH,
     payload: {
@@ -155,7 +156,7 @@ export const overallScore = (score) => {
   }
 }
 
-export const serViceHotel = (service) => {
+export const serviceHotel = (service) => {
   return {
     type: ActionTypes.SERVICE_HOTEL,
     payload: {
@@ -169,6 +170,15 @@ export const Apply = () => {
     type: ActionTypes.APPLY,
     payload: {
       apply: true
+    }
+  }
+}
+
+export const getAllPrice = (allPrice) => {
+  return {
+    type: ActionTypes.GET_ALL_PRICE,
+    payload: {
+      allPrice,
     }
   }
 }

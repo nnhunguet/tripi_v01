@@ -32,13 +32,6 @@ export default function DetailsScreen({ navigation }) {
   const multiSliderValuesChange = (values) => setMultiSliderValue(values)
   const [priceValue, setPriceValue] = useState([0, 50])
   const PriceValuesChange = (values) => setPriceValue(values)
-  const [scrollEnabled, setScrollEnabled] = useState(false);
-  const enableScroll = () => {
-    setScrollEnabled(true);
-  }
-  const disableScroll = () => {
-    setScrollEnabled(false);
-  }
   const dataHotels = useSelector(state => state.getHotelReducer.data);
   const dispatch = useDispatch();
   const actioon = () =>
@@ -81,7 +74,7 @@ export default function DetailsScreen({ navigation }) {
           <Feather name="x" size={24} color={Color.primary} />
         </TouchableWithoutFeedback>
       </View>
-      <ScrollView style={{flex: 0.68}} scrollEnabled={scrollEnabled}>
+      <ScrollView style={{flex: 0.68}} >
         <View style={styles.BottomSheet_price}>
           <View style={styles.Bottom_warp}>
             <Text style={{fontSize: 16, fontWeight: 'bold'}}>Giá mỗi đêm</Text>
@@ -133,7 +126,7 @@ export default function DetailsScreen({ navigation }) {
           values={[priceValue[0], priceValue[1]]}
           sliderLength={WIDTH/1.2}
           onValuesChange={PriceValuesChange}
-          onValuesChangeStart={disableScroll}
+          // onValuesChangeStart={disableScroll}
           onValuesChangeFinish={() => {
             console.log(1);
           }}
@@ -299,7 +292,9 @@ export default function DetailsScreen({ navigation }) {
               <View style={{flexDirection: 'row', width: WIDTH/1.42, justifyContent: 'space-between'}}>
                 <TouchableOpacity
                   onPress={() => {
-                    dispatch.serViceHotel(5);
+                    console.log(1);
+                    alter('123');
+                    dispatch.serviceHotel(5);
                   }}
                 >
                   <View style={styles.star_ratting}>
@@ -308,7 +303,7 @@ export default function DetailsScreen({ navigation }) {
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => {
-                    dispatch.serViceHotel(2);
+                    dispatch.serviceHotel(2);
                   }}
                 >
                   <View style={styles.star_ratting}>
@@ -317,7 +312,7 @@ export default function DetailsScreen({ navigation }) {
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => {
-                    dispatch.serViceHotel(13);
+                    dispatch.serviceHotel(13);
                   }}
                 >
                   <View style={styles.star_ratting}>
@@ -328,7 +323,7 @@ export default function DetailsScreen({ navigation }) {
               <View style={{flexDirection: 'row', width: WIDTH/1.42, justifyContent: 'space-between'}}>
                 <TouchableOpacity
                   onPress={() => {
-                    dispatch.serViceHotel(12);
+                    dispatch.serviceHotel(12);
                   }}
                 >
                   <View style={styles.star_ratting}>
@@ -337,7 +332,7 @@ export default function DetailsScreen({ navigation }) {
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => {
-                    dispatch.serViceHotel(14);
+                    dispatch.serviceHotel(14);
                   }}
                 >
                   <View style={styles.star_ratting}>
@@ -348,7 +343,7 @@ export default function DetailsScreen({ navigation }) {
               <View style={{flexDirection: 'row', width: WIDTH/1.42, justifyContent: 'space-between'}}>
                 <TouchableOpacity
                   onPress={() => {
-                    dispatch.serViceHotel(10);
+                    dispatch.serviceHotel(10);
                   }}
                 >
                   <View style={styles.star_ratting}>
@@ -357,7 +352,7 @@ export default function DetailsScreen({ navigation }) {
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => {
-                    dispatch.serViceHotel(7);
+                    dispatch.serviceHotel(7);
                   }}
                 >
                   <View style={styles.star_ratting}>
