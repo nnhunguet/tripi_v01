@@ -31,7 +31,6 @@ export default function DetailsScreen({ navigation }) {
   const multiSliderValuesChange = (values) => setMultiSliderValue(values);
   const [priceValue, setPriceValue] = useState([0, 50]);
   const PriceValuesChange = (values) => setPriceValue(values);
-
   const dataHotels = useSelector(state => state.getHotelReducer.data);
   const dispatch = useDispatch();
   const action = () =>
@@ -467,7 +466,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     borderTopLeftRadius: 10,
-    borderTopRightRadius: 10
+    borderTopRightRadius: 10,
   },
   card_Info: {
     flex: 0.35,
@@ -543,6 +542,7 @@ const styles = StyleSheet.create({
   BottomSheet_button:{
     width: WIDTH,
     height: HEIGHT/8,
+    backgroundColor: '#fff',
     alignItems: 'center',
     shadowColor: "#000",
     shadowColor: "#000",
@@ -587,7 +587,9 @@ const styles = StyleSheet.create({
     width: WIDTH,
     height: HEIGHT/3,
     backgroundColor: '#fff',
-    marginTop: 5
+    marginTop: 5,
+    marginBottom: 100,
+    
   },
   Bottomsheet_Button: {
     width: WIDTH*(9/10),
@@ -596,20 +598,22 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 50,
-    paddingBottom: 10,
   },
   button_view: {
     width: WIDTH,
     height: HEIGHT/8,
     backgroundColor: '#fff',
+    position: 'relative',
+    bottom: HEIGHT/8.7,
+    justifyContent: 'center',
     alignItems: 'center',
     shadowColor: "#000",
     shadowOffset: {
 	  width: 0,
-    height: 8,
-    },
-    shadowOpacity: 0.46,
-    shadowRadius: 11.14,
-    elevation: 17,
+	  height: 8,
+  },
+  shadowOpacity: 0.46,
+  shadowRadius: 11.14,
+  elevation: 17,
   },
 });

@@ -2,16 +2,18 @@ import * as React from 'react';
 import { 
   View,
   Text,
+  Dimensions
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Feather from 'react-native-vector-icons/Feather';
-
+import { Color } from './components/Color'
 import { useSelector, } from 'react-redux';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
+const wp = Dimensions.get('window').width;
+const hp = Dimensions.get('window').height;
 const Tab = createBottomTabNavigator();
 
 const ProfileStack = createStackNavigator();
@@ -88,6 +90,11 @@ function ExploreStackScreen() {
         options={{
           headerTransparent: false,
           headerTitle: null,
+          headerTintColor: Color.primary,
+          headerTitleAlign: "center",
+          headerTruncatedBackTitle: null,
+          headerLeftContainerStyle: {paddingLeft: wp/26},
+          
         }}
       />
       <ExploreStack.Screen name="Hotel" component={Hotel} />
