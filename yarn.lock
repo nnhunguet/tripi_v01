@@ -4665,6 +4665,11 @@ react-native-elements@^2.1.0:
     react-native-ratings "^7.2.0"
     react-native-status-bar-height "^2.5.0"
 
+react-native-gesture-bottom-sheet@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-gesture-bottom-sheet/-/react-native-gesture-bottom-sheet-1.0.1.tgz#e7bb52c4adb835dea2b90470e2ad45544e51d2f9"
+  integrity sha512-WwWsui6lA6S1YkWj6ZNymTi6wnrQRXg2p9RAtJmu3x0uvS4MTEl2kFHvLnS093U4+6tAWP+IXtBq3tZa7ImB6g==
+
 react-native-gesture-handler@~1.6.0:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.6.1.tgz#678e2dce250ed66e93af409759be22cd6375dd17"
