@@ -89,12 +89,14 @@ function ExploreStackScreen() {
         component={Detail} 
         options={{
           headerTransparent: false,
-          headerTitle: null,
+          headerTitle: "Hà Nội",
           headerTintColor: Color.primary,
           headerTitleAlign: "center",
           headerTruncatedBackTitle: null,
-          headerLeftContainerStyle: {paddingLeft: wp/26},
-          
+          headerLeftContainerStyle: {paddingLeft: wp/30},
+          headerTitleStyle: {
+            color: '#111',
+          },
         }}
       />
       <ExploreStack.Screen name="Hotel" component={Hotel} />
