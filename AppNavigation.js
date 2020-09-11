@@ -98,8 +98,12 @@ function ExploreStackScreen() {
         component={Detail} 
         options={{
           headerTransparent: false,
+<<<<<<< HEAD
           // headerTitle: "Hà Nội",
           headerTitle: props => <LogoTitle {...props} />,
+=======
+          headerTitle: "Hà Nội",
+>>>>>>> 1732ada979b8e54dcedc684d63daaa65eee78473
           headerTintColor: Color.primary,
           headerTitleAlign: "center",
           headerTruncatedBackTitle: null,
