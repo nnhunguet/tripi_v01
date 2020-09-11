@@ -7,6 +7,7 @@ import { StyleSheet,
   Image, 
   Dimensions, 
   ActionSheetIOS,
+  TouchableOpacity
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import BottomSheet from "react-native-gesture-bottom-sheet";
@@ -14,11 +15,12 @@ import {
   AntDesign, 
   FontAwesome5, 
   FontAwesome, 
-  MaterialCommunityIcons 
+  MaterialCommunityIcons,
+  MaterialIcons 
 } from 'react-native-vector-icons';
 import { Feather } from '@expo/vector-icons';
 import  { Color }  from './Color'; 
-import { TouchableWithoutFeedback, FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableWithoutFeedback, FlatList } from 'react-native-gesture-handler';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -399,15 +401,15 @@ export default function DetailsScreen({ navigation }) {
             </TouchableWithoutFeedback>
             <TouchableWithoutFeedback onPress={() => bottomSheet.current.show()}>
               <View style={{flexDirection: 'row', alignItems: "center", marginLeft: 10}}>
-                <MaterialCommunityIcons name="sort-descending" size={24} color={Color.primary} />
+              <MaterialIcons name="filter-list" size={24} color={Color.primary} />
                 <Text style={{fontSize: 14, paddingLeft:3}}>Bộ lọc</Text>
               </View>
             </TouchableWithoutFeedback>
           </View>
           <View style={styles.menu_chose_second}>
             <View style={styles.menu_chose_second_icon}>
-              <FontAwesome5 name="th-list" size={20} color={Color.primary} style={{backgroundColor: 'grey', padding: '10%'}}/>
-              <MaterialCommunityIcons name="map-marker-radius" size={20} color={Color.primary} style={{ padding: '10%'}}/>
+              <FontAwesome5 name="th-list" size={20} color={Color.primary} style={{backgroundColor: '#f5f5f5', padding: '10%'}}/>
+              <MaterialCommunityIcons name="map-marker-radius" size={20} color="grey" style={{ padding: '10%'}}/>
             </View>
           </View>
         </View>
@@ -420,6 +422,7 @@ export default function DetailsScreen({ navigation }) {
                 dispatch(getInforHotelAction(item.hotel_id)); 
                 navigation.navigate('Hotel');
               }}
+              style={{height: WIDTH*(9/10)*(28/35)}}
             >
               <View style={styles.card}>
                 <View style={styles.card_Img}>
@@ -499,7 +502,7 @@ const styles = StyleSheet.create({
   menu_chose_second_icon: {
     flexDirection: 'row',
     alignItems: "center",
-    borderColor: 'grey',
+    borderColor: '#d3d3d3',
     borderWidth: 1,
     width: 73,
     justifyContent: "space-between",
@@ -513,25 +516,25 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     paddingRight: 10,
-    paddingTop: 10
+    // paddingTop: 10
   },
   card: {
     flex: 1,
     width: WIDTH*(9/10),
-    height: WIDTH*(9/10)*(24/35),
+    height: WIDTH*(9/10)*(25/35),
     backgroundColor: "#fff",
     borderRadius: 10,
-    marginBottom: 12,
+    marginTop: WIDTH/15,
     marginRight: 5,
     marginLeft: 15,
     shadowColor: "#000",
     shadowOffset: {
 	  width: 0,
-	  height: 2,
+	  height: 5,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    shadowOpacity: 0.34,
+    shadowRadius: 6.27,
+    elevation: 10,
   },
   card_Img: {
     flex: 0.65,
