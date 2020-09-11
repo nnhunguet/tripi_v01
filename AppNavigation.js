@@ -42,6 +42,15 @@ function Trips() {
     </View>
   );
 }
+function LogoTitle() {
+  return (
+    <View style={{justifyContent: 'center', alignItems:'center'}}>
+
+      <Text style={{fontSize: 16, fontWeight: '400'}}>Hà nội</Text>
+      <Text style={{fontSize: 10}}>13/9 - 15/9 * 1 phòng * 2 người</Text>
+    </View>
+  );
+}
 
 function LoginStackScreen() {
   return (
@@ -89,7 +98,8 @@ function ExploreStackScreen() {
         component={Detail} 
         options={{
           headerTransparent: false,
-          headerTitle: "Hà Nội",
+          // headerTitle: "Hà Nội",
+          headerTitle: props => <LogoTitle {...props} />,
           headerTintColor: Color.primary,
           headerTitleAlign: "center",
           headerTruncatedBackTitle: null,
