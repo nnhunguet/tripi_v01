@@ -21,7 +21,25 @@ tại The Bar.`,
     "sleep_quality_score": 8.6,
     "star_number": 4,
   }
-  ]
+  ],
+  allPrice: [{
+    "checkin_date_id": 1232131,
+    "checkout_date_id": 12320201,
+    "crawled_at": 1599797744,
+    "crawled_date_id": 20200911,
+    "discount_code": null,
+    "discount_price": null,
+    "domain_id": 3,
+    "final_amount": 1491342,
+    "hotel_id": 10967,
+    "id": "3_10967_1232131",
+    "non_tax_amount": 1491342,
+    "num_night": 1,
+    "num_room": null,
+    "original_amount": null,
+    "room_type_id": 11015716,
+    "room_type_name": "Phòng Club giường King - Được vào lounge (Club King Room - Lounge Access Included)",
+  }],
 };
 
 export default function getInforHotelReducer(state = initialNoteState, action) {

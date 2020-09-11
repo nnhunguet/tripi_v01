@@ -1,25 +1,49 @@
 import React, { useState, useRef } from 'react';
-import { ImageBackground, StyleSheet, View, Text, Image, ScrollView, TextInput, Dimensions } from 'react-native';
+import { 
+  ImageBackground, 
+  StyleSheet, 
+  View, 
+  Text, 
+  Image, 
+  ScrollView, 
+  TextInput, 
+  Dimensions,
+} from 'react-native';
 import { Color } from '../components/Color'; 
 import { StatusBar } from 'expo-status-bar';
-import { FontAwesome } from '@expo/vector-icons';
+import { 
+  AntDesign,
+  FontAwesome
+} from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useSelector, useDispatch } from 'react-redux';
-import { keyWordSuggestion, getHotels, getInforHotel } from '../redux/actions'
-import { FlatList, TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { AntDesign } from '@expo/vector-icons';
-import {DATA} from '../components/Data';
+import { 
+  keyWordSuggestion, 
+  getHotels,
+} from '../redux/actions'
+import { 
+  FlatList, 
+  TouchableOpacity, 
+  TouchableWithoutFeedback 
+} from 'react-native-gesture-handler';
 import BottomSheet from "react-native-gesture-bottom-sheet";
+
+import {DATA} from '../components/Data';
 const wp = Dimensions.get('window').width;
 const hp = Dimensions.get('window').height;
+
 export default function Hotel_find({ navigation }) {
   const dispath = useDispatch();
   const dataKeyWords = useSelector(state => state.keyWordReducer);
+
+  const [textInput, setTextInput] = useState(null);
+
   const [person, setPerson] = useState(2);
   const [room, setRoom] = useState(1);
   const [kid, setKid] = useState(0);
   const [rooms, setRooms] = useState(1);
   const [adults, setAdults] = useState(2);
+
   const renderPlace = ({ item }) => {
     return (
       <View style={styles.city_background}> 
@@ -109,7 +133,10 @@ export default function Hotel_find({ navigation }) {
         <View style={styles.Input_container}>
           <TextInput
             style={{  height: 40, borderColor: '#fff', borderWidth: 1, width: wp*(8/10), borderRadius: 8, paddingLeft: 8, backgroundColor: '#fff'  }}
-            onChangeText={text => dispath(keyWordSuggestion(text))}
+            onChangeText={text => {
+              setTextInput(text);
+              dispath(keyWordSuggestion(text))
+            }}
           />
           <View style={{justifyContent: 'center', alignItems:'center', position: 'absolute', zIndex: 3, top: 50}}>
           {
@@ -118,9 +145,9 @@ export default function Hotel_find({ navigation }) {
               data={dataKeyWords}
               renderItem={({ item }) => (
                 <TouchableOpacity
-                  onPress={ async () => {
-                    await dispath(getHotels(item)); 
-                    navigation.navigate('Detail', {});
+                  onPress={ () => {
+                    dispath(getHotels(item)); 
+                    navigation.navigate('Detail');
                   }}
                   style={{padding: 8, backgroundColor: '#fff', width: wp*(8/10), position: 'relative'}}
                 >
@@ -129,7 +156,6 @@ export default function Hotel_find({ navigation }) {
               )}
               keyExtractor={(item) => item.search_id}
             >
-
             </FlatList> 
             : <View></View>
           }
@@ -146,9 +172,16 @@ export default function Hotel_find({ navigation }) {
                 </TouchableWithoutFeedback>
               </View>
           </View>
-          <View style={styles.loginButton}>
-            <Text style={{color: "#fff", fontSize: 24, fontWeight: '400'}}>Tìm Kiếm</Text>
-          </View>
+          <TouchableOpacity
+            onPress={() => {
+              dispath(getHotels(textInput)); 
+              navigation.navigate('Detail');
+            }}
+          >
+            <View style={styles.loginButton}>
+              <Text style={{color: "#fff", fontSize: 24, fontWeight: '400'}}>Tìm Kiếm</Text>
+            </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.city_container}>
         <Text style={[styles.Title, {flex: 0.15}]}>Điểm Đến Hàng Đầu</Text>

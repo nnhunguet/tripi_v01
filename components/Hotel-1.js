@@ -1,5 +1,14 @@
-import React from 'react';
-import { StyleSheet, View, Text, Image, ScrollView } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { 
+  StyleSheet, 
+  View, 
+  Text, 
+  Image, 
+  ScrollView, 
+  Dimensions, 
+  FlatList,
+} from 'react-native';
+import { PricingCard } from 'react-native-elements';
 import { Color } from './Color'; 
 import { StatusBar } from 'expo-status-bar';
 import { AntDesign } from 'react-native-vector-icons';
@@ -7,22 +16,84 @@ import { FontAwesome } from 'react-native-vector-icons';
 import { FontAwesome5 } from 'react-native-vector-icons';
 import { Entypo } from 'react-native-vector-icons';
 import { MaterialIcons } from 'react-native-vector-icons';
+import BottomSheet from "react-native-gesture-bottom-sheet";
 import MapView, {Marker} from 'react-native-maps';
+const wp = Dimensions.get('window').width;
+const hp = Dimensions.get('window').height;
 const LATITUDE = 21.037814;
 const LONGITUDE = 105.781468;
 
 import { useSelector, useDispatch } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+
+const convertVND = (price) => {
+  return price.toLocaleString('en-US', {style : 'currency', currency : 'VND'});
+}
+
+const stringDomain = (domain_id) => {
+  switch(domain_id) {
+    case 2: 
+      return 'Traveloka';
+      break;
+    case 3: 
+      return 'Agoda';
+      break;
+    case 4: 
+      return 'Expedia';
+      break;
+    case 5: 
+      return 'Booking';
+      break;
+    default:
+      return 'Hết Phòng';
+      break;
+  }
+} 
  
 export default function Hotel_info_screens() {
-  const dispath = useDispatch();
-  console.log(1);
   const inforHotel = useSelector(state => state.getInforHotelReducer.data[0]);
-  console.log('infor', inforHotel);
-  console.log(2);
+  console.log('inforHotel: ', inforHotel);
+  console.log('============');
+  let allPrice = useSelector(state => state.getInforHotelReducer.allPrice);
+  console.log('allPrice - Hotel1',allPrice);
+  if(allPrice.length === 0) {
+    allPrice = [{ domain_id: -1, final_amount: '???' }]
+  }
+  const bottomSheet = useRef();
   return(
       <View style={styles.container}>
         <StatusBar barStyle="dark-content" />
+        <BottomSheet hasDraggableIcon ref={bottomSheet} height={hp/1.35}>
+          <FlatList
+            ListHeaderComponent={() => {
+              return (
+                <View>
+                  <Text style={{textAlign: 'center', fontSize: 30, }}>
+                    BẢNG GIÁ
+                  </Text>
+                </View>
+              )
+            }}
+            style={{marginTop: 15}}
+            data={allPrice}
+            renderItem={ ({ item }) => (
+              <View style={{marginTop: 20, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' ,paddingHorizontal: 16}}>
+                <PricingCard
+                  containerStyle={{width: '80%'}}
+                  color="#4f9deb"
+                  title={stringDomain(item.domain_id)}
+                  pricingStyle={{fontSize: 24}}
+                  price={convertVND(item.final_amount)}
+                  infoStyle={{fontSize: 12}}
+                  info={['1 Room/ 1 Night']}
+                  button={{ title: 'GET STARTED', icon: 'flight-takeoff' }}
+                />
+              </View>
+            )}
+            keyExtractor={(item, index) => index}
+          >
+          </FlatList>
+        </BottomSheet>
         <ScrollView>
           <View style={styles.Img_Background}>
             <Image style={styles.background} source={{uri: inforHotel.logo || "https://scontent.fhan2-2.fna.fbcdn.net/v/t1.0-0/p640x640/68401906_157744848700465_7740565304106811392_o.jpg?_nc_cat=111&_nc_sid=e3f864&_nc_ohc=ALSx5Ro_F-cAX-Q4xwi&_nc_ht=scontent.fhan2-2.fna&tp=6&oh=6071894881c03d120497e3f8a844b4f1&oe=5F7D0E5C"}} resizeMode={'cover'} >
@@ -73,8 +144,8 @@ export default function Hotel_info_screens() {
                   </View>
                 </View>
                 <View style={styles.Best_price}>
-                  <Text>Booking.com</Text>
-                  <Text style={{fontWeight: 'bold', fontSize: 20}}>313.939 d</Text>
+                  <Text> {stringDomain(allPrice[0].domain_id)} </Text>
+                  <Text style={{fontWeight: 'bold', fontSize: 20}}> {convertVND(allPrice[0].final_amount) || "???"} </Text>
                 </View>
                 <View style={styles.Price_footer}>
                   <Text style={{color: 'grey', fontSize: 10}}>
@@ -88,8 +159,11 @@ export default function Hotel_info_screens() {
                   </View>
                   <TouchableOpacity
                     onPress={() => {
-                      console.log(1);
-                      dispath.getAllPrice(inforHotel.hotel_id);
+                      if(stringDomain(allPrice[0].domain_id) !== 'Hết Phòng'){
+                        bottomSheet.current.show()
+                      } else {
+                        alert('Hết Phòng');
+                      }
                     }}
                   >
                     <View style={styles.Price_more}>
