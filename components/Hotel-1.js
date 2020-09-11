@@ -101,7 +101,7 @@ export default function Hotel_info_screens() {
           </View>
           <View style={styles.Info_container}> 
             <View style={styles.Hotel_name}>
-              <Text style={styles.Hotel_name_tittle}> {inforHotel.name} </Text>
+              <Text numberOfLines={2} style={styles.Hotel_name_tittle}> {inforHotel.name} </Text>
               <View style={{borderRadius: 50, backgroundColor: '#fff', height: 40}}>
                 <AntDesign name="hearto" size={20} color={Color.primary} style={{padding: 10}}/>
               </View>
@@ -213,7 +213,7 @@ export default function Hotel_info_screens() {
             </View>
             <View style={{flex: 0.08, justifyContent: 'center'}}>
                 <Text style={{fontSize: 25, fontWeight: 'bold', marginBottom: 13}}>Giới Thiệu</Text>
-                <Text numberOfLines={30}> {inforHotel.description} </Text>
+                <Text numberOfLines={5}> {inforHotel.description} </Text>
                 <Text style={{fontSize: 12, fontWeight: "bold", marginTop: 5}}>Xem thêm</Text>
             </View>
             <View style={styles.Review}> 

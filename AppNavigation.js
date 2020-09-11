@@ -98,12 +98,7 @@ function ExploreStackScreen() {
         component={Detail} 
         options={{
           headerTransparent: false,
-<<<<<<< HEAD
-          // headerTitle: "Hà Nội",
           headerTitle: props => <LogoTitle {...props} />,
-=======
-          headerTitle: "Hà Nội",
->>>>>>> 1732ada979b8e54dcedc684d63daaa65eee78473
           headerTintColor: Color.primary,
           headerTitleAlign: "center",
           headerTruncatedBackTitle: null,
@@ -113,7 +108,16 @@ function ExploreStackScreen() {
           },
         }}
       />
-      <ExploreStack.Screen name="Hotel" component={Hotel} />
+      <ExploreStack.Screen 
+      name="Hotel" 
+      component={Hotel} 
+      options={{
+        headerBackTitle: null,
+        headerTintColor: Color.primary,
+        headerLeftContainerStyle: {paddingLeft: wp/30},
+        headerTruncatedBackTitle: null,
+      }}
+    />
     </ExploreStack.Navigator>
   );
 }
