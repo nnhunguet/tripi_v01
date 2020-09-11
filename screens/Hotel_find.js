@@ -46,12 +46,19 @@ export default function Hotel_find({ navigation }) {
 
   const renderPlace = ({ item }) => {
     return (
+      <TouchableOpacity
+        onPress={() => {
+          dispath(getHotels(item.title)); 
+          navigation.navigate('Detail');
+        }}
+      >
       <View style={styles.city_background}> 
          <Image resizeMode="cover" style={styles.placeImage} source={item.link} /> 
           <View style={styles.city_img_title}>
           <Text style={styles.city_name}>{item.title}</Text>
           </View>
       </View>
+      </TouchableOpacity>
       );
   };
   const bottomSheet = useRef();

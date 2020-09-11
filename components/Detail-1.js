@@ -25,6 +25,10 @@ import MultiSlider from '@ptomasroos/react-native-multi-slider';
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
+const convertVND = (price) => {
+  return price.toLocaleString('en-US', {style : 'currency', currency : 'VND'});
+}
+
 import { useSelector, useDispatch } from 'react-redux';
 import { getInforHotelAction, serviceHotel, keyWordSuggestion } from '../redux/actions'
 
@@ -40,9 +44,9 @@ export default function DetailsScreen({ navigation }) {
   const [star4, setStar4] = useState(false);
   const [star5, setStar5] = useState(false);
 
-  console.log('DataHotels')
+  console.log('DataHotels');
   const dataHotels = useSelector(state => state.getHotelReducer.data);
-  // console.log(dataHotels);
+  const allPrice = useSelector(state => state.getHotelReducer.allPrice);
   const dispatch = useDispatch();
   const action = () =>
   ActionSheetIOS.showActionSheetWithOptions(
@@ -416,11 +420,12 @@ export default function DetailsScreen({ navigation }) {
         <View style={styles.flatList}>
           <FlatList style={styles.scrollView}
             data={dataHotels}
-            renderItem={({item}) => (
+            renderItem={({item, index}) => {
+            return (
             <TouchableOpacity
               onPress={() => {
                 dispatch(getInforHotelAction(item.hotel_id)); 
-                navigation.navigate('Hotel');
+                navigation.navigate('Hotel', {allPrice1: allPrice[index]});
               }}
               style={{height: WIDTH*(9/10)*(28/35)}}
             >
@@ -445,17 +450,17 @@ export default function DetailsScreen({ navigation }) {
                         <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>    
                         <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>
                         <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>    
-                        <Text style={{color:'white', marginLeft: 7, fontSize: 12,paddingLeft: 5,paddingRight: 5, borderColor: 'black',backgroundColor: Color.primary}}> { item.overall_score } </Text>
+                        <Text style={{color:'white', marginLeft: 7, fontSize: 12,paddingLeft: 5,paddingRight: 5, borderColor: 'black',backgroundColor: Color.primary}}> { (item.point_hidden/10).toFixed(1)} </Text>
                       </View>
                     </View>
                     <View style={styles.card_row_2}>
-                      <Text style={{fontSize: 15, fontWeight: 'bold'}}>435.000 đ</Text>
+                      <Text style={{fontSize: 15, fontWeight: 'bold'}}> {allPrice[index].length > 0 ? convertVND(allPrice[index][0].final_amount) : '???'} </Text>
                       <Text style={{}}>/Đêm</Text>
                     </View>
                   </View> 
               </View> 
             </TouchableOpacity>
-            )}
+            )}}
             keyExtractor={item => item.hotel_id}
           >
           </FlatList>

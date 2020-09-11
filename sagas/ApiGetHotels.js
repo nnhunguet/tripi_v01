@@ -16,17 +16,6 @@ function* getHotels(hotel) {
     // handle error
     console.log(error);
   });
-  // const token = 'UGhvZW5pWDpOTzEyRWs5Z1dLcEgxY3pnM1Z2dA==';
-  // const urlPrice = 'https://tripgle.data.tripi.vn/get_price';
-  // const data = {"hotel_ids": `${id}`}
-
-  // yield axios.post(urlPrice, data, 
-  //   {
-  //   headers: {
-  //     'Authorization': `Basic ${token}` 
-  //   }
-  // }).then(res => console.log(res.data))
-  //   .catch(err => console.log(err));
   return response;
 }
 
