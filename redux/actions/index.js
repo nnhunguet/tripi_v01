@@ -83,7 +83,7 @@ export const getHotelFaildAction = (error) => {
   }
 }
 
-export const getInforHotel = (hotel_id) => {
+export const getInforHotelAction = (hotel_id) => {
   return {
     type: ActionTypes.GET_INFOR_HOTEL,
     payload: {

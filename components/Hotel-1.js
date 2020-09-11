@@ -16,8 +16,10 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
  
 export default function Hotel_info_screens() {
   const dispath = useDispatch();
+  console.log(1);
   const inforHotel = useSelector(state => state.getInforHotelReducer.data[0]);
-  console.log(inforHotel);
+  console.log('infor', inforHotel);
+  console.log(2);
   return(
       <View style={styles.container}>
         <StatusBar barStyle="dark-content" />

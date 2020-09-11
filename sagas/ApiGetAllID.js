@@ -1,9 +1,9 @@
-const urlGetHotels = 'http://13.250.18.254:5000/hotels/getByID';
+const urlGetAllID = 'http://13.250.18.254:5000/hotels/getAllId';
 import axios from 'axios';
 
-function* getInforHotel(id) {
+function* getAllID(id) {
   let response;
-  yield axios.get(`${urlGetHotels}/${id}`)
+  yield axios.get(`${urlGetAllID}/${id}`)
   .then(function (res) {
     // handle success
     response = res.data;
@@ -18,6 +18,6 @@ function* getInforHotel(id) {
   return response;
 }
 
-export const Api = {
-  getInforHotel
+export const Api2 = {
+  getAllID
 }

@@ -10,10 +10,12 @@ function* fetchKeyWord({payload}) {
   try {
     yield put(showLoading());
     const receivedKeyWord = yield Api.getKeyWordSuggestion(payload.keyword);
+    yield put(hideLoading());
     if(payload.keyword !== '') {
       yield put({ type: FETCH_SUCCEEDED, payload: { data: receivedKeyWord } });  
-    } 
-    yield put(hideLoading());
+    } else {
+      yield put({ type: FETCH_FAILD, err });
+    }
   } 
   catch(err) {
     console.log('err');

@@ -12,8 +12,7 @@ export default function keyWordReducer(state = initialNoteState, action) {
     case ActionTypes.FETCH_FAILD: 
       console.log(action.payload); 
       console.log('Fetch Fail');
-      return state;
-
+      return [];
     default:
       return state;
       break;

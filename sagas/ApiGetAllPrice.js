@@ -1,32 +1,32 @@
-const urlAllIdHotels = 'http://13.250.18.254:5000/hotels/getAllId'
 import axios from 'axios'
-function* getAllPrice() {
-  let response;
-  yield axios.get(`${urlAllIdHotels}/${id}`)
-  .then(function (res) {
-    console.log(res.data);
-    const token = 'UGhvZW5pWDpOTzEyRWs5Z1dLcEgxY3pnM1Z2dA==';
-    const urlPrice = 'https://tripgle.data.tripi.vn/get_price';
-    const data = {"hotel_ids": `${id}`}
-
-    axios.post(urlPrice, data, 
-      {
-      headers: {
-        'Authorization': `Basic ${token}` 
-      }
-    }).then(res => console.log(res.data))
-      .catch(err => console.log(err));
-  })
-  .catch(function (error) {
-    // handle error
-    console.log(error);
-  })
-  .then(function () {
-    return response;
-  });
-  return response;
+const token = 'UGhvZW5pWDpOTzEyRWs5Z1dLcEgxY3pnM1Z2dA==';
+const url = 'https://tripgle.data.tripi.vn/get_price';
+function* getAllPrice(arrDomainId) {
+  // const data = {"hotel_ids": "2_3000020008985_20200830,3_4656943_20200830,_4656943_20200830"}
+  const data = {"hotel_ids": arrDomainId.join(',')}
+  
+  let respone = yield axios.post(url, data, 
+    {
+    headers: {
+      'Authorization': `Basic ${token}` 
+    }
+  }).then((res) => {
+      let arrPrice = res.data.flat(1); 
+      let sortArrPrice = arrPrice.sort((a,b) => {
+        return a.final_amount - b.final_amount;
+      });
+      respone = sortArrPrice;
+      console.log('sort', sortArrPrice);
+      console.log('res', respone);
+    })
+    .catch(err => console.log(err))
+    .then(() => {
+      return respone;
+    })
+  console.log(respone);
+  return respone;
 }
 
-export const Api = {
+export const Api3 = {
   getAllPrice
 }
