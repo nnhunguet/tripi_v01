@@ -48,7 +48,7 @@ const stringDomain = (domain_id) => {
  
 export default function Hotel_info_screens({ route }) {
   const inforHotel = useSelector(state => state.getInforHotelReducer.data[0]);
-  const { allPrice1 } = route.params;
+  const { allPrice1, allHotelUrl } = route.params;
   let allPrice = allPrice1;
   if(allPrice.length === 0) {
     allPrice = [{ domain_id: -1, final_amount: '???' }]
@@ -81,6 +81,9 @@ export default function Hotel_info_screens({ route }) {
                   infoStyle={{fontSize: 12}}
                   info={['1 Room/ 1 Night']}
                   button={{ title: 'GET STARTED', icon: 'flight-takeoff' }}
+                  onButtonPress={() => {
+                    console.log(allHotelUrl);
+                  }}
                 />
               </View>
             )}

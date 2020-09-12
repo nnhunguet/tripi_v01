@@ -1,7 +1,7 @@
 const urlGetHotels = 'http://13.250.18.254:5000/hotels/gethotels'
 import axios from 'axios'
 function* getHotels(hotel) {
-  console.log(hotel);
+  console.log('hotel',hotel);
   let search_id = hotel.search_id ? hotel.search_id : hotel;
   let type_code = hotel.type_code ? hotel.type_code : 0; 
   let filters = hotel.filters ? hotel.filters : 15; 

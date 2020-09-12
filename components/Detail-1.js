@@ -30,7 +30,7 @@ const convertVND = (price) => {
 }
 
 import { useSelector, useDispatch } from 'react-redux';
-import { getInforHotelAction, serviceHotel, keyWordSuggestion } from '../redux/actions'
+import { getInforHotelAction, serviceHotel, keyWordSuggestion, sortPriceAsc } from '../redux/actions'
 
 export default function DetailsScreen({ navigation }) {
   const [multiSliderValue, setMultiSliderValue] = useState([0, 100]);
@@ -44,9 +44,10 @@ export default function DetailsScreen({ navigation }) {
   const [star4, setStar4] = useState(false);
   const [star5, setStar5] = useState(false);
 
-  console.log('DataHotels');
   const dataHotels = useSelector(state => state.getHotelReducer.data);
+  console.log('data Hotel', dataHotels);
   const allPrice = useSelector(state => state.getHotelReducer.allPrice);
+  const allHotelUrl = useSelector(state => state.getHotelReducer.allHotelUrl);
   const dispatch = useDispatch();
   const action = () =>
   ActionSheetIOS.showActionSheetWithOptions(
@@ -65,7 +66,7 @@ export default function DetailsScreen({ navigation }) {
           console.log(1);
           break;
         case 2: 
-          console.log(2);
+          dispatch(sortPriceAsc());
           break;
         case 3: 
           console.log(3);
@@ -425,7 +426,7 @@ export default function DetailsScreen({ navigation }) {
             <TouchableOpacity
               onPress={() => {
                 dispatch(getInforHotelAction(item.hotel_id)); 
-                navigation.navigate('Hotel', {allPrice1: allPrice[index]});
+                navigation.navigate('Hotel', {allPrice1: allPrice[index], allHotelUrl: allHotelUrl[index]});
               }}
               style={{height: WIDTH*(9/10)*(28/35)}}
             >
