@@ -107,7 +107,16 @@ function ExploreStackScreen() {
           },
         }}
       />
-      <ExploreStack.Screen name="Hotel" component={Hotel} />
+      <ExploreStack.Screen 
+      name="Hotel" 
+      component={Hotel} 
+      options={{
+        headerBackTitle: null,
+        headerTintColor: Color.primary,
+        headerLeftContainerStyle: {paddingLeft: wp/30},
+        headerTruncatedBackTitle: null,
+      }}
+    />
     </ExploreStack.Navigator>
   );
 }

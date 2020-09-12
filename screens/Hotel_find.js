@@ -8,6 +8,7 @@ import {
   ScrollView, 
   TextInput, 
   Dimensions,
+  TouchableOpacity, 
 } from 'react-native';
 import { Color } from '../components/Color'; 
 import { StatusBar } from 'expo-status-bar';
@@ -23,16 +24,25 @@ import {
 } from '../redux/actions'
 import { 
   FlatList, 
-  TouchableOpacity, 
   TouchableWithoutFeedback 
 } from 'react-native-gesture-handler';
 import BottomSheet from "react-native-gesture-bottom-sheet";
-
+import moment from "moment";
+import DateRangePicker from "react-native-daterange-picker";
 import {DATA} from '../components/Data';
 const wp = Dimensions.get('window').width;
 const hp = Dimensions.get('window').height;
-
 export default function Hotel_find({ navigation }) {
+  var now = moment().date();
+  const [startDate, setStartDate] = useState(null)
+  const [endDate, setEndDate] = useState(null)
+  const [displayedDate, setDisplayedDate] = useState(moment())
+  const [minDate, setMinDate] = useState(moment().set("date", now))
+  const [day1, setDay1] = useState(now)
+  const [day2, setDay2] = useState(now + 1)
+  const setDates = (dates) => {
+    dates.startDate ? setStartDate(dates.startDate) : setEndDate(dates.endDate);
+  };
   const dispath = useDispatch();
   const dataKeyWords = useSelector(state => state.keyWordReducer);
 
@@ -145,7 +155,7 @@ export default function Hotel_find({ navigation }) {
               dispath(keyWordSuggestion(text))
             }}
           />
-          <View style={{justifyContent: 'center', alignItems:'center', position: 'absolute', zIndex: 3, top: 50}}>
+          <View style={{justifyContent: 'center', alignItems:'center', position: 'absolute',zIndex: 3, top: 50}}>
           {
             dataKeyWords.length > 0   ?
             <FlatList
@@ -156,7 +166,7 @@ export default function Hotel_find({ navigation }) {
                     dispath(getHotels(item)); 
                     navigation.navigate('Detail');
                   }}
-                  style={{padding: 8, backgroundColor: '#fff', width: wp*(8/10), position: 'relative'}}
+                  style={{padding: 8, backgroundColor: '#fff', width: wp*(8/10), position: 'relative', zIndex: 3}}
                 >
                   <Text>{item.name}</Text>
                 </TouchableOpacity>
@@ -169,13 +179,28 @@ export default function Hotel_find({ navigation }) {
           </View>
           <View style={styles.info_Container}>
             <View style={styles.info_date}>
-              <Text style={styles.info_date_title}>CHỌN NGÀY</Text>
-              <Text style={styles.info_date_day}>12 Dec - 15 Dec</Text>
+            <DateRangePicker
+                    onChange={setDates}
+                    endDate={endDate}
+                    startDate={startDate}
+                    displayedDate={displayedDate}
+                    minDate={minDate}
+                    selectedStyle={{backgroundColor: Color.primary}}
+                    presetButtons={true}
+                    buttonTextStyle={{paddingLeft: wp/15, paddingRight: wp/15, color: Color.primary}}
+                    buttonStyle={{borderColor: Color.primary}}
+                    range
+                    >
+                      <View style={{justifyContent: 'space-between', height: '100%'}}>
+                      <Text style={styles.info_date_title}>CHỌN NGÀY</Text>
+                      <Text style={styles.info_date_day}>{day1} Th9 - {day2} Th9</Text>
+                      </View>
+                      </DateRangePicker>
             </View>
             <View style={styles.info_person}>
                 <TouchableWithoutFeedback onPress={() => bottomSheet.current.show()} style={{justifyContent: 'space-between', height: '100%'}}>
                   <Text style={styles.info_date_title}>SỐ PHÒNG</Text>
-                  <Text style={styles.info_date_day}>{rooms} Room - {adults} Adults</Text>
+                  <Text style={styles.info_date_day}>{rooms} Phòng - {adults} Người</Text>
                 </TouchableWithoutFeedback>
               </View>
           </View>
@@ -358,13 +383,14 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: "#fff",
     width: '90%',
-    height: '20%'
+    height: '20%',
+    zIndex: -1
   },
   info_Container: {
     width: "90%",
     height: "20%",
     flexDirection: 'row',
-    zIndex: -1,
+    zIndex: 1,
   },
   info_date: {
     flex: 0.5,
@@ -380,13 +406,14 @@ const styles = StyleSheet.create({
   info_date_day: {
     fontWeight: 'bold',
     fontSize: 14,
-    color: '#fff'
+    color: '#fff',
+    zIndex: -1
   },
   info_person: {
     flex: 0.5,
     paddingLeft: 10,
     justifyContent: "space-between",
-    zIndex: -1
+    zIndex: -2
   },
   city_container: {
     marginTop: 20,
