@@ -6,6 +6,7 @@ export default function keyWordReducer(state = initialNoteState, action) {
   switch(action.type) {
     case ActionTypes.FETCH_SUCCEEDED:
       const { data } = action.payload; 
+      console.log(data);
       console.log('Fetch Keyword');
       return data;
 

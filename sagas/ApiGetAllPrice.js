@@ -3,7 +3,6 @@ const token = 'UGhvZW5pWDpOTzEyRWs5Z1dLcEgxY3pnM1Z2dA==';
 const url = 'https://tripgle.data.tripi.vn/get_price';
 function* getAllPrice(arrDomainId) {
   const data = {"hotel_ids": arrDomainId.join(',')}
-  
   let respone = yield axios.post(url, data, 
     {
     headers: {
@@ -20,7 +19,6 @@ function* getAllPrice(arrDomainId) {
     .then(() => {
       return respone;
     })
-  console.log(respone);
   return respone;
 }
 

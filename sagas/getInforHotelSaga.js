@@ -1,6 +1,4 @@
 import { Api }  from './ApiGetInforHotel';
-import { Api2 } from './ApiGetAllID';
-import { Api3 } from './ApiGetAllPrice';
 import { GET_INFOR_HOTEL, GET_INFOR_HOTEL_SUCCEEDED, GET_INFOR_HOTEL_FAILD } from '../redux/actionTypes';
 
 import { put, takeLatest } from 'redux-saga/effects';
@@ -11,14 +9,7 @@ function* getInforHotel({ payload }) {
   try {
     yield put(showLoading());
     const inforHotel = yield (Api.getInforHotel(hotel_id));
-    const getAllID = yield (Api2.getAllID(hotel_id));
-    // console.log(getAllID);
-    let arrDomian = [];
-    for(let item of getAllID) {
-      arrDomian.push(`${item.domain_id}_${item.domain_hotel_id}_1232131`);
-    }
-    const getAllPrice = yield (Api3.getAllPrice(arrDomian));
-    yield put({ type: GET_INFOR_HOTEL_SUCCEEDED, payload: { data: inforHotel, allPrice: getAllPrice } });  
+    yield put({ type: GET_INFOR_HOTEL_SUCCEEDED, payload: { data: inforHotel }});  
   } 
   catch(err) {
     console.log('err');

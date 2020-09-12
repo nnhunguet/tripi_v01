@@ -25,16 +25,28 @@ import MultiSlider from '@ptomasroos/react-native-multi-slider';
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
+const convertVND = (price) => {
+  return price.toLocaleString('en-US', {style : 'currency', currency : 'VND'});
+}
+
 import { useSelector, useDispatch } from 'react-redux';
-import { getInforHotelAction } from '../redux/actions'
+import { getInforHotelAction, serviceHotel, keyWordSuggestion } from '../redux/actions'
 
 export default function DetailsScreen({ navigation }) {
   const [multiSliderValue, setMultiSliderValue] = useState([0, 100]);
   const multiSliderValuesChange = (values) => setMultiSliderValue(values);
   const [priceValue, setPriceValue] = useState([0, 50]);
   const PriceValuesChange = (values) => setPriceValue(values);
-  console.log('DataHotels')
+
+  const [star1, setStar1] = useState(false);
+  const [star2, setStar2] = useState(false);
+  const [star3, setStar3] = useState(false);
+  const [star4, setStar4] = useState(false);
+  const [star5, setStar5] = useState(false);
+
+  console.log('DataHotels');
   const dataHotels = useSelector(state => state.getHotelReducer.data);
+  const allPrice = useSelector(state => state.getHotelReducer.allPrice);
   const dispatch = useDispatch();
   const action = () =>
   ActionSheetIOS.showActionSheetWithOptions(
@@ -151,31 +163,92 @@ export default function DetailsScreen({ navigation }) {
                 <Text style={{fontSize: 16, fontWeight: 'bold'}}>Hạng khách sạn</Text>
                 <View style={{ height: HEIGHT/9, marginTop: 10, justifyContent: "space-around"}}>
                   <View style={{flexDirection: 'row', width: WIDTH/1.9, justifyContent: 'space-between'}}>
-                        <FontAwesome name="star" size={13} color={'grey'} style={{paddingHorizontal: 15, paddingVertical: 7,  borderColor: 'grey', borderWidth: 1, borderRadius: 5}}/>
-                        <View style={styles.star_ratting}>
-                          <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-                          <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-                        </View>
-                        <View style={styles.star_ratting}>
-                          <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-                          <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-                          <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-                        </View>
+                    <TouchableOpacity
+                      onPress={() => {
+                        console.log('1 sao');
+                        setStar1(!star1);
+                      }}
+                    >
+                      <View style={{paddingHorizontal: 15, paddingVertical: 7,  borderColor: star1 ? '#f0a500' : 'grey', borderWidth: 1, borderRadius: 5}} >
+                        <FontAwesome name="star" size={13} color={star1 ?'#f0a500' : 'grey'}/>
+                      </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity 
+                      style={{
+                        flexDirection: 'row',
+                        paddingVertical: 7,
+                        paddingHorizontal: 15,
+                        borderWidth: 1,
+                        borderColor: star2 ? '#f0a500' :'grey',
+                        borderRadius: 5,
+                      }}
+                      onPress={() => {
+                        setStar2(!star2);
+                        console.log('2 sao');
+                      }}
+                    >
+                      <FontAwesome name="star" size={13} color={star2 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star2 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
+                    </TouchableOpacity>
+                    <TouchableOpacity 
+                      style={{
+                        flexDirection: 'row',
+                        paddingVertical: 7,
+                        paddingHorizontal: 15,
+                        borderWidth: 1,
+                        borderColor: star3 ? '#f0a500' :'grey',
+                        borderRadius: 5,
+                      }}
+                      onPress={() => {
+                        setStar3(!star3);
+                        console.log('3 sao')
+                      }}
+                    >
+                      <FontAwesome name="star" size={13} color={star3 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star3 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star3 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
+                    </TouchableOpacity>
                   </View>
                   <View style={{flexDirection: 'row', width: WIDTH/1.9, justifyContent: 'space-between'}}>
-                    <View style={styles.star_ratting}>
-                      <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-                      <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-                      <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-                      <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-                    </View>
-                    <View style={styles.star_ratting}>
-                      <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-                      <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-                      <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-                      <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-                      <FontAwesome name="star" size={13} color={'grey'} style={{paddingRight: 1}}/> 
-                    </View>
+                    <TouchableOpacity 
+                      style={{
+                        flexDirection: 'row',
+                        paddingVertical: 7,
+                        paddingHorizontal: 15,
+                        borderWidth: 1,
+                        borderColor: star4 ? '#f0a500' :'grey',
+                        borderRadius: 5,
+                      }}
+                      onPress={() => {
+                        setStar4(!star4);
+                        console.log('4 sao')
+                      }}
+                    >
+                      <FontAwesome name="star" size={13} color={star4 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star4 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star4 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star4 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
+                    </TouchableOpacity>
+                    <TouchableOpacity 
+                      style={{
+                        flexDirection: 'row',
+                        paddingVertical: 7,
+                        paddingHorizontal: 15,
+                        borderWidth: 1,
+                        borderColor: star5 ? '#f0a500' :'grey',
+                        borderRadius: 5,
+                      }}
+                      onPress={() => {
+                        setStar5(!star5);
+                        console.log('5 sao')
+                      }}  
+                    >
+                      <FontAwesome name="star" size={13} color={star5 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star5 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star5 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star5 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star5 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
+                    </TouchableOpacity>
                   </View>
                 </View>
               </View>  
@@ -259,11 +332,11 @@ export default function DetailsScreen({ navigation }) {
                     </View>
                   </View>
                   <View style={{flexDirection: 'row', width: WIDTH/1.9, justifyContent: 'space-between'}}>
-                    <View style={styles.star_ratting}>
                       <TouchableOpacity onPress={()=> {console.log('nha')}}>
+                    <View style={styles.star_ratting}>
                       <Text style={{fontSize: 12}}>Căn hộ/Villa</Text>
-                      </TouchableOpacity>
                     </View>
+                      </TouchableOpacity>
                     <View style={styles.star_ratting}>
                       <Text style={{fontSize: 12}}>Du thuyền</Text>
                     </View>
@@ -279,9 +352,9 @@ export default function DetailsScreen({ navigation }) {
                     <View style={styles.star_ratting}>
                       <Text style={{fontSize: 12}}>Bể bơi ngoài trời</Text>
                     </View>
-                    <View style={styles.star_ratting}>
-                      <Text style={{fontSize: 12}}>Bể bơi trong nhà</Text>
-                    </View>
+                      <View style={styles.star_ratting}>
+                        <Text style={{fontSize: 12}}>Bể bơi trong nhà</Text>
+                      </View>
                   </View>
                   <View style={{flexDirection: 'row', width: WIDTH/1.42, justifyContent: 'space-between'}}>
                     <View style={styles.star_ratting}>
@@ -297,7 +370,7 @@ export default function DetailsScreen({ navigation }) {
                   <View style={{flexDirection: 'row', width: WIDTH/1.42, justifyContent: 'space-between'}}>
                     <TouchableOpacity
                       onPress={() => {
-                        console.log('Bottom sheet')
+                        console.log('Bottom sheet');
                       }}
                     >
                       <View style={styles.star_ratting}>
@@ -313,9 +386,10 @@ export default function DetailsScreen({ navigation }) {
         <View style={styles.button_view}>
           <TouchableOpacity
             style={styles.Bottomsheet_Button}
-            onPress={
-              () => {bottomSheet.current.close()}     
-            }
+            onPress={ () => {
+              bottomSheet.current.close();
+              
+            }}
           >
             <Text style={{color: "#fff", fontSize: 20, fontWeight: '400',}}>Áp Dụng</Text>
           </TouchableOpacity>
@@ -346,11 +420,12 @@ export default function DetailsScreen({ navigation }) {
         <View style={styles.flatList}>
           <FlatList style={styles.scrollView}
             data={dataHotels}
-            renderItem={({item}) => (
+            renderItem={({item, index}) => {
+            return (
             <TouchableOpacity
               onPress={() => {
                 dispatch(getInforHotelAction(item.hotel_id)); 
-                navigation.navigate('Hotel');
+                navigation.navigate('Hotel', {allPrice1: allPrice[index]});
               }}
               style={{height: WIDTH*(9/10)*(28/35)}}
             >
@@ -375,17 +450,17 @@ export default function DetailsScreen({ navigation }) {
                         <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>    
                         <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>
                         <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>    
-                        <Text style={{color:'white', marginLeft: 7, fontSize: 12,paddingLeft: 5,paddingRight: 5, borderColor: 'black',backgroundColor: Color.primary}}> { item.overall_score } </Text>
+                        <Text style={{color:'white', marginLeft: 7, fontSize: 12,paddingLeft: 5,paddingRight: 5, borderColor: 'black',backgroundColor: Color.primary}}> { (item.point_hidden/10).toFixed(1)} </Text>
                       </View>
                     </View>
                     <View style={styles.card_row_2}>
-                      <Text style={{fontSize: 15, fontWeight: 'bold'}}>435.000 đ</Text>
+                      <Text style={{fontSize: 15, fontWeight: 'bold'}}> {allPrice[index].length > 0 ? convertVND(allPrice[index][0].final_amount) : '???'} </Text>
                       <Text style={{}}>/Đêm</Text>
                     </View>
                   </View> 
               </View> 
             </TouchableOpacity>
-            )}
+            )}}
             keyExtractor={item => item.hotel_id}
           >
           </FlatList>
@@ -580,7 +655,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     borderWidth: 1,
     borderColor: 'grey',
-    borderRadius: 5
+    borderRadius: 5,
   },
   BottomSheet_Kieu: {
     width: WIDTH,
@@ -588,7 +663,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     marginTop: 5,
     borderBottomColor: '#dbd7d7',
-    borderBottomWidth: 3
+    borderBottomWidth: 3,
   },
   BottomSheet_tien_ich: {
     width: WIDTH,

@@ -98,7 +98,6 @@ function ExploreStackScreen() {
         component={Detail} 
         options={{
           headerTransparent: false,
-          headerTitle: props => <LogoTitle {...props} />,
           headerTintColor: Color.primary,
           headerTitleAlign: "center",
           headerTruncatedBackTitle: null,

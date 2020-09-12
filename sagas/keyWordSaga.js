@@ -5,7 +5,7 @@ import { put, takeLatest, delay } from 'redux-saga/effects';
 import { showLoading, hideLoading } from '../redux/actions';
 
 function* fetchKeyWord({payload}) {
-  yield delay(500);
+  yield delay(1000);
   console.log('fetch key word', payload);
   try {
     yield put(showLoading());

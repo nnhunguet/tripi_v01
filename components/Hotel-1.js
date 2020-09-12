@@ -34,28 +34,22 @@ const stringDomain = (domain_id) => {
   switch(domain_id) {
     case 2: 
       return 'Traveloka';
-      break;
     case 3: 
       return 'Agoda';
-      break;
     case 4: 
       return 'Expedia';
-      break;
     case 5: 
       return 'Booking';
-      break;
     default:
       return 'Hết Phòng';
       break;
   }
 } 
  
-export default function Hotel_info_screens() {
+export default function Hotel_info_screens({ route }) {
   const inforHotel = useSelector(state => state.getInforHotelReducer.data[0]);
-  console.log('inforHotel: ', inforHotel);
-  console.log('============');
-  let allPrice = useSelector(state => state.getInforHotelReducer.allPrice);
-  console.log('allPrice - Hotel1',allPrice);
+  const { allPrice1 } = route.params;
+  let allPrice = allPrice1;
   if(allPrice.length === 0) {
     allPrice = [{ domain_id: -1, final_amount: '???' }]
   }
