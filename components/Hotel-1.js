@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { 
   StyleSheet, 
   View, 
@@ -22,7 +22,6 @@ const wp = Dimensions.get('window').width;
 const hp = Dimensions.get('window').height;
 const LATITUDE = 21.037814;
 const LONGITUDE = 105.781468;
-
 import { useSelector, useDispatch } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -54,6 +53,16 @@ export default function Hotel_info_screens({ route }) {
     allPrice = [{ domain_id: -1, final_amount: '???' }]
   }
   const bottomSheet = useRef();
+  const [textShown, setTextShown] = useState(false);
+  const [lengthMore,setLengthMore] = useState(false); 
+  const toggleNumberOfLines = () => {
+      setTextShown(!textShown);
+  }
+  
+  const onTextLayout = useCallback(e =>{
+      setLengthMore(e.nativeEvent.lines.length >=5); 
+  },[]);
+      
   return(
       <View style={styles.container}>
         <StatusBar barStyle="dark-content" />
@@ -205,10 +214,22 @@ export default function Hotel_info_screens({ route }) {
                   </View>
               </View> 
             </View>
-            <View style={{flex: 0.08, justifyContent: 'center'}}>
+            <View style={{ justifyContent: 'center', marginTop: hp/20}}>
                 <Text style={{fontSize: 25, fontWeight: 'bold', marginBottom: 13}}>Giới Thiệu</Text>
-                <Text numberOfLines={5}> {inforHotel.description} </Text>
-                <Text style={{fontSize: 12, fontWeight: "bold", marginTop: 5}}>Xem thêm</Text>
+                {/* <Text numberOfLines={5}> {inforHotel.description} </Text>
+                <Text style={{fontSize: 12, fontWeight: "bold", marginTop: 5}}>Xem thêm</Text> */}
+                <Text
+                onTextLayout={onTextLayout}
+                numberOfLines={textShown ? undefined : 5}
+                style={{ lineHeight: 21 }}>
+                {inforHotel.description}
+                </Text>
+                {
+                    lengthMore ? <Text
+                    onPress={toggleNumberOfLines}
+                    style={{ lineHeight: 21, marginTop: 10, color: Color.primary}}>{textShown ? 'Thu gọn...' : 'Xem thêm...'}</Text>
+                    :null
+                }
             </View>
             <View style={styles.Review}> 
               <View style={styles.Review_tittle}>
@@ -262,30 +283,7 @@ export default function Hotel_info_screens({ route }) {
                     </View>         
                   </View>
                 </View>
-                <View style={styles.Review_comment_display}>
-                  <View style={styles.Review_comment_lui}>
-                    <View style={styles.Review_comment_info}>
-                      <Image source={require('../assets/Ha_Noi.jpg')} resizeMode='cover' style={{flex: 0.16, height: 42, borderRadius: 90}}/>
-                      <View style={styles.Review_comment_name}>
-                          <Text style={{fontWeight: 'bold'}}>Nguyễn Văn A</Text>
-                          <Text style={{color: 'grey', fontSize: 10}}>Cập nhật lần cuối 21/05/2019</Text>
-                      </View>
-                      <View style={{flexDirection: 'row'}}>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>  
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>
-                      </View>
-                    </View>
-                    <View style={styles.Review_comment_content}>
-                      <Text style={{fontWeight: 'bold', marginBottom: 10, fontSize: 18}}>Điểm đến tuyệt vời</Text>
-                      <Text numberOfLines={4}>Khách sạn tuyệt vời, con người thân thiện, ánh nắng mỗi bình minh tuyệt đẹp là những gì mà tôi được trả tiền để nói Khách sạn tuyệt vời, con người thân thiện, ánh nắng mỗi bình minh tuyệt đẹp là những gì mà tôi được trả tiền để nói Khách sạn tuyệt vời, con người thân thiện, ánh nắng mỗi bình minh tuyệt đẹp là những gì mà tôi được trả tiền để nói Khách sạn tuyệt vời, con người thân thiện, ánh nắng mỗi bình minh tuyệt đẹp là những gì mà tôi được trả tiền để nói </Text>
-                      <Text style={{fontSize: 12, marginTop: 10}}>Xem thêm</Text>
-                    </View>         
-                  </View>
-                </View>
-                <View style={{justifyContent: "center", alignItems: "center", flex: 0.04}}>
+                <View style={{justifyContent: "center", alignItems: "center", height: hp/20}}>
                 <Text style={{fontSize: 12, fontWeight: 'bold'}}>
                   Đọc thêm 
                   <Entypo name="chevron-small-right" size={12} color="black" />
@@ -299,20 +297,12 @@ export default function Hotel_info_screens({ route }) {
                   <Text style={{fontSize: 16, marginTop: 10, marginBottom: 10}}><Entypo name="check" size={10} color="black" /> Wifi miễn phí</Text>
                   <Text style={{fontSize: 16, marginTop: 10, marginBottom: 10}}><Entypo name="check" size={10} color="black" /> Wifi miễn phí</Text>
                 </View>
-                <View style={{flex: 0.2, justifyContent: 'center'}}>
+                <View style={{height: hp/15, justifyContent: 'center'}}>
                   <Text style={{fontSize: 14, fontWeight: 'bold'}}>Hiển thị thêm tiện ích</Text>
                 </View>
               </View>
-              <View style={{flex: 0.22, borderTopColor: Color.grey, borderTopWidth: 1}}>
+              <View style={{height: hp/3, borderTopColor: Color.grey, borderTopWidth: 1}}>
                 <Text style={{fontSize: 24, fontWeight: 'bold', marginBottom: 10, paddingTop: 15}}>Thông tin hữu ích</Text>
-                <Text style={{fontSize: 16, marginTop: 5, fontWeight: 'bold', color: 'grey'}}>Hạng khách sạn</Text>
-                <View style={{flexDirection: 'row', marginTop: 3}}>
-                  <FontAwesome name="star" size={13} color='black' style={{paddingRight: 2}}/>
-                  <FontAwesome name="star" size={13} color='black' style={{paddingRight: 2}}/>
-                  <FontAwesome name="star" size={13} color='black' style={{paddingRight: 2}}/>  
-                  <FontAwesome name="star" size={13} color='black' style={{paddingRight: 2}}/>
-                  <FontAwesome name="star" size={13} color='black' style={{paddingRight: 2}}/>
-                </View>
                 <Text style={{fontSize: 16, marginTop: 15, fontWeight: 'bold', color: 'grey'}}>Số tầng</Text>
                 <Text style={{marginTop: 3, fontWeight: 'bold'}}>1</Text>
                 <Text style={{fontSize: 16, marginTop: 15, fontWeight: 'bold', color: 'grey'}}>Nhà Hàng</Text>
@@ -320,7 +310,7 @@ export default function Hotel_info_screens({ route }) {
               </View>
                 </View>
             </View>
-            <View style={{flex: 0.2}}>
+            <View style={{height: hp/1.3}}>
               <MapView style={styles.mapView}
                 region={
                   {
@@ -354,21 +344,19 @@ const styles = StyleSheet.create({
     },
   Img_Background: {
     width: '100%',
-    flex: 0.12,
+    height: hp/3
     },
   background: {
     flex: 1,
-    height: 200,
+    height: hp/5,
     width: '100%',
     },  
   Info_container: {
     paddingLeft: 20,
     paddingRight: 20,
-    //flex: 0.88,
-    height: 2500
     },
   Hotel_name: {
-    flex: 0.035,
+    height: hp/7.5,
     flexDirection: 'row',
     paddingTop: 10,
     justifyContent: 'space-between',
@@ -381,10 +369,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   Price: {
-    flex: 0.12,
+    height: hp/3,
   },
   Booking_info: {
-    flex: 0.3,
+    height: hp/10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -407,16 +395,16 @@ const styles = StyleSheet.create({
   Best_price: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    flex: 0.2,
     alignItems: "center",
+    height: hp/15
   },
   Price_footer: {
-    flex: 0.1,
+    height: hp/30,
     justifyContent: "center",
   },  
   Button_container: {
     justifyContent: "space-between",
-    flex: 0.3,
+    height: hp/7,
   },
   Price_sell: {
     width: "100%",
@@ -438,7 +426,7 @@ const styles = StyleSheet.create({
   },
   Rating: {
     marginTop: 25,
-    flex: 0.11,
+    height: hp/3.5,
     width: '100%',
     borderColor: 'grey',
     backgroundColor: '#fff',
@@ -478,24 +466,24 @@ const styles = StyleSheet.create({
     paddingRight: 20
   },
   Review: {
-    flex: 0.55,
+    marginTop: hp/30,
   },
   Review_tittle: {
-    flex: 0.02,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginBottom: 10
   },
   Review_comment: {
-    flex: 0.97,
   },
   Review_comment_display: {
     flex: 0.2,
     borderTopWidth: 1,
     borderTopColor: 'grey',
     justifyContent: "center",
+    height: hp/3.5
   },
   Review_comment_lui: {
-    flex: 0.9
+    
   },
   Review_comment_info: {
     height: 55,
@@ -504,6 +492,8 @@ const styles = StyleSheet.create({
   },
   Review_comment_name: {
     flex: 0.75,
+    height: hp/20,
+    justifyContent: 'space-between'
   },
   Review_comment_content: {
   },
