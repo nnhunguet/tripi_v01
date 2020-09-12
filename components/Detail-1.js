@@ -18,6 +18,7 @@ import {
   MaterialCommunityIcons,
   MaterialIcons 
 } from 'react-native-vector-icons';
+import StarRating from './star-rating';
 import { Feather } from '@expo/vector-icons';
 import  { Color }  from './Color'; 
 import { TouchableWithoutFeedback, FlatList } from 'react-native-gesture-handler';
@@ -47,7 +48,6 @@ export default function DetailsScreen({ navigation }) {
   const dataHotels = useSelector(state => state.getHotelReducer.data);
   console.log('data Hotel', dataHotels);
   const allPrice = useSelector(state => state.getHotelReducer.allPrice);
-  const allHotelUrl = useSelector(state => state.getHotelReducer.allHotelUrl);
   const dispatch = useDispatch();
   const action = () =>
   ActionSheetIOS.showActionSheetWithOptions(
@@ -426,7 +426,7 @@ export default function DetailsScreen({ navigation }) {
             <TouchableOpacity
               onPress={() => {
                 dispatch(getInforHotelAction(item.hotel_id)); 
-                navigation.navigate('Hotel', {allPrice1: allPrice[index], allHotelUrl: allHotelUrl[index]});
+                navigation.navigate('Hotel', {allPrice1: allPrice[index]});
               }}
               style={{height: WIDTH*(9/10)*(28/35)}}
             >
@@ -446,11 +446,7 @@ export default function DetailsScreen({ navigation }) {
                         <Text numberOfLines= {2} style={{fontSize: 11, color: 'grey', marginLeft: 10}}> { item.address } </Text>
                       </View>
                       <View style={{flexDirection: 'row', marginLeft: 10}}>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>    
-                        <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                        <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>    
+                        <StarRating rating={item.star_number}/>   
                         <Text style={{color:'white', marginLeft: 7, fontSize: 12,paddingLeft: 5,paddingRight: 5, borderColor: 'black',backgroundColor: Color.primary}}> { (item.point_hidden/10).toFixed(1)} </Text>
                       </View>
                     </View>

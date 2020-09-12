@@ -12,7 +12,6 @@ import { PricingCard } from 'react-native-elements';
 import { Color } from './Color'; 
 import { StatusBar } from 'expo-status-bar';
 import { AntDesign } from 'react-native-vector-icons';
-import { FontAwesome } from 'react-native-vector-icons';
 import { FontAwesome5 } from 'react-native-vector-icons';
 import { Entypo } from 'react-native-vector-icons';
 import { MaterialIcons } from 'react-native-vector-icons';
@@ -48,7 +47,7 @@ const stringDomain = (domain_id) => {
  
 export default function Hotel_info_screens({ route }) {
   const inforHotel = useSelector(state => state.getInforHotelReducer.data[0]);
-  const { allPrice1, allHotelUrl } = route.params;
+  const { allPrice1 } = route.params;
   let allPrice = allPrice1;
   if(allPrice.length === 0) {
     allPrice = [{ domain_id: -1, final_amount: '???' }]
@@ -92,7 +91,7 @@ export default function Hotel_info_screens({ route }) {
                   info={['1 Room/ 1 Night']}
                   button={{ title: 'GET STARTED', icon: 'flight-takeoff' }}
                   onButtonPress={() => {
-                    console.log(allHotelUrl);
+                    console.log(1);
                   }}
                 />
               </View>
@@ -193,7 +192,7 @@ export default function Hotel_info_screens({ route }) {
                     <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>
                     <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>   
                   </View> */}
-                  <StarRating rating={3}/>
+                  <StarRating rating={inforHotel.star_number}/>
                 </View>
               </View>  
               <View style={styles.Rating_details}>
