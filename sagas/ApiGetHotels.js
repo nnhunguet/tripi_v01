@@ -4,8 +4,10 @@ function* getHotels(hotel) {
   console.log(hotel);
   let search_id = hotel.search_id ? hotel.search_id : hotel;
   let type_code = hotel.type_code ? hotel.type_code : 0; 
+  let filters = hotel.filters ? hotel.filters : 15; 
+  let start_number = hotel.start_number ? hotel.start_number : 6; 
   let response;
-  yield axios.get(`${urlGetHotels}/${search_id}/${type_code}/15/6`)
+  yield axios.get(`${urlGetHotels}/${search_id}/${type_code}/${filters}/${start_number}`)
   .then(function (res) {
     // handle success
     response = res.data;
@@ -14,17 +16,6 @@ function* getHotels(hotel) {
     // handle error
     console.log(error);
   });
-  // const token = 'UGhvZW5pWDpOTzEyRWs5Z1dLcEgxY3pnM1Z2dA==';
-  // const urlPrice = 'https://tripgle.data.tripi.vn/get_price';
-  // const data = {"hotel_ids": `${id}`}
-
-  // yield axios.post(urlPrice, data, 
-  //   {
-  //   headers: {
-  //     'Authorization': `Basic ${token}` 
-  //   }
-  // }).then(res => console.log(res.data))
-  //   .catch(err => console.log(err));
   return response;
 }
 
