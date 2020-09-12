@@ -24,6 +24,7 @@ const LATITUDE = 21.037814;
 const LONGITUDE = 105.781468;
 import { useSelector, useDispatch } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import StarRating from './star-rating';
 
 const convertVND = (price) => {
   return price.toLocaleString('en-US', {style : 'currency', currency : 'VND'});
@@ -182,13 +183,14 @@ export default function Hotel_info_screens({ route }) {
                 </View>
                 <View style={styles.Rating_overall}>
                   <Text>Đánh giá chung</Text>
-                  <View style={{flexDirection: "row"}}>
+                  {/* <View style={{flexDirection: "row"}}>
                     <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>
                     <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>
                     <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>    
                     <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>
                     <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>   
-                  </View>
+                  </View> */}
+                  <StarRating rating={3}/>
                 </View>
               </View>  
               <View style={styles.Rating_details}>
@@ -216,8 +218,6 @@ export default function Hotel_info_screens({ route }) {
             </View>
             <View style={{ justifyContent: 'center', marginTop: hp/20}}>
                 <Text style={{fontSize: 25, fontWeight: 'bold', marginBottom: 13}}>Giới Thiệu</Text>
-                {/* <Text numberOfLines={5}> {inforHotel.description} </Text>
-                <Text style={{fontSize: 12, fontWeight: "bold", marginTop: 5}}>Xem thêm</Text> */}
                 <Text
                 onTextLayout={onTextLayout}
                 numberOfLines={textShown ? undefined : 5}
@@ -245,13 +245,14 @@ export default function Hotel_info_screens({ route }) {
                           <Text style={{fontWeight: 'bold'}}>Nguyễn Văn A</Text>
                           <Text style={{color: 'grey', fontSize: 10}}>Cập nhật lần cuối 21/05/2019</Text>
                       </View>
-                      <View style={{flexDirection: 'row'}}>
+                      {/* <View style={{flexDirection: 'row'}}>
                         <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>
                         <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>
                         <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>  
                         <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>
                         <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>
-                      </View>
+                      </View> */}
+                      <StarRating rating={5}/>
                     </View>
                     <View style={styles.Review_comment_content}>
                       <Text style={{fontWeight: 'bold', marginBottom: 10, fontSize: 18}}>Điểm đến tuyệt vời</Text>
@@ -268,13 +269,14 @@ export default function Hotel_info_screens({ route }) {
                           <Text style={{fontWeight: 'bold'}}>Nguyễn Văn A</Text>
                           <Text style={{color: 'grey', fontSize: 10}}>Cập nhật lần cuối 21/05/2019</Text>
                       </View>
-                      <View style={{flexDirection: 'row'}}>
+                      {/* <View style={{flexDirection: 'row'}}>
                         <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>
                         <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>
                         <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>  
                         <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>
                         <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>
-                      </View>
+                      </View> */}
+                      <StarRating rating={5}/>
                     </View>
                     <View style={styles.Review_comment_content}>
                       <Text style={{fontWeight: 'bold', marginBottom: 10, fontSize: 18}}>Điểm đến tuyệt vời</Text>
