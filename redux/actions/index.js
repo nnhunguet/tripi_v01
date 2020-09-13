@@ -128,6 +128,12 @@ export const hideLoading = () => {
   }
 }
 
+export const sortPriceAsc = () => {
+  return {
+    type: ActionTypes.SORT_PRICE_ASC,
+  }
+}
+
 export const priceOneNight = (price) => {
   return {
     type: ActionTypes.PRICE_ONE_NIGTH,

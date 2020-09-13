@@ -25,4 +25,6 @@ export const APPLY = 'APPLY';
 export const GET_ALL_PRICE = 'GET_ALL_PRICE';
 export const GET_ALL_PRICE_SUCCESS = 'GET_ALL_PRICE_SUCCESS'; 
 export const GET_ALL_PRICE_FAILD = 'GET_ALL_PRICE_FAILD'; 
+
+export const SORT_PRICE_ASC = 'SORT_PRICE_ASC';
  

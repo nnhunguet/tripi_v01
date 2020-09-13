@@ -18,6 +18,7 @@ import {
   MaterialCommunityIcons,
   MaterialIcons 
 } from 'react-native-vector-icons';
+import StarRating from './star-rating';
 import { Feather } from '@expo/vector-icons';
 import  { Color }  from './Color'; 
 import { TouchableWithoutFeedback, FlatList } from 'react-native-gesture-handler';
@@ -30,7 +31,7 @@ const convertVND = (price) => {
 }
 
 import { useSelector, useDispatch } from 'react-redux';
-import { getInforHotelAction, serviceHotel, keyWordSuggestion } from '../redux/actions'
+import { getInforHotelAction, serviceHotel, keyWordSuggestion, sortPriceAsc } from '../redux/actions'
 
 export default function DetailsScreen({ navigation }) {
   const [multiSliderValue, setMultiSliderValue] = useState([0, 100]);
@@ -44,8 +45,8 @@ export default function DetailsScreen({ navigation }) {
   const [star4, setStar4] = useState(false);
   const [star5, setStar5] = useState(false);
 
-  console.log('DataHotels');
   const dataHotels = useSelector(state => state.getHotelReducer.data);
+  console.log('data Hotel', dataHotels);
   const allPrice = useSelector(state => state.getHotelReducer.allPrice);
   const dispatch = useDispatch();
   const action = () =>
@@ -65,7 +66,7 @@ export default function DetailsScreen({ navigation }) {
           console.log(1);
           break;
         case 2: 
-          console.log(2);
+          dispatch(sortPriceAsc());
           break;
         case 3: 
           console.log(3);
@@ -445,11 +446,7 @@ export default function DetailsScreen({ navigation }) {
                         <Text numberOfLines= {2} style={{fontSize: 11, color: 'grey', marginLeft: 10}}> { item.address } </Text>
                       </View>
                       <View style={{flexDirection: 'row', marginLeft: 10}}>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>    
-                        <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                        <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>    
+                        <StarRating rating={item.star_number}/>   
                         <Text style={{color:'white', marginLeft: 7, fontSize: 12,paddingLeft: 5,paddingRight: 5, borderColor: 'black',backgroundColor: Color.primary}}> { (item.point_hidden/10).toFixed(1)} </Text>
                       </View>
                     </View>

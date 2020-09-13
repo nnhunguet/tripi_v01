@@ -10,19 +10,28 @@ function* getHotels({payload}) {
   try {
     yield put(showLoading());
     const hotels = yield Api.getHotels(payload.hotel);
-    const filerHotels = hotels.length > 10 ? hotels.slice(0,9) : hotels;
+    const filerHotels = hotels.length > 10 ? hotels.slice(0,10) : hotels;
     let allPrice = [];
-    for(let hotel of filerHotels ) {
-      let { hotel_id } = hotel;
+    for(let i = 0; i < filerHotels.length; i++) {
+      let objHotelUrl = {};
+      let { hotel_id } = filerHotels[i];
       const getAllID = yield (Api2.getAllID(hotel_id));
       let arrDomain = [];
       for(let item of getAllID) {
-        arrDomain.push(`${item.domain_id}_${item.domain_hotel_id}_1232131`);
+        let cur = `${item.domain_id}`;
+        objHotelUrl[cur] = item.hotel_url;
+        arrDomain.push(`${item.domain_id}_${item.domain_hotel_id}_20200830`);
       }
-      const getAllPrice = yield (Api3.getAllPrice(arrDomain));
+      let getAllPrice = yield (Api3.getAllPrice(arrDomain));
       allPrice.push(getAllPrice);
+      filerHotels[i]['final_amount'] = getAllPrice.length > 0 ? getAllPrice[0].final_amount : -1 ;
+      if(allPrice[allPrice.length-1].length > 0) {
+        filerHotels[i]['hotel_url'] = objHotelUrl[`${allPrice[allPrice.length-1][0].domain_id}`]
+      } else {
+        filerHotels[i]['hotel_url'] = '???'
+      }
     }
-    yield put({ type: GET_HOTELS_SUCCEEDED, payload: { data: filerHotels, allPrice: allPrice } });  
+    yield put({ type: GET_HOTELS_SUCCEEDED, payload: { data: filerHotels, allPrice: allPrice,} });  
   } 
   catch(err) {
     console.log('err');

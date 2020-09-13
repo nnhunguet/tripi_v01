@@ -12,7 +12,6 @@ import { PricingCard } from 'react-native-elements';
 import { Color } from './Color'; 
 import { StatusBar } from 'expo-status-bar';
 import { AntDesign } from 'react-native-vector-icons';
-import { FontAwesome } from 'react-native-vector-icons';
 import { FontAwesome5 } from 'react-native-vector-icons';
 import { Entypo } from 'react-native-vector-icons';
 import { MaterialIcons } from 'react-native-vector-icons';
@@ -91,6 +90,9 @@ export default function Hotel_info_screens({ route }) {
                   infoStyle={{fontSize: 12}}
                   info={['1 Room/ 1 Night']}
                   button={{ title: 'GET STARTED', icon: 'flight-takeoff' }}
+                  onButtonPress={() => {
+                    console.log(1);
+                  }}
                 />
               </View>
             )}
@@ -190,7 +192,7 @@ export default function Hotel_info_screens({ route }) {
                     <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>
                     <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>   
                   </View> */}
-                  <StarRating rating={3}/>
+                  <StarRating rating={inforHotel.star_number}/>
                 </View>
               </View>  
               <View style={styles.Rating_details}>

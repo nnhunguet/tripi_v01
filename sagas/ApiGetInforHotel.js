@@ -6,6 +6,7 @@ function* getInforHotel(id) {
   yield axios.get(`${urlGetHotels}/${id}`)
   .then(function (res) {
     // handle success
+    console.log('res data',res.data);
     response = res.data;
   })
   .catch(function (error) {
