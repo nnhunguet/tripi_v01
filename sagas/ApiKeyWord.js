@@ -1,4 +1,4 @@
-const urlKeyWordSuggestion = 'http://13.250.18.254:5000/hotels/keywordsuggestion/'
+const urlKeyWordSuggestion = 'http://13.250.18.254:8000/hotels/keywordsuggestion/'
 import axios from 'axios'
 
 function* getKeyWordSuggestion(keyword) {

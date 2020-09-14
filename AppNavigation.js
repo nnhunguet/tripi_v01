@@ -136,7 +136,7 @@ function AppNavigation() {
                 <Feather
                   name= 'search'
                   size={size}
-                  color='#68d3c2'
+                  color= {focused ? Color.primary : '#d3d3d3'}  
                 />
               );
             } else if (route.name === 'Trips') {
@@ -144,7 +144,7 @@ function AppNavigation() {
                 <Feather
                   name= 'heart'
                   size={size}
-                  color='#68d3c2'
+                  color= {focused ? Color.primary : '#d3d3d3'}  
                 />
               );
             } else if (route.name === 'Profile') {
@@ -152,7 +152,7 @@ function AppNavigation() {
                 <Feather
                   name= 'user'
                   size={size}
-                  color='#68d3c2'
+                  color= {focused ? Color.primary : '#d3d3d3'}  
                 />
               );
             }

@@ -1,4 +1,4 @@
-const urlGetAllID = 'http://13.250.18.254:5000/hotels/getAllId';
+const urlGetAllID = 'http://13.250.18.254:8000/hotels/getAllId';
 import axios from 'axios';
 
 function* getAllID(id) {

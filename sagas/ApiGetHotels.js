@@ -1,4 +1,4 @@
-const urlGetHotels = 'http://13.250.18.254:5000/hotels/gethotels'
+const urlGetHotels = 'http://13.250.18.254:8000/hotels/gethotels'
 import axios from 'axios'
 function* getHotels(hotel) {
   console.log('hotel',hotel);
