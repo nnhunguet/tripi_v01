@@ -145,9 +145,8 @@ export const priceOneNight = (price) => {
 }
 
 export const starHotel = (star) => {
-  console.log(star);
   return {
-    type: ActionTypes.PRICE_ONE_NIGTH,
+    type: ActionTypes.STAR_HOTEL,
     payload: {
       star,
     }

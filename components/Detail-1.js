@@ -31,9 +31,9 @@ const convertVND = (price) => {
 }
 
 import { useSelector, useDispatch } from 'react-redux';
-import { getInforHotelAction, serviceHotel, sortPriceAsc, starHotel } from '../redux/actions'
+import { getInforHotelAction, serviceHotel, sortPriceAsc, starHotel, getHotels } from '../redux/actions';
 
-export default function DetailsScreen({ navigation }) {
+export default function DetailsScreen({ navigation, route }) {
   const [multiSliderValue, setMultiSliderValue] = useState([0, 100]);
   const multiSliderValuesChange = (values) => setMultiSliderValue(values);
   const [priceValue, setPriceValue] = useState([0, 50]);
@@ -46,7 +46,9 @@ export default function DetailsScreen({ navigation }) {
   const [star5, setStar5] = useState(false);
 
   const dataHotels = useSelector(state => state.getHotelReducer.data);
-  console.log('data Hotel', dataHotels);
+  // console.log('data Hotel', dataHotels);
+  const { star, service } = useSelector(state => state.filterReducer);
+  const { search_id, type_code } = route.params;
   const dispatch = useDispatch();
   const action = () =>
   ActionSheetIOS.showActionSheetWithOptions(
@@ -165,6 +167,8 @@ export default function DetailsScreen({ navigation }) {
                     <TouchableOpacity
                       onPress={() => {
                         console.log('1 sao');
+                        setStar1(!star1);
+                        dispatch(starHotel(1));
                       }}
                     >
                       <View style={{paddingHorizontal: 15, paddingVertical: 7,  borderColor: star1 ? '#f0a500' : 'grey', borderWidth: 1, borderRadius: 5}} >
@@ -182,6 +186,7 @@ export default function DetailsScreen({ navigation }) {
                       }}
                       onPress={() => {
                         setStar2(!star2);
+                        dispatch(starHotel(2));
                         console.log('2 sao');
                       }}
                     >
@@ -199,6 +204,7 @@ export default function DetailsScreen({ navigation }) {
                       }}
                       onPress={() => {
                         setStar3(!star3);
+                        dispatch(starHotel(3));
                         console.log('3 sao')
                       }}
                     >
@@ -219,6 +225,7 @@ export default function DetailsScreen({ navigation }) {
                       }}
                       onPress={() => {
                         setStar4(!star4);
+                        dispatch(starHotel(4));
                         console.log('4 sao')
                       }}
                     >
@@ -238,6 +245,7 @@ export default function DetailsScreen({ navigation }) {
                       }}
                       onPress={() => {
                         setStar5(!star5);
+                        dispatch(starHotel(5));
                         console.log('5 sao')
                       }}  
                     >
@@ -369,7 +377,7 @@ export default function DetailsScreen({ navigation }) {
                   <View style={{flexDirection: 'row', width: WIDTH/1.42, justifyContent: 'space-between'}}>
                     <TouchableOpacity
                       onPress={() => {
-                        dispatch(serviceHotel(13));
+                        dispatch(serviceHotel(12));
                       }}
                     >
                       <View style={styles.star_ratting}>
@@ -378,7 +386,7 @@ export default function DetailsScreen({ navigation }) {
                     </TouchableOpacity>
                     <TouchableOpacity
                       onPress={() => {
-                        dispatch(serviceHotel(13));
+                        dispatch(serviceHotel(11));
                       }}
                     >
                       <View style={styles.star_ratting}>
@@ -387,7 +395,7 @@ export default function DetailsScreen({ navigation }) {
                     </TouchableOpacity>
                     <TouchableOpacity
                       onPress={() => {
-                        dispatch(serviceHotel(12));
+                        dispatch(serviceHotel(10));
                       }}
                     >
                       <View style={styles.star_ratting}>
@@ -425,7 +433,7 @@ export default function DetailsScreen({ navigation }) {
             style={styles.Bottomsheet_Button}
             onPress={ () => {
               bottomSheet.current.close();
-              
+              dispatch(getHotels({ type_code, search_id, star, service }))
             }}
           >
             <Text style={{color: "#fff", fontSize: 20, fontWeight: '400',}}>Áp Dụng</Text>
@@ -487,7 +495,7 @@ export default function DetailsScreen({ navigation }) {
                       </View>
                     </View>
                     <View style={styles.card_row_2}>
-                      <Text style={{fontSize: 15, fontWeight: 'bold'}}> {(item.minPrice.minPrice === 20000000000) ? '???' : convertVND(item.minPrice.minPrice)} </Text>
+                      <Text style={{fontSize: 15, fontWeight: 'bold'}}> {(item.minPrice.minPrice === 20000000000 || item.minPrice.minPrice === -1) ? '???' : convertVND(item.minPrice.minPrice)} </Text>
                       <Text style={{}}>/Đêm</Text>
                     </View>
                   </View> 
