@@ -1,4 +1,5 @@
-const urlGetHotels = 'http://13.250.18.254:5000/hotels/getByID';
+import { port } from './constants';
+const urlGetHotels = `${port}/getByID`;
 import axios from 'axios';
 
 function* getInforHotel(id) {

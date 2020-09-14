@@ -7,6 +7,7 @@ import getInforHotelReducer from './getInforHotelReducer';
 import loadingReducer from './loadingReducer';
 import filterReducer from './filterReducer';
 import getAllPriceReducer from './getAllPriceReducer';
+import getMinPriceReducer from './getMinPriceReducer';
 
 const reducer = combineReducers({
   loginReducer,
@@ -16,6 +17,7 @@ const reducer = combineReducers({
   loadingReducer,
   filterReducer,
   getAllPriceReducer,
+  getMinPriceReducer,
 })
 
 export default reducer;

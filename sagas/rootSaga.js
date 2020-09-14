@@ -6,6 +6,7 @@ import { watchGetInforHotel } from './getInforHotelSaga'
 import { watchGetAllPrices } from './getAllPriceSaga'
 
 export default function* rootSaga() {
+  
   yield all([
     watchFetchKeyWord(),
     watchGetHotels(),
