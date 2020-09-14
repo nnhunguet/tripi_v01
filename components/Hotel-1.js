@@ -77,8 +77,7 @@ export default function Hotel_info_screens({ route }) {
   
   const onTextLayout = useCallback(e =>{
       setLengthMore(e.nativeEvent.lines.length >=4); 
-  },[]);
-  // const scrollA = useRef(new Animated.Value(0)).current    
+  },[]);  
   return(
       <View style={styles.container}>
         <StatusBar barStyle="dark-content" />
@@ -116,7 +115,7 @@ export default function Hotel_info_screens({ route }) {
           >
           </FlatList>
         </BottomSheet>
-        <ScrollView onScroll={() => console.log(e.nativeEvent.contentOffset.y)} scrollEventThrottle={16}>
+        <ScrollView>
           <View style={styles.Img_Background}>
             <Image style={styles.background} source={{uri: inforHotel.logo || "https://scontent.fhan2-2.fna.fbcdn.net/v/t1.0-0/p640x640/68401906_157744848700465_7740565304106811392_o.jpg?_nc_cat=111&_nc_sid=e3f864&_nc_ohc=ALSx5Ro_F-cAX-Q4xwi&_nc_ht=scontent.fhan2-2.fna&tp=6&oh=6071894881c03d120497e3f8a844b4f1&oe=5F7D0E5C"}} resizeMode={'cover'} >
             </Image>   
