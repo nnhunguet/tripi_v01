@@ -28,3 +28,5 @@ export const GET_ALL_PRICE_FAILD = 'GET_ALL_PRICE_FAILD';
 
 export const SORT_PRICE_ASC = 'SORT_PRICE_ASC';
  
+export const GET_MIN_PRICE = 'GET_MIN_PRICE';
+

@@ -4,7 +4,7 @@ const initialNoteState = {
   price: null,
   star: null,
   overallScore: null,
-  service: null,
+  service: [],
   apply: false,
 };
 
@@ -28,11 +28,12 @@ export default function filterReducer(state = initialNoteState, action) {
       };
     case ActionTypes.SERVICE_HOTEL:
       let preService = state.service;
-      let curService;
-      if(preService !== null) {
-        curService = `${preService}_${action.payload.service}`
+      let curService = [...preService];
+      let index = preService.indexOf(action.payload.service);
+      if(index === -1) {
+        curService.push(action.payload.service)
       } else {
-        curService = `${preService}`;
+        curService = curService.slice(index, index+1);
       }
       console.log(curService);
       return {

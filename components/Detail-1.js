@@ -31,7 +31,7 @@ const convertVND = (price) => {
 }
 
 import { useSelector, useDispatch } from 'react-redux';
-import { getInforHotelAction, serviceHotel, keyWordSuggestion, sortPriceAsc } from '../redux/actions'
+import { getInforHotelAction, serviceHotel, sortPriceAsc, starHotel } from '../redux/actions'
 
 export default function DetailsScreen({ navigation }) {
   const [multiSliderValue, setMultiSliderValue] = useState([0, 100]);
@@ -47,7 +47,6 @@ export default function DetailsScreen({ navigation }) {
 
   const dataHotels = useSelector(state => state.getHotelReducer.data);
   console.log('data Hotel', dataHotels);
-  const allPrice = useSelector(state => state.getHotelReducer.allPrice);
   const dispatch = useDispatch();
   const action = () =>
   ActionSheetIOS.showActionSheetWithOptions(
@@ -61,16 +60,15 @@ export default function DetailsScreen({ navigation }) {
       switch(buttonIndex) {
         case 0:
           console.log('Cancel');
-          break;
         case 1: 
           console.log(1);
-          break;
         case 2: 
           dispatch(sortPriceAsc());
-          break;
         case 3: 
           console.log(3);
-          break; 
+        default:
+          console.log('default');
+          break;
       }
     }
   );
@@ -167,7 +165,6 @@ export default function DetailsScreen({ navigation }) {
                     <TouchableOpacity
                       onPress={() => {
                         console.log('1 sao');
-                        setStar1(!star1);
                       }}
                     >
                       <View style={{paddingHorizontal: 15, paddingVertical: 7,  borderColor: star1 ? '#f0a500' : 'grey', borderWidth: 1, borderRadius: 5}} >
@@ -350,32 +347,71 @@ export default function DetailsScreen({ navigation }) {
                 <Text style={{fontSize: 16, fontWeight: 'bold'}}>Tiện ích sẵn có</Text>
                 <View style={{ height: HEIGHT/5, marginTop: 10, justifyContent: "space-around"}}>
                   <View style={{flexDirection: 'row', width: WIDTH/1.42, justifyContent: 'space-between'}}>
-                    <View style={styles.star_ratting}>
-                      <Text style={{fontSize: 12}}>Bể bơi ngoài trời</Text>
-                    </View>
+                    <TouchableOpacity
+                      onPress={() => {
+                        dispatch(serviceHotel(14));
+                      }}
+                    >
                       <View style={styles.star_ratting}>
-                        <Text style={{fontSize: 12}}>Bể bơi trong nhà</Text>
+                        <Text style={{fontSize: 12}}>Bể bơi ngoài trời</Text>
                       </View>
-                  </View>
-                  <View style={{flexDirection: 'row', width: WIDTH/1.42, justifyContent: 'space-between'}}>
-                    <View style={styles.star_ratting}>
-                      <Text style={{fontSize: 12}}>Phòng thể dục</Text>
-                    </View>
-                    <View style={styles.star_ratting}>
-                      <Text style={{fontSize: 12}}>Xông hơi</Text>
-                    </View>
-                    <View style={styles.star_ratting}>
-                      <Text style={{fontSize: 12}}>Spa</Text>
-                    </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => {
+                        dispatch(serviceHotel(13));
+                      }}
+                    >
+                      <View style={styles.star_ratting}>
+                        <Text style={{fontSize: 12}}>Dịch vụ tour</Text>
+                      </View>
+                    </TouchableOpacity>
                   </View>
                   <View style={{flexDirection: 'row', width: WIDTH/1.42, justifyContent: 'space-between'}}>
                     <TouchableOpacity
                       onPress={() => {
-                        console.log('Bottom sheet');
+                        dispatch(serviceHotel(13));
                       }}
                     >
                       <View style={styles.star_ratting}>
-                        <Text style={{fontSize: 12}}>Mát xa</Text>
+                        <Text style={{fontSize: 12}}>Wifi/Internet</Text>
+                      </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => {
+                        dispatch(serviceHotel(13));
+                      }}
+                    >
+                      <View style={styles.star_ratting}>
+                        <Text style={{fontSize: 12}}>Giặt ủi</Text>
+                      </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => {
+                        dispatch(serviceHotel(12));
+                      }}
+                    >
+                      <View style={styles.star_ratting}>
+                        <Text style={{fontSize: 12}}>Quầy bar</Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={{flexDirection: 'row', width: WIDTH/1.42, justifyContent: 'space-between'}}>
+                    <TouchableOpacity
+                      onPress={() => {
+                        dispatch(serviceHotel(8))
+                      }}
+                    >
+                      <View style={styles.star_ratting}>
+                        <Text style={{fontSize: 12}}>Hướng dẫn viên du lịch</Text>
+                      </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => {
+                        dispatch(serviceHotel(7))
+                      }}
+                    >
+                      <View style={styles.star_ratting}>
+                        <Text style={{fontSize: 12}}>Nhà hàng</Text>
                       </View>
                     </TouchableOpacity>
                   </View>
@@ -418,7 +454,7 @@ export default function DetailsScreen({ navigation }) {
             <TouchableOpacity
               onPress={() => {
                 dispatch(getInforHotelAction(item.hotel_id)); 
-                navigation.navigate('Hotel', {allPrice1: allPrice[index]});
+                navigation.navigate('Hotel', { minPrice: item.minPrice.minPrice, domain_id: item.minPrice.domain_id});
               }}
               style={{height: WIDTH*(9/10)*(28/35)}}
             >
@@ -443,7 +479,7 @@ export default function DetailsScreen({ navigation }) {
                       </View>
                     </View>
                     <View style={styles.card_row_2}>
-                      <Text style={{fontSize: 15, fontWeight: 'bold'}}> {allPrice[index].length > 0 ? convertVND(allPrice[index][0].final_amount) : '???'} </Text>
+                      <Text style={{fontSize: 15, fontWeight: 'bold'}}> {(item.minPrice.minPrice === 20000000000) ? '???' : convertVND(item.minPrice.minPrice)} </Text>
                       <Text style={{}}>/Đêm</Text>
                     </View>
                   </View> 

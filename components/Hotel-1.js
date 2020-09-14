@@ -24,7 +24,7 @@ const wp = Dimensions.get('window').width;
 const hp = Dimensions.get('window').height;
 const LATITUDE = 21.037814;
 const LONGITUDE = 105.781468;
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import StarRating from './star-rating';
 import StickyParallaxHeader from 'react-native-sticky-parallax-header'
@@ -65,11 +65,9 @@ const imagelogo = (domain_id) => {
  
 export default function Hotel_info_screens({ route }) {
   const inforHotel = useSelector(state => state.getInforHotelReducer.data[0]);
-  const { allPrice1 } = route.params;
-  let allPrice = allPrice1;
-  if(allPrice.length === 0) {
-    allPrice = [{ domain_id: -1, final_amount: '???' }]
-  }
+  const { minPrice, domain_id } = route.params;
+  let allPrice = useSelector(state => state.getInforHotelReducer.allPrice);
+
   const bottomSheet = useRef();
   const [textShown, setTextShown] = useState(false);
   const [lengthMore,setLengthMore] = useState(false); 
@@ -168,7 +166,6 @@ export default function Hotel_info_screens({ route }) {
                   </View>
                 </View>
                 <View style={styles.Best_price}>
-                {/* <Text>{stringDomain(allPrice[0].domain_id)}</Text> */}
                 <Image source={imagelogo(allPrice[0].domain_id)} resizeMode='cover' style={{height:'100%', width: '50%'}}/>
                 <Text style={{fontWeight: 'bold', fontSize: 24}}> {convertVND(allPrice[0].final_amount) || "???"} </Text>
                 </View>
@@ -184,7 +181,7 @@ export default function Hotel_info_screens({ route }) {
                   </View>
                   <TouchableOpacity
                     onPress={() => {
-                      if(stringDomain(allPrice[0].domain_id) !== 'Hết Phòng'){
+                      if(minPrice !== 20000000000){
                         bottomSheet.current.show()
                       } else {
                         alert('Hết Phòng');

@@ -1,9 +1,9 @@
-import { port } from './constants';
-const urlGetAllID = `${port}/getAllId`;
+const getMinPriceUrl = 'http://13.250.18.254:5000/getMinPrice';
 import axios from 'axios';
-function* getAllID(id) {
+
+async function getMinPrice(id) {
   let response;
-  yield axios.get(`${urlGetAllID}/${id}`)
+  await axios.get(`${getMinPriceUrl}/${id}`)
   .then(function (res) {
     // handle success
     response = res.data;
@@ -18,6 +18,6 @@ function* getAllID(id) {
   return response;
 }
 
-export const Api2 = {
-  getAllID
+export const Api4 = {
+  getMinPrice
 }

@@ -129,6 +129,7 @@ export const hideLoading = () => {
 }
 
 export const sortPriceAsc = () => {
+  console.log('action sortPriceAsc');
   return {
     type: ActionTypes.SORT_PRICE_ASC,
   }
@@ -185,6 +186,15 @@ export const getAllPrice = (allPrice) => {
     type: ActionTypes.GET_ALL_PRICE,
     payload: {
       allPrice,
+    }
+  }
+}
+
+export const getMinPrice = (data) => {
+  return {
+    type: ActionTypes.GET_MIN_PRICE,
+    payload: {
+      data,
     }
   }
 }

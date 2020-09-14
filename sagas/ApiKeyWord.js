@@ -1,4 +1,5 @@
-const urlKeyWordSuggestion = 'http://13.250.18.254:8000/hotels/keywordsuggestion/'
+import { port } from './constants';
+const urlKeyWordSuggestion = `${port}/keywordsuggestion/`;
 import axios from 'axios'
 
 function* getKeyWordSuggestion(keyword) {
