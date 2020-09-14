@@ -7,6 +7,7 @@ import {
   ScrollView, 
   Dimensions, 
   FlatList,
+  Animated
 } from 'react-native';
 import { PricingCard } from 'react-native-elements';
 import { Color } from './Color'; 
@@ -14,9 +15,11 @@ import { StatusBar } from 'expo-status-bar';
 import { AntDesign } from 'react-native-vector-icons';
 import { FontAwesome5 } from 'react-native-vector-icons';
 import { Entypo } from 'react-native-vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MaterialIcons } from 'react-native-vector-icons';
 import BottomSheet from "react-native-gesture-bottom-sheet";
 import MapView, {Marker} from 'react-native-maps';
+import { FontAwesome } from '@expo/vector-icons';
 const wp = Dimensions.get('window').width;
 const hp = Dimensions.get('window').height;
 const LATITUDE = 21.037814;
@@ -24,7 +27,7 @@ const LONGITUDE = 105.781468;
 import { useSelector } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import StarRating from './star-rating';
-
+import StickyParallaxHeader from 'react-native-sticky-parallax-header'
 const convertVND = (price) => {
   return price.toLocaleString('en-US', {style : 'currency', currency : 'VND'});
 }
@@ -34,16 +37,31 @@ const stringDomain = (domain_id) => {
     case 2: 
       return 'Traveloka';
     case 3: 
-      return 'Agoda';
+      return 'agoda';
     case 4: 
       return 'Expedia';
     case 5: 
-      return 'Booking';
+      return 'Booking.com';
     default:
       return 'Hết Phòng';
       break;
   }
 } 
+const imagelogo = (domain_id) => {
+  switch(domain_id) {
+    case 2: 
+      return require('../assets/traveloka.png');
+    case 3: 
+      return require('../assets/agoda.jpg');
+    case 4: 
+      return require('../assets/expedia.jpg');
+    case 5: 
+      return require('../assets/Booking.jpg');
+    default:
+      return require('../assets/hetphong.png');
+      break;
+  }
+}
  
 export default function Hotel_info_screens({ route }) {
   const inforHotel = useSelector(state => state.getInforHotelReducer.data[0]);
@@ -58,9 +76,8 @@ export default function Hotel_info_screens({ route }) {
   }
   
   const onTextLayout = useCallback(e =>{
-      setLengthMore(e.nativeEvent.lines.length >=5); 
-  },[]);
-      
+      setLengthMore(e.nativeEvent.lines.length >=4); 
+  },[]);  
   return(
       <View style={styles.container}>
         <StatusBar barStyle="dark-content" />
@@ -148,8 +165,8 @@ export default function Hotel_info_screens({ route }) {
                   </View>
                 </View>
                 <View style={styles.Best_price}>
-                  <Text> {stringDomain(domain_id)} </Text>
-                  <Text style={{fontWeight: 'bold', fontSize: 20}}> {convertVND(minPrice) || "???"} </Text>
+                <Image source={imagelogo(allPrice[0].domain_id)} resizeMode='cover' style={{height:'100%', width: '50%'}}/>
+                <Text style={{fontWeight: 'bold', fontSize: 24}}> {convertVND(allPrice[0].final_amount) || "???"} </Text>
                 </View>
                 <View style={styles.Price_footer}>
                   <Text style={{color: 'grey', fontSize: 10}}>
@@ -183,13 +200,6 @@ export default function Hotel_info_screens({ route }) {
                 </View>
                 <View style={styles.Rating_overall}>
                   <Text>Đánh giá chung</Text>
-                  {/* <View style={{flexDirection: "row"}}>
-                    <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                    <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                    <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>    
-                    <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                    <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>   
-                  </View> */}
                   <StarRating rating={inforHotel.star_number}/>
                 </View>
               </View>  
@@ -245,19 +255,12 @@ export default function Hotel_info_screens({ route }) {
                           <Text style={{fontWeight: 'bold'}}>Nguyễn Văn A</Text>
                           <Text style={{color: 'grey', fontSize: 10}}>Cập nhật lần cuối 21/05/2019</Text>
                       </View>
-                      {/* <View style={{flexDirection: 'row'}}>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>  
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>
-                      </View> */}
                       <StarRating rating={5}/>
                     </View>
                     <View style={styles.Review_comment_content}>
                       <Text style={{fontWeight: 'bold', marginBottom: 10, fontSize: 18}}>Điểm đến tuyệt vời</Text>
                       <Text numberOfLines={4}>Khách sạn tuyệt vời, con người thân thiện, ánh nắng mỗi bình minh tuyệt đẹp là những gì mà tôi được trả tiền để nói Khách sạn tuyệt vời, con người thân thiện, ánh nắng mỗi bình minh tuyệt đẹp là những gì mà tôi được trả tiền để nói Khách sạn tuyệt vời, con người thân thiện, ánh nắng mỗi bình minh tuyệt đẹp là những gì mà tôi được trả tiền để nói Khách sạn tuyệt vời, con người thân thiện, ánh nắng mỗi bình minh tuyệt đẹp là những gì mà tôi được trả tiền để nói </Text>
-                      <Text style={{fontSize: 12, marginTop: 10}}>Xem thêm</Text>
+                      <Text style={{fontSize: 12, marginTop: 10, height: 20}}>Xem thêm</Text>
                     </View>         
                   </View>
                 </View>
@@ -269,13 +272,6 @@ export default function Hotel_info_screens({ route }) {
                           <Text style={{fontWeight: 'bold'}}>Nguyễn Văn A</Text>
                           <Text style={{color: 'grey', fontSize: 10}}>Cập nhật lần cuối 21/05/2019</Text>
                       </View>
-                      {/* <View style={{flexDirection: 'row'}}>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>  
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 2}}/>
-                      </View> */}
                       <StarRating rating={5}/>
                     </View>
                     <View style={styles.Review_comment_content}>
@@ -328,9 +324,9 @@ export default function Hotel_info_screens({ route }) {
                 />    
               </MapView> 
               <View style={{flex: 1}}>
-                <Text style={{paddingTop: 20, paddingBottom: 5}}> {inforHotel.address} </Text>
-                <Text style={{paddingTop: 5, paddingBottom: 5}}>0907512750</Text>
-                <Text style={{paddingTop: 5, paddingBottom: 5, color: Color.primary}}>Trang web của khách sạn</Text>
+                <Text style={{paddingTop: 20, paddingBottom: 5}}><FontAwesome name="map-marker" size={16} color={Color.primary} />  {inforHotel.address} </Text>
+                <Text style={{paddingTop: 5, paddingBottom: 5}}><Entypo name="old-phone" size={16} color={Color.primary} />  0907512750</Text>
+                <Text style={{paddingTop: 5, paddingBottom: 5, color: Color.primary}}><MaterialCommunityIcons name="web" size={16} color={Color.primary} /> Truy cập Trang web của khách sạn</Text>
               </View>
             </View>
           </View>
@@ -363,7 +359,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     justifyContent: 'space-between',
     borderBottomWidth: 1,
-    borderBottomColor: 'grey',
+    borderBottomColor: '#d5d5d5',
   },  
   Hotel_name_tittle: {
     flex: 0.8,
@@ -398,7 +394,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: "center",
-    height: hp/15
+    height: hp/13,
   },
   Price_footer: {
     height: hp/30,
@@ -430,10 +426,8 @@ const styles = StyleSheet.create({
     marginTop: 25,
     height: hp/3.5,
     width: '100%',
-    borderColor: 'grey',
     backgroundColor: '#fff',
     borderRadius: 10,
-    borderWidth: 1,
     shadowColor: "#000",
     shadowOffset: {
 	  width: 0,
@@ -480,9 +474,9 @@ const styles = StyleSheet.create({
   Review_comment_display: {
     flex: 0.2,
     borderTopWidth: 1,
-    borderTopColor: 'grey',
+    borderTopColor: '#d5d5d5',
     justifyContent: "center",
-    height: hp/3.5
+    height: hp/3.4,
   },
   Review_comment_lui: {
     

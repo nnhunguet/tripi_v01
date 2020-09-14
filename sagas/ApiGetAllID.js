@@ -1,7 +1,6 @@
 import { port } from './constants';
 const urlGetAllID = `${port}/getAllId`;
 import axios from 'axios';
-
 function* getAllID(id) {
   let response;
   yield axios.get(`${urlGetAllID}/${id}`)
