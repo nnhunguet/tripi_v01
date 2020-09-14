@@ -433,7 +433,6 @@ export default function DetailsScreen({ navigation }) {
         </View>
       </BottomSheet>
         <View style={styles.menu_chose}>
-          <View style={styles.menu_chose_first}> 
             <TouchableWithoutFeedback onPress={action}>
               <View style={{flexDirection: 'row', alignItems: "center"}}>
                 <MaterialCommunityIcons name="sort-descending" size={24} color={Color.primary} />
@@ -446,13 +445,6 @@ export default function DetailsScreen({ navigation }) {
                 <Text style={{fontSize: 14, paddingLeft:3}}>Bộ lọc</Text>
               </View>
             </TouchableWithoutFeedback>
-          </View>
-          <View style={styles.menu_chose_second}>
-            <View style={styles.menu_chose_second_icon}>
-              <FontAwesome5 name="th-list" size={20} color={Color.primary} style={{backgroundColor: '#f5f5f5', padding: '10%'}}/>
-              <MaterialCommunityIcons name="map-marker-radius" size={20} color="grey" style={{ padding: '10%'}}/>
-            </View>
-          </View>
         </View>
         <View style={styles.flatList}>
           <FlatList style={styles.scrollView}
@@ -511,12 +503,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   menu_chose:{
+    paddingHorizontal: 20,
     flex: 0.078,
     backgroundColor: "#fff",
     flexDirection: 'row',
     marginTop: -19,
     alignItems: "center",
     shadowColor: "#000",
+    justifyContent: 'space-between',
     shadowOffset: {
 	  width: 0,
 	  height: 3,

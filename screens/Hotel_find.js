@@ -30,6 +30,8 @@ import BottomSheet from "react-native-gesture-bottom-sheet";
 import moment from "moment";
 import DateRangePicker from "react-native-daterange-picker";
 import {DATA} from '../components/Data';
+import { width } from 'react-native-daterange-picker/src/modules';
+import StarRating from '../components/star-rating';
 const wp = Dimensions.get('window').width;
 const hp = Dimensions.get('window').height;
 export default function Hotel_find({ navigation }) {
@@ -200,7 +202,7 @@ export default function Hotel_find({ navigation }) {
             <View style={styles.info_person}>
                 <TouchableWithoutFeedback onPress={() => bottomSheet.current.show()} style={{justifyContent: 'space-between', height: '100%'}}>
                   <Text style={styles.info_date_title}>SỐ PHÒNG</Text>
-                  <Text style={styles.info_date_day}>{rooms} Phòng - {adults} Người</Text>
+                  <Text style={styles.info_date_day}>{rooms} Phòng - {adults} Khách</Text>
                 </TouchableWithoutFeedback>
               </View>
           </View>
@@ -229,11 +231,10 @@ export default function Hotel_find({ navigation }) {
         </View>
         <View style={styles.hot_deal}>
           <Text style={[styles.Title, {flex: 0.1}]}>Giá Tuyệt Vời</Text>
-          <View style={{flex: 0.9, justifyContent: "center"}}>
-            <ScrollView style={{height: 500}}>
+            <View>
               <View style={styles.hot_deal_items}>
                 <View style={styles.hot_deal_img}>
-                  <Image style={{width:'100%', height:150, borderTopLeftRadius: 15, borderBottomLeftRadius: 15,}} source={require('../assets/Welcome.jpg') }></Image>
+                  <Image style={{width:'100%', height:'100%', borderTopLeftRadius: 15, borderBottomLeftRadius: 15,}} source={require('../assets/Welcome.jpg') }></Image>
                 </View>
                 <View style={styles.hot_deal_info}>
                   <Text numberOfLines= {2} style={styles.suggestion_name}>Cereja Hotel {'&'} Resort Đà Lạt by alibaba và 40 tên cướp alibaba</Text> 
@@ -241,11 +242,7 @@ export default function Hotel_find({ navigation }) {
                   <View style={{flexDirection: 'row'}}>
                     <View style={{flex: 0.4}}>
                       <View style={{flexDirection: 'row', paddingLeft: 10, marginTop: 10}}>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>    
-                        <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                        <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>     
+                        <StarRating rating={3}/>   
                       </View>    
                       <View style={{marginLeft: 10,borderColor: 'black',backgroundColor: Color.primary,width: 50, marginTop: 10, alignItems:"center" }}>  
                       <Text style={{color:'white',  fontSize: 12}}>9.0</Text>        
@@ -257,10 +254,10 @@ export default function Hotel_find({ navigation }) {
                     </View>
                   </View>    
                 </View>
-              </View>
+              </View>    
               <View style={styles.hot_deal_items}>
                 <View style={styles.hot_deal_img}>
-                  <Image style={{width:'100%', height:150, borderTopLeftRadius: 15, borderBottomLeftRadius: 15,}} source={require('../assets/Welcome.jpg') }></Image>
+                  <Image style={{width:'100%', height:'100%', borderTopLeftRadius: 15, borderBottomLeftRadius: 15,}} source={require('../assets/Welcome.jpg') }></Image>
                 </View>
                 <View style={styles.hot_deal_info}>
                   <Text numberOfLines= {2} style={styles.suggestion_name}>Cereja Hotel {'&'} Resort Đà Lạt by alibaba và 40 tên cướp alibaba</Text> 
@@ -268,11 +265,7 @@ export default function Hotel_find({ navigation }) {
                   <View style={{flexDirection: 'row'}}>
                     <View style={{flex: 0.4}}>
                       <View style={{flexDirection: 'row', paddingLeft: 10, marginTop: 10}}>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>    
-                        <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                        <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>     
+                        <StarRating rating={3}/>   
                       </View>    
                       <View style={{marginLeft: 10,borderColor: 'black',backgroundColor: Color.primary,width: 50, marginTop: 10, alignItems:"center" }}>  
                       <Text style={{color:'white',  fontSize: 12}}>9.0</Text>        
@@ -284,10 +277,10 @@ export default function Hotel_find({ navigation }) {
                     </View>
                   </View>    
                 </View>
-              </View>
+              </View> 
               <View style={styles.hot_deal_items}>
                 <View style={styles.hot_deal_img}>
-                  <Image style={{width:'100%', height:150, borderTopLeftRadius: 15, borderBottomLeftRadius: 15,}} source={require('../assets/Welcome.jpg') }></Image>
+                  <Image style={{width:'100%', height:'100%', borderTopLeftRadius: 15, borderBottomLeftRadius: 15,}} source={require('../assets/Welcome.jpg') }></Image>
                 </View>
                 <View style={styles.hot_deal_info}>
                   <Text numberOfLines= {2} style={styles.suggestion_name}>Cereja Hotel {'&'} Resort Đà Lạt by alibaba và 40 tên cướp alibaba</Text> 
@@ -295,11 +288,7 @@ export default function Hotel_find({ navigation }) {
                   <View style={{flexDirection: 'row'}}>
                     <View style={{flex: 0.4}}>
                       <View style={{flexDirection: 'row', paddingLeft: 10, marginTop: 10}}>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>    
-                        <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                        <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>     
+                        <StarRating rating={3}/>   
                       </View>    
                       <View style={{marginLeft: 10,borderColor: 'black',backgroundColor: Color.primary,width: 50, marginTop: 10, alignItems:"center" }}>  
                       <Text style={{color:'white',  fontSize: 12}}>9.0</Text>        
@@ -311,36 +300,9 @@ export default function Hotel_find({ navigation }) {
                     </View>
                   </View>    
                 </View>
-              </View>
-              <View style={styles.hot_deal_items}>
-                <View style={styles.hot_deal_img}>
-                  <Image style={{width:'100%', height:150, borderTopLeftRadius: 15, borderBottomLeftRadius: 15,}} source={require('../assets/Welcome.jpg') }></Image>
-                </View>
-                <View style={styles.hot_deal_info}>
-                  <Text numberOfLines= {2} style={styles.suggestion_name}>Cereja Hotel {'&'} Resort Đà Lạt by alibaba và 40 tên cướp alibaba</Text> 
-                  <Text numberOfLines= {2} style={{fontSize: 12, color: 'grey', paddingLeft: 10, marginTop: 15, paddingBottom: 10}}>73 Trương Định, Quận 3, Hồ Chí ah</Text>
-                  <View style={{flexDirection: 'row'}}>
-                    <View style={{flex: 0.4}}>
-                      <View style={{flexDirection: 'row', paddingLeft: 10, marginTop: 10}}>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                        <FontAwesome name="star" size={13} color={Color.primary} style={{paddingRight: 1}}/>    
-                        <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>
-                        <FontAwesome name="star-o" size={13} color={Color.primary} style={{paddingRight: 1}}/>     
-                      </View>    
-                      <View style={{marginLeft: 10,borderColor: 'black',backgroundColor: Color.primary,width: 50, marginTop: 10, alignItems:"center" }}>  
-                      <Text style={{color:'white',  fontSize: 12}}>9.0</Text>        
-                      </View> 
-                    </View>
-                    <View style={{flex: 0.6,alignItems: "center", justifyContent: "center", marginTop: 5}}>
-                      <Text style={{fontSize: 15, fontWeight: 'bold'}}>435.000 đ</Text>
-                      <Text style={{}}>/Đêm</Text>
-                    </View>
-                  </View>    
-                </View>
-              </View>
-            </ScrollView>
-          </View>
+              </View>  
+              
+            </View>
         </View>
       </ScrollView>
     </View>
@@ -433,7 +395,7 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
 	  width: 0,
-	  height: 5,
+    height: 5,
     },
     shadowOpacity: 0.34,
     shadowRadius: 6.27,
@@ -456,33 +418,35 @@ const styles = StyleSheet.create({
   },
   hot_deal: {
     width: '100%',
-    height: 500,
+    // height: 500,
     paddingLeft: 20,
   },
   hot_deal_items: {
     width: '94%',
+    marginTop: 20,
     height: 150,
     marginBottom: 20,
     flexDirection: 'row',
     flex: 1,
     shadowColor: "#000",
-shadowOffset: {
-	width: 0,
-	height: 5,
-},
-shadowOpacity: 0.34,
-shadowRadius: 6.27,
-
-elevation: 10,
+    shadowOffset: {
+	  width: 0,
+	  height: 5,
+  },
+  shadowOpacity: 0.34,
+  shadowRadius: 6.27,
+  elevation: 10,
   },
   hot_deal_img: {
     flex: 0.4,
+    height: hp/4
   },
   hot_deal_info: {
     flex: 0.6,
     backgroundColor: '#fff',
     borderTopRightRadius: 15,
-    borderBottomRightRadius: 15
+    borderBottomRightRadius: 15,
+    height: hp/4
   },
   suggestion_name: {
     fontWeight: 'bold', 
