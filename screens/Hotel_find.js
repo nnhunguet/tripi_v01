@@ -9,6 +9,7 @@ import {
   TextInput, 
   Dimensions,
   TouchableOpacity, 
+  Animated
 } from 'react-native';
 import { Color } from '../components/Color'; 
 import { StatusBar } from 'expo-status-bar';
@@ -74,6 +75,7 @@ export default function Hotel_find({ navigation }) {
       );
   };
   const bottomSheet = useRef();
+  const scrollA = useRef(new Animated.Value(0)).current;
   return(
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" />
@@ -140,14 +142,21 @@ export default function Hotel_find({ navigation }) {
                 </TouchableOpacity>
                 </View>
         </BottomSheet>
-      <ScrollView style={styles.scrollView_container} showsVerticalScrollIndicator={false}>
+      <Animated.ScrollView style={styles.scrollView_container} showsVerticalScrollIndicator={false} 
+        onScroll = {Animated.event(
+          [{nativeEvent: {contentOffset: {y: scrollA}}}],
+          {useNativeDriver: true},
+        )}
+        scrollEventThrottle = {16}
+      > 
+         
         <View style={styles.Img_Background}>
-        <ImageBackground style={styles.background} source={require('../assets/hotel_find.jpg')}>
-            <LinearGradient locations={[0, 1]}  colors= 
+        <Animated.Image  style={styles.background(scrollA)} source={require('../assets/hotel_find.jpg')}>
+            {/* <LinearGradient locations={[0, 1]}  colors= 
               {['rgba(0,0,0,0)', '#f3f3f3']} 
               style={styles.linearGradient}>
-            </LinearGradient>
-          </ImageBackground> 
+            </LinearGradient> */}
+        </Animated.Image> 
         </View>
         <View style={styles.Input_container}>
           <TextInput
@@ -300,11 +309,10 @@ export default function Hotel_find({ navigation }) {
                     </View>
                   </View>    
                 </View>
-              </View>  
-              
+              </View>       
             </View>
         </View>
-      </ScrollView>
+      </Animated.ScrollView>
     </View>
   )
 }
@@ -324,12 +332,34 @@ const styles = StyleSheet.create({
   Img_Background: {
     width: '100%',
     height: 500,
+    overflow: "hidden",
+    alignItems: 'center',
   },
-  background: {
+  background: scrollA => ({
     flex: 1,
     justifyContent: 'flex-end',
     paddingLeft: 50,
-  },
+    transform: [
+      {
+        translateY: scrollA.interpolate({
+          inputRange: [-500, 0, 500, 501],
+          outputRange: [-250, 0, 500 * 0.75,500 * 0.75],
+        }),
+      },
+      {
+        scale: scrollA.interpolate({
+          inputRange: [-500, 0, 500, 501],
+          outputRange: [2, 1, 0.66, 0.66],
+        }),
+      }
+    ]
+  }),
+  // background: {
+  //   flex: 1,
+  //   justifyContent: 'flex-end',
+  //   paddingLeft: 50,
+  //   // top: scrollA,
+  // },
   Input_container: {
     position: 'absolute',
     backgroundColor: 'rgba(0,0,0,0.5)',
