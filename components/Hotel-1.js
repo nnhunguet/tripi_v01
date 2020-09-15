@@ -20,6 +20,7 @@ import { MaterialIcons } from 'react-native-vector-icons';
 import BottomSheet from "react-native-gesture-bottom-sheet";
 import MapView, {Marker} from 'react-native-maps';
 import { FontAwesome } from '@expo/vector-icons';
+import  Topnavigate  from './TopNavigation';
 const wp = Dimensions.get('window').width;
 const hp = Dimensions.get('window').height;
 const LATITUDE = 21.037814;
@@ -27,7 +28,6 @@ const LONGITUDE = 105.781468;
 import { useSelector } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import StarRating from './star-rating';
-import StickyParallaxHeader from 'react-native-sticky-parallax-header'
 const convertVND = (price) => {
   return price.toLocaleString('en-US', {style : 'currency', currency : 'VND'});
 }
@@ -63,7 +63,7 @@ const imagelogo = (domain_id) => {
   }
 }
  
-export default function Hotel_info_screens({ route }) {
+export default function Hotel_info_screens({ route, props }) {
   const inforHotel = useSelector(state => state.getInforHotelReducer.data[0]);
   const { minPrice, domain_id } = route.params;
   let allPrice = useSelector(state => state.getInforHotelReducer.allPrice);
@@ -77,7 +77,8 @@ export default function Hotel_info_screens({ route }) {
   
   const onTextLayout = useCallback(e =>{
       setLengthMore(e.nativeEvent.lines.length >=4); 
-  },[]);  
+  },[]);
+  const scrollA = useRef(new Animated.Value(0)).current;   
   return(
       <View style={styles.container}>
         <StatusBar barStyle="dark-content" />
@@ -115,10 +116,17 @@ export default function Hotel_info_screens({ route }) {
           >
           </FlatList>
         </BottomSheet>
-        <ScrollView>
+        <Topnavigate title={inforHotel.name} scrollA={scrollA}/>
+         <Animated.ScrollView
+            onScroll = {Animated.event(
+            [{nativeEvent: {contentOffset: {y: scrollA}}}],
+            {useNativeDriver: true},
+            )}
+            scrollEventThrottle = {16}
+         > 
           <View style={styles.Img_Background}>
-            <Image style={styles.background} source={{uri: inforHotel.logo || "https://scontent.fhan2-2.fna.fbcdn.net/v/t1.0-0/p640x640/68401906_157744848700465_7740565304106811392_o.jpg?_nc_cat=111&_nc_sid=e3f864&_nc_ohc=ALSx5Ro_F-cAX-Q4xwi&_nc_ht=scontent.fhan2-2.fna&tp=6&oh=6071894881c03d120497e3f8a844b4f1&oe=5F7D0E5C"}} resizeMode={'cover'} >
-            </Image>   
+            <Animated.Image style={styles.background(scrollA)} source={{uri: inforHotel.logo || "https://scontent.fhan2-2.fna.fbcdn.net/v/t1.0-0/p640x640/68401906_157744848700465_7740565304106811392_o.jpg?_nc_cat=111&_nc_sid=e3f864&_nc_ohc=ALSx5Ro_F-cAX-Q4xwi&_nc_ht=scontent.fhan2-2.fna&tp=6&oh=6071894881c03d120497e3f8a844b4f1&oe=5F7D0E5C"}} resizeMode={'cover'} >
+            </Animated.Image>   
           </View>
           <View style={styles.Info_container}> 
             <View style={styles.Hotel_name}>
@@ -330,7 +338,7 @@ export default function Hotel_info_screens({ route }) {
               </View>
             </View>
           </View>
-        </ScrollView>
+        </Animated.ScrollView>
       </View>
     )
 }
@@ -344,14 +352,33 @@ const styles = StyleSheet.create({
     width: '100%',
     height: hp/3
     },
-  background: {
-    flex: 1,
-    height: hp/5,
+  // background: {
+  //   flex: 1,
+  //   height: hp/5,
+  //   width: '100%',
+  //   },  
+  background: scrollA => ({
     width: '100%',
-    },  
+    height: hp/3,
+    transform: [
+      {
+        translateY: scrollA.interpolate({
+          inputRange: [-(hp/3), 0, hp/3, hp/3 + 1],
+          outputRange: [-(hp/3) / 2, 0, hp/3 * 0.5,hp/3 * 0.5],
+        }),
+      },
+      {
+        scale: scrollA.interpolate({
+          inputRange: [-(hp/3), 0, hp/3, hp/3 + 1],
+          outputRange: [2, 1, 0.995, 0.995],
+        }),
+      }
+    ]
+  }),
   Info_container: {
     paddingLeft: 20,
     paddingRight: 20,
+    backgroundColor: '#fff'
     },
   Hotel_name: {
     height: hp/7.5,

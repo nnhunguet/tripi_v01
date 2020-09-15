@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState, useEffect} from 'react';
 import { 
   View,
   Text,
@@ -23,7 +23,6 @@ const ExploreStack = createStackNavigator();
 import Setting from './screens/Setting';
 import Profile from './screens/Profile';
 import EditProfile from './screens/EditProfile';
-
 import Welcome from './screens/Welcome';
 import Login from './screens/Login';
 import SignUp from './screens/SignUp';
@@ -84,7 +83,7 @@ function ProfileStackScreen() {
   );
 }
 
-function ExploreStackScreen() {
+function ExploreStackScreen({ props }) {
   return (
     <ExploreStack.Navigator
       screenOptions={{
