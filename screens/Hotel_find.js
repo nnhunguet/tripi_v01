@@ -9,7 +9,7 @@ import {
   TextInput, 
   Dimensions,
   TouchableOpacity, 
-  Animated
+  Animated,
 } from 'react-native';
 import { Color } from '../components/Color'; 
 import { StatusBar } from 'expo-status-bar';
@@ -33,6 +33,7 @@ import DateRangePicker from "react-native-daterange-picker";
 import {DATA} from '../components/Data';
 import { width } from 'react-native-daterange-picker/src/modules';
 import StarRating from '../components/star-rating';
+import Topnavigate from '../components/TopNavigation';
 const wp = Dimensions.get('window').width;
 const hp = Dimensions.get('window').height;
 export default function Hotel_find({ navigation }) {
@@ -74,8 +75,8 @@ export default function Hotel_find({ navigation }) {
       </TouchableOpacity>
       );
   };
-  const bottomSheet = useRef();
   const scrollA = useRef(new Animated.Value(0)).current;
+  const bottomSheet = useRef();
   return(
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" />
@@ -87,8 +88,8 @@ export default function Hotel_find({ navigation }) {
               <Text style={{ fontWeight: 'bold'}}>Phòng</Text>
             </View>
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: "space-between", width: wp/3.2}}>
-              <TouchableOpacity onPress={() => room > 1 ? setRoom(room - 1) : setRoom(1)}> 
-                <AntDesign name="minuscircle" size={50} color="#f3f3f3" />
+              <TouchableOpacity onPress={() => room > 1 ? setRoom(room - 1) : null}> 
+                <AntDesign name="minuscircle" size={50} color={room > 1 ? '#d3d3d3' : '#f3f3f3'} />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setRoom(room + 1)}>
                 <AntDesign name="pluscircle" size={50} color={Color.primary} />
@@ -104,8 +105,8 @@ export default function Hotel_find({ navigation }) {
                   </View>
                 </View>
                 <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: "space-between", width: wp/3.2}}>
-                  <TouchableOpacity onPress={() =>person > 1 ? setPerson(person - 1) : setPerson(1)}> 
-                    <AntDesign name="minuscircle" size={50} color="#e0e0e0"/>
+                  <TouchableOpacity onPress={() =>person > 1 ? setPerson(person - 1) : null}> 
+                    <AntDesign name="minuscircle" size={50} color={person > 1 ? '#d3d3d3' : '#f3f3f3'}/>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => setPerson(person + 1)}>
                     <AntDesign name="pluscircle" size={50} color={Color.primary} />
@@ -121,8 +122,8 @@ export default function Hotel_find({ navigation }) {
                       </View>
                     </View>
                     <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: "space-between", width: wp/3.2}}>
-                    <TouchableOpacity onPress={() =>kid > 0 ? setKid(kid - 1) : setKid(0)}>
-                    <AntDesign name="minuscircle" size={50} color="#e0e0e0"/>
+                    <TouchableOpacity onPress={() =>kid > 0 ? setKid(kid - 1) : null}>
+                    <AntDesign name="minuscircle" size={50} color={kid > 0 ? '#d3d3d3' : '#f3f3f3'}/>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => setKid(kid + 1)}>
                     <AntDesign name="pluscircle" size={50} color={Color.primary} />
@@ -142,21 +143,15 @@ export default function Hotel_find({ navigation }) {
                 </TouchableOpacity>
                 </View>
         </BottomSheet>
-      <Animated.ScrollView style={styles.scrollView_container} showsVerticalScrollIndicator={false} 
-        onScroll = {Animated.event(
-          [{nativeEvent: {contentOffset: {y: scrollA}}}],
-          {useNativeDriver: true},
-        )}
-        scrollEventThrottle = {16}
-      > 
-         
+        <Topnavigate title="haha" scrollA = {scrollA}/>
+      <ScrollView style={styles.scrollView_container} showsVerticalScrollIndicator={false} >     
         <View style={styles.Img_Background}>
-        <Animated.Image  style={styles.background(scrollA)} source={require('../assets/hotel_find.jpg')}>
-            {/* <LinearGradient locations={[0, 1]}  colors= 
+        <ImageBackground  style={styles.background} source={require('../assets/hotel_find.jpg')}>
+            <LinearGradient locations={[0, 1]}  colors= 
               {['rgba(0,0,0,0)', '#f3f3f3']} 
               style={styles.linearGradient}>
-            </LinearGradient> */}
-        </Animated.Image> 
+            </LinearGradient>
+        </ImageBackground> 
         </View>
         <View style={styles.Input_container}>
           <TextInput
@@ -312,7 +307,7 @@ export default function Hotel_find({ navigation }) {
               </View>       
             </View>
         </View>
-      </Animated.ScrollView>
+      </ScrollView>
     </View>
   )
 }
@@ -332,34 +327,12 @@ const styles = StyleSheet.create({
   Img_Background: {
     width: '100%',
     height: 500,
-    overflow: "hidden",
-    alignItems: 'center',
   },
-  background: scrollA => ({
+  background: {
     flex: 1,
     justifyContent: 'flex-end',
     paddingLeft: 50,
-    transform: [
-      {
-        translateY: scrollA.interpolate({
-          inputRange: [-500, 0, 500, 501],
-          outputRange: [-250, 0, 500 * 0.75,500 * 0.75],
-        }),
-      },
-      {
-        scale: scrollA.interpolate({
-          inputRange: [-500, 0, 500, 501],
-          outputRange: [2, 1, 0.66, 0.66],
-        }),
-      }
-    ]
-  }),
-  // background: {
-  //   flex: 1,
-  //   justifyContent: 'flex-end',
-  //   paddingLeft: 50,
-  //   // top: scrollA,
-  // },
+  },
   Input_container: {
     position: 'absolute',
     backgroundColor: 'rgba(0,0,0,0.5)',

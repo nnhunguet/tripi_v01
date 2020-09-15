@@ -20,6 +20,7 @@ import { MaterialIcons } from 'react-native-vector-icons';
 import BottomSheet from "react-native-gesture-bottom-sheet";
 import MapView, {Marker} from 'react-native-maps';
 import { FontAwesome } from '@expo/vector-icons';
+import  Topnavigate  from './TopNavigation';
 const wp = Dimensions.get('window').width;
 const hp = Dimensions.get('window').height;
 const LATITUDE = 21.037814;
@@ -62,7 +63,7 @@ const imagelogo = (domain_id) => {
   }
 }
  
-export default function Hotel_info_screens({ route }) {
+export default function Hotel_info_screens({ route, props }) {
   const inforHotel = useSelector(state => state.getInforHotelReducer.data[0]);
   const { minPrice, domain_id } = route.params;
   let allPrice = useSelector(state => state.getInforHotelReducer.allPrice);
@@ -115,6 +116,7 @@ export default function Hotel_info_screens({ route }) {
           >
           </FlatList>
         </BottomSheet>
+        <Topnavigate title={inforHotel.name} scrollA={scrollA}/>
          <Animated.ScrollView
             onScroll = {Animated.event(
             [{nativeEvent: {contentOffset: {y: scrollA}}}],
