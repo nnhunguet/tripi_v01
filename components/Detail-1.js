@@ -65,8 +65,10 @@ export default function DetailsScreen({ navigation, route }) {
         case 1: 
           console.log(1);
         case 2: 
+          console.log('sort ascending')
           dispatch(sortPriceAsc());
         case 3: 
+        console.log('sort desning');
           console.log(3);
         default:
           console.log('default');
