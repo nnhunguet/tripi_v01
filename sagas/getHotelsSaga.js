@@ -35,7 +35,7 @@ function* getHotels({payload}) {
         minPrice,
       })
     }
-    console.log(arrMinPrice);
+    console.log(resultHotel);
     yield put({ type: GET_HOTELS_SUCCEEDED, payload: { data: resultHotel} });  
   } 
   catch(err) {

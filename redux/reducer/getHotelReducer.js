@@ -7,11 +7,13 @@ export default function getHotelsReducer(state = initialNoteState, action) {
     case ActionTypes.SORT_PRICE_ASC:
       console.log("state data", state.data);
       console.log('sort price');
-      const data = state.data.sort((a, b) => {
+      const newData = [...state.data] 
+
+      const oldData = newData.sort((a, b) => {
         return a.minPrice.minPrice - b.minPrice.minPrice;
-      });
-      console.log(data)
-      return { data };
+      }); 
+
+      return {data: oldData};
     case ActionTypes.GET_HOTELS_FAILD:
       console.log('getfail');
       return state;

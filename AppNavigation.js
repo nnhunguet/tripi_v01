@@ -102,6 +102,7 @@ function ExploreStackScreen() {
           headerTitleAlign: "center",
           headerTruncatedBackTitle: null,
           headerLeftContainerStyle: {paddingLeft: wp/30},
+          headerTitle: 'Hotels',
           headerTitleStyle: {
             color: '#111',
           },
@@ -125,7 +126,7 @@ function AppNavigation() {
   const isLogin = useSelector(state => state.loginReducer.isLogin);
   console.log(isLogin);
   return (
-    // isLogin ? 
+    isLogin ? 
      ( <NavigationContainer>
       <Loading />
       <Tab.Navigator
@@ -164,9 +165,9 @@ function AppNavigation() {
         <Tab.Screen name="Profile" component={ProfileStackScreen}/>
       </Tab.Navigator>
     </NavigationContainer> )
-    // : (
-    //   <LoginStackScreen />
-    // )
+    : (
+      <LoginStackScreen />
+    )
   );
 }
 

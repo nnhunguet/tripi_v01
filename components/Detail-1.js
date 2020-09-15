@@ -46,6 +46,7 @@ export default function DetailsScreen({ navigation, route }) {
   const [star5, setStar5] = useState(false);
 
   const dataHotels = useSelector(state => state.getHotelReducer.data);
+
   // console.log('data Hotel', dataHotels);
   const { star, service } = useSelector(state => state.filterReducer);
   const { search_id, type_code } = route.params;
@@ -485,7 +486,7 @@ export default function DetailsScreen({ navigation, route }) {
                       </View>
                       <View style={{flexDirection: 'row', marginLeft: 10}}>
                         <StarRating rating={item.star_number}/>   
-                        <Text style={{color:'white', marginLeft: 7, fontSize: 12,paddingLeft: 5,paddingRight: 5, borderColor: 'black',backgroundColor: Color.primary}}> { (item.point_hidden/10).toFixed(1)} </Text>
+                        <Text style={{color:'white', marginLeft: 7, fontSize: 12,paddingLeft: 5,paddingRight: 5, borderColor: 'black',backgroundColor: Color.primary}}> { (item.point_hidden/6).toFixed(1)} </Text>
                       </View>
                     </View>
                     <View style={styles.card_row_2}>
