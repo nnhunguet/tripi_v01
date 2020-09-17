@@ -27,26 +27,26 @@ export const DATA = [
     {
         id: '6',
         title: 'Khánh Hòa',
-        link: require('../assets/Welcome.jpg')
+        link: require('../assets/Khanhhoa.jpg')
     },
     {
         id: '7',
         title: 'Quảng Nam',
-        link: require('../assets/Welcome.jpg')
+        link: require('../assets/Quangnam.jpg')
     },
     {
         id: '8',
         title: 'Quảng Ninh',
-        link: require('../assets/Welcome.jpg')
+        link: require('../assets/quangninh.jpg')
     },
     {
         id: '9',
         title: 'Kiên Giang',
-        link: require('../assets/Welcome.jpg')
+        link: require('../assets/Kiengiang.jpg')
     },
     {
         id: '10',
         title: 'Bình Thuận',
-        link: require('../assets/Welcome.jpg')
+        link: require('../assets/Binhthuan.jpg')
     },
 ];
