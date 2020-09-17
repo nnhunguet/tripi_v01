@@ -14,9 +14,10 @@ import {
 import { SocialIcon } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Feather from 'react-native-vector-icons/Feather';
-
+import { login } from '../redux/actions';
+import { useDispatch } from 'react-redux';
 export default function LoginScreen({ navigation }){
-
+  const dispatch = useDispatch();
   const [hidePassword, setHidePassword] = useState(true);
 
   return(
@@ -43,9 +44,11 @@ export default function LoginScreen({ navigation }){
           onPress={() => {alert('Đăng nhập google')}}
         />
       </View>
+      <TouchableOpacity onPress={() => dispatch(login({username: 'Hungbn12301', password: 'hungbn01'}))}>
       <Text style={{textAlign: 'center', marginVertical: 12, color: "#aaa"}}>
-        or sign up with email
+        Đăng nhập dưới dạng khách
       </Text>
+      </TouchableOpacity>
       <View>
         <View style={styles.wrapTextInput}> 
           <TextInput 

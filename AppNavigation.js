@@ -131,35 +131,23 @@ function AppNavigation() {
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
-            if (route.name === 'Explore') {
-              return (
-                <Feather
-                  name= 'search'
-                  size={size}
-                  color= {focused ? Color.primary : '#d3d3d3'}  
-                />
-              );
-            } else if (route.name === 'Trips') {
-              return (
-                <Feather
-                  name= 'heart'
-                  size={size}
-                  color= {focused ? Color.primary : '#d3d3d3'}  
-                />
-              );
-            } else if (route.name === 'Profile') {
-              return (
-                <Feather
-                  name= 'user'
-                  size={size}
-                  color= {focused ? Color.primary : '#d3d3d3'}  
-                />
-              );
+            if (route.name === 'Explore'){
+              return <Feather name="search" size={size} color={color}  />;
             }
+            else if (route.name === 'Trips'){
+              return <Feather name="heart" size={size} color={color} />
+            }
+            else if(route.name ==='Profile'){
+              return <Feather name="user" size={size} color={color} />
+            } 
           },
         })}
+        tabBarOptions={{
+          activeTintColor: Color.primary,
+          inactiveTintColor: '#d3d3d3',
+        }}
       >
-        <Tab.Screen name="Explore" component={ExploreStackScreen} />
+        <Tab.Screen name="Explore" component={ExploreStackScreen}/>
         <Tab.Screen name="Trips" component={Trips} />
         <Tab.Screen name="Profile" component={ProfileStackScreen}/>
       </Tab.Navigator>

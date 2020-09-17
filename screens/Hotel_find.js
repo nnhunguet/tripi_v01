@@ -49,9 +49,7 @@ export default function Hotel_find({ navigation }) {
   };
   const dispath = useDispatch();
   const dataKeyWords = useSelector(state => state.keyWordReducer);
-
   const [textInput, setTextInput] = useState(null);
-
   const [person, setPerson] = useState(2);
   const [room, setRoom] = useState(1);
   const [kid, setKid] = useState(0);
@@ -185,23 +183,23 @@ export default function Hotel_find({ navigation }) {
           </View>
           <View style={styles.info_Container}>
             <View style={styles.info_date}>
-            <DateRangePicker
-                    onChange={setDates}
-                    endDate={endDate}
-                    startDate={startDate}
-                    displayedDate={displayedDate}
-                    minDate={minDate}
-                    selectedStyle={{backgroundColor: Color.primary}}
-                    presetButtons={true}
-                    buttonTextStyle={{paddingLeft: wp/15, paddingRight: wp/15, color: Color.primary}}
-                    buttonStyle={{borderColor: Color.primary}}
-                    range
-                    >
-                      <View style={{justifyContent: 'space-between', height: '100%'}}>
-                      <Text style={styles.info_date_title}>CHỌN NGÀY</Text>
-                      <Text style={styles.info_date_day}>{day1} Th9 - {day2} Th9</Text>
-                      </View>
-                      </DateRangePicker>
+              <DateRangePicker
+                onChange={setDates}
+                endDate={endDate}
+                startDate={startDate}
+                displayedDate={displayedDate}
+                minDate={minDate}
+                selectedStyle={{backgroundColor: Color.primary}}
+                presetButtons={true}
+                buttonTextStyle={{paddingLeft: wp/15, paddingRight: wp/15, color: Color.primary}}
+                buttonStyle={{borderColor: Color.primary}}
+                range
+              >
+                <View style={{justifyContent: 'space-between', height: '100%'}}>
+                  <Text style={styles.info_date_title}>CHỌN NGÀY</Text>
+                  <Text style={styles.info_date_day}>{day1} Th9 - {day2} Th9</Text>
+                </View>
+              </DateRangePicker>
             </View>
             <View style={styles.info_person}>
                 <TouchableWithoutFeedback onPress={() => bottomSheet.current.show()} style={{justifyContent: 'space-between', height: '100%'}}>

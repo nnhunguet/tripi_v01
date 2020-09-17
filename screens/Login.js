@@ -47,9 +47,11 @@ export default function LoginScreen({ navigation }){
           onPress={() => {alert('Đăng nhập google')}}
         />
       </View>
+      <TouchableOpacity onPress={() => dispatch(login({username: 'Hungbn12301', password: 'hungbn01'}))}>
       <Text style={{textAlign: 'center', marginVertical: 12, color: "#aaa"}}>
-        or login with email
+        Đăng nhập dưới dạng khách
       </Text>
+      </TouchableOpacity>
       { isWrong ? <Text style={{textAlign: 'center', marginVertical: 10, color: 'red', fontWeight: '600'}}>Sai tên đăng nhập hoặc mật khẩu</Text> : <Text></Text>}
       <View>
         <View style={styles.wrapTextInput}> 

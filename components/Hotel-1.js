@@ -67,14 +67,15 @@ export default function Hotel_info_screens({ route, props }) {
   const inforHotel = useSelector(state => state.getInforHotelReducer.data[0]);
   const { minPrice, domain_id } = route.params;
   let allPrice = useSelector(state => state.getInforHotelReducer.allPrice);
-
+  const regex = /(<([^>]+)>)/ig;
   const bottomSheet = useRef();
   const [textShown, setTextShown] = useState(false);
   const [lengthMore,setLengthMore] = useState(false); 
   const toggleNumberOfLines = () => {
       setTextShown(!textShown);
   }
-  
+  let room_score = (inforHotel.sleep_quality_score + inforHotel.meal_score + inforHotel.cleanliness_score) / 3;
+  let average_score = (inforHotel.overall_score + inforHotel.service_score + inforHotel.location_score + room_score) / 4;
   const onTextLayout = useCallback(e =>{
       setLengthMore(e.nativeEvent.lines.length >=4); 
   },[]);
@@ -96,20 +97,18 @@ export default function Hotel_info_screens({ route, props }) {
             style={{marginTop: 15}}
             data={allPrice}
             renderItem={ ({ item }) => (
-              <View style={{marginTop: 20, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' ,paddingHorizontal: 16}}>
-                <PricingCard
-                  containerStyle={{width: '80%'}}
-                  color="#4f9deb"
-                  title={stringDomain(item.domain_id)}
-                  pricingStyle={{fontSize: 24}}
-                  price={convertVND(item.final_amount)}
-                  infoStyle={{fontSize: 12}}
-                  info={['1 Room/ 1 Night']}
-                  button={{ title: 'GET STARTED', icon: 'flight-takeoff' }}
-                  onButtonPress={() => {
-                    console.log(1);
-                  }}
-                />
+              <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center' ,paddingHorizontal: 20}}>
+                <TouchableOpacity>
+                <View style={{height: hp/6, width: '100%', borderBottomColor: '#d3d3d3', borderBottomWidth: 1, flexDirection: 'row'}}>
+                  <View style={{width: '60%'}}>
+                    <Image source={imagelogo(item.domain_id)} resizeMode='cover' style={{height:'60%', width: '60%'}}/>
+                    <Text style={{width: '95%'}} numberOfLines={2}>{item.room_type_name}</Text>
+                  </View>
+                  <View style={{width: '40%', justifyContent: 'center', alignItems:'center'}}>
+                    <Text style={{fontSize: 20}}>{convertVND(item.final_amount)}</Text>
+                  </View>
+                </View>
+                </TouchableOpacity>
               </View>
             )}
             keyExtractor={(item, index) => index}
@@ -184,7 +183,7 @@ export default function Hotel_info_screens({ route, props }) {
                 </View>
                 <View style={styles.Button_container}>
                   <View style={styles.Price_sell}>
-                    <Text style={{fontSize: 16, fontWeight: "600"}}>Xem giảm giá</Text>
+                    <Text style={{fontSize: 16, fontWeight: "600"}}>Xem chi tiết</Text>
                   </View>
                   <TouchableOpacity
                     onPress={() => {
@@ -196,7 +195,7 @@ export default function Hotel_info_screens({ route, props }) {
                     }}
                   >
                     <View style={styles.Price_more}>
-                      <Text style={{fontSize: 16, fontWeight: '600', color: Color.primary}}>Xem tất cả giảm giá</Text>
+                      <Text style={{fontSize: 16, fontWeight: '600', color: Color.primary}}>Xem tất cả giá cả</Text>
                     </View>
                   </TouchableOpacity>
                 </View>
@@ -204,23 +203,23 @@ export default function Hotel_info_screens({ route, props }) {
             <View style={styles.Rating}>
               <View style={styles.Rating_tittle}>
                 <View style={{justifyContent: "center", alignItems: 'center', flex: 0.37}}> 
-                  <Text style={styles.Rating_score}> { parseFloat(inforHotel.overall_score).toFixed(1)} </Text>
+                  <Text style={styles.Rating_score}> { parseFloat(average_score).toFixed(1)} </Text>
                 </View>
                 <View style={styles.Rating_overall}>
-                  <Text>Đánh giá chung</Text>
+                  <Text>Hạng khách sạn</Text>
                   <StarRating rating={inforHotel.star_number}/>
                 </View>
               </View>  
               <View style={styles.Rating_details}>
                   <View style={styles.Rating_details_name}>
-                    <Text style={{fontWeight: 'bold', fontSize: 14}}>Giá</Text>
+                    <Text style={{fontWeight: 'bold', fontSize: 14}}>Chung</Text>
                     <Text style={{fontWeight: 'bold', fontSize: 14}}>Dịch Vụ</Text>
                     <Text style={{fontWeight: 'bold', fontSize: 14}}>Địa Điểm</Text>
                     <Text style={{fontWeight: 'bold', fontSize: 14}}>Phòng</Text>
                   </View>
                   <View style={styles.Rating_details_score}>
                     <View style={{backgroundColor: Color.grey, width: '100%', height: 13, borderRadius: 20}}>
-                      <View style={{backgroundColor: Color.primary, width: '100%', height: 13, borderRadius: 20}}></View>
+                      <View style={{backgroundColor: Color.primary, width: `${inforHotel.overall_score*10}%`, height: 13, borderRadius: 20}}></View>
                     </View>
                     <View style={{backgroundColor: Color.grey, width: '100%', height: 13, borderRadius: 20}}>
                       <View style={{backgroundColor: Color.primary, width: `${inforHotel.service_score*10}%`, height: 13, borderRadius: 20}}></View>
@@ -229,7 +228,7 @@ export default function Hotel_info_screens({ route, props }) {
                       <View style={{backgroundColor: Color.primary, width: `${inforHotel.location_score*10}%`, height: 13, borderRadius: 20}}></View>
                     </View>
                     <View style={{backgroundColor: Color.grey, width: '100%', height: 13, borderRadius: 20}}>
-                      <View style={{backgroundColor: Color.primary, width: '89%', height: 13, borderRadius: 20}}></View>
+                      <View style={{backgroundColor: Color.primary, width: `${room_score*10}%`, height: 13, borderRadius: 20}}></View>
                     </View>
                   </View>
               </View> 
@@ -240,7 +239,7 @@ export default function Hotel_info_screens({ route, props }) {
                 onTextLayout={onTextLayout}
                 numberOfLines={textShown ? undefined : 5}
                 style={{ lineHeight: 21 }}>
-                {inforHotel.description}
+                {inforHotel.description.replace(regex, '')}
                 </Text>
                 {
                     lengthMore ? <Text
