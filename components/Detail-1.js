@@ -45,6 +45,18 @@ export default function DetailsScreen({ navigation, route }) {
   const [star4, setStar4] = useState(false);
   const [star5, setStar5] = useState(false);
 
+  const [service1, setService1] = useState(false);
+  const [service2, setService2] = useState(false);
+  const [service3, setService3] = useState(false);
+  const [service4, setService4] = useState(false);
+  const [service5, setService5] = useState(false);
+  const [service6, setService6] = useState(false);
+  const [service7, setService7] = useState(false);
+  const [service8, setService8] = useState(false);
+  const [service9, setService9] = useState(false);
+  const [service10, setService10] = useState(false);
+
+
   const dataHotels = useSelector(state => state.getHotelReducer.data);
 
   // console.log('data Hotel', dataHotels);
