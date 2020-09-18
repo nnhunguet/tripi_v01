@@ -61,7 +61,7 @@ export default function DetailsScreen({ navigation, route }) {
 
   // console.log('data Hotel', dataHotels);
   const { star, service } = useSelector(state => state.filterReducer);
-  const { search_id, type_code } = route.params;
+  const { search_id, type_code } = route?.params;
   const dispatch = useDispatch();
   const action = () =>
   ActionSheetIOS.showActionSheetWithOptions(

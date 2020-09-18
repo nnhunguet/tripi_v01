@@ -61,7 +61,7 @@ export default function Hotel_find({ navigation }) {
       <TouchableOpacity
         onPress={() => {
           dispath(getHotels(item.title)); 
-          navigation.navigate('Detail');
+          navigation.navigate('Detail', { type_code: 0, search_id: item.title});
         }}
       >
       <View style={styles.city_background}> 

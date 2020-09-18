@@ -3,8 +3,8 @@ const urlGetHotels = `${port}/gethotels`;
 import axios from 'axios'
 function* getHotels(hotel) {
   console.log('hotel',hotel);
-  let search_id = hotel.search_id ? hotel.search_id : `${hotel}`;
-  let type_code = hotel.type_code ? hotel.type_code : 0; 
+  let search_id = hotel?.search_id ? hotel.search_id : `${hotel}`;
+  let type_code = hotel?.type_code ? hotel.type_code : 0; 
   let filters = hotel?.service?.length ? hotel.service.join('_') : 15; 
   let star_number = hotel?.star?.length ? hotel.star.join('_') : 6; 
   let response;
