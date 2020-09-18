@@ -30,3 +30,7 @@ export const SORT_PRICE_ASC = 'SORT_PRICE_ASC';
  
 export const GET_MIN_PRICE = 'GET_MIN_PRICE';
 
+export const GET_URL_HOTEL = 'GET_URL_HOTEL';
+export const GET_URL_HOTEL_SUCCESS = 'GET_URL_HOTEL_SUCCESS';
+export const GET_URL_HOTEL_FAILD = 'GET_URL_HOTEL_FAILD';
+

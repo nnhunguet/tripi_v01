@@ -3,12 +3,13 @@ const urlGetHotels = `${port}/gethotels`;
 import axios from 'axios'
 function* getHotels(hotel) {
   console.log('hotel',hotel);
-  let search_id = hotel.search_id ? hotel.search_id : hotel;
+  let search_id = hotel.search_id ? hotel.search_id : `${hotel}`;
   let type_code = hotel.type_code ? hotel.type_code : 0; 
-  let filters = hotel.filters ? hotel.filters : 15; 
-  let start_number = hotel.start_number ? hotel.start_number : 6; 
+  let filters = hotel?.service?.length ? hotel.service.join('_') : 15; 
+  let star_number = hotel?.star?.length ? hotel.star.join('_') : 6; 
   let response;
-  yield axios.get(`${urlGetHotels}/${search_id}/${type_code}/${filters}/${start_number}`)
+  console.log(`${urlGetHotels}/${search_id}/${type_code}/${filters}/${star_number}`);
+  yield axios.get(`${urlGetHotels}/${search_id}/${type_code}/${filters}/${star_number}`)
   .then(function (res) {
     // handle success
     response = res.data;

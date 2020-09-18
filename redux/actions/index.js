@@ -145,9 +145,8 @@ export const priceOneNight = (price) => {
 }
 
 export const starHotel = (star) => {
-  console.log(star);
   return {
-    type: ActionTypes.PRICE_ONE_NIGTH,
+    type: ActionTypes.STAR_HOTEL,
     payload: {
       star,
     }
@@ -198,3 +197,32 @@ export const getMinPrice = (data) => {
     }
   }
 }
+
+export const getUrl = (data) => {
+  return {
+    type: ActionTypes.GET_URL_HOTEL,
+    payload: {
+      data,
+    }
+  }
+}
+
+export const getUrlSuccess = (data) => {
+  return {
+    type: ActionTypes.GET_URL_HOTEL_SUCCESS,
+    payload: {
+      data,
+    }
+  }
+}
+
+export const getUrlFaild = (data) => {
+  return {
+    type: ActionTypes.GET_URL_HOTEL_FAILD,
+    payload: {
+      data,
+    }
+  }
+}
+
+

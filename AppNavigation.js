@@ -101,6 +101,7 @@ function ExploreStackScreen({ props }) {
           headerTitleAlign: "center",
           headerTruncatedBackTitle: null,
           headerLeftContainerStyle: {paddingLeft: wp/30},
+          headerTitle: 'Hotels',
           headerTitleStyle: {
             color: '#111',
           },

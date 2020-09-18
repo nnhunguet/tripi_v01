@@ -168,7 +168,7 @@ export default function Hotel_find({ navigation }) {
                 <TouchableOpacity
                   onPress={ () => {
                     dispath(getHotels(item)); 
-                    navigation.navigate('Detail');
+                    navigation.navigate('Detail', { type_code: item.type_code, search_id: item.search_id});
                   }}
                   style={{padding: 8, backgroundColor: '#fff', width: wp*(8/10), position: 'relative', zIndex: 3}}
                 >

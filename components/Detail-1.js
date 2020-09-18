@@ -31,9 +31,9 @@ const convertVND = (price) => {
 }
 
 import { useSelector, useDispatch } from 'react-redux';
-import { getInforHotelAction, serviceHotel, sortPriceAsc, starHotel } from '../redux/actions'
+import { getInforHotelAction, serviceHotel, sortPriceAsc, starHotel, getHotels } from '../redux/actions';
 
-export default function DetailsScreen({ navigation }) {
+export default function DetailsScreen({ navigation, route }) {
   const [multiSliderValue, setMultiSliderValue] = useState([0, 100]);
   const multiSliderValuesChange = (values) => setMultiSliderValue(values);
   const [priceValue, setPriceValue] = useState([0, 50]);
@@ -45,8 +45,23 @@ export default function DetailsScreen({ navigation }) {
   const [star4, setStar4] = useState(false);
   const [star5, setStar5] = useState(false);
 
+  const [service1, setService1] = useState(false);
+  const [service2, setService2] = useState(false);
+  const [service3, setService3] = useState(false);
+  const [service4, setService4] = useState(false);
+  const [service5, setService5] = useState(false);
+  const [service6, setService6] = useState(false);
+  const [service7, setService7] = useState(false);
+  const [service8, setService8] = useState(false);
+  const [service9, setService9] = useState(false);
+  const [service10, setService10] = useState(false);
+
+
   const dataHotels = useSelector(state => state.getHotelReducer.data);
-  console.log('data Hotel', dataHotels);
+
+  // console.log('data Hotel', dataHotels);
+  const { star, service } = useSelector(state => state.filterReducer);
+  const { search_id, type_code } = route.params;
   const dispatch = useDispatch();
   const action = () =>
   ActionSheetIOS.showActionSheetWithOptions(
@@ -63,8 +78,10 @@ export default function DetailsScreen({ navigation }) {
         case 1: 
           console.log(1);
         case 2: 
+          console.log('sort ascending')
           dispatch(sortPriceAsc());
         case 3: 
+        console.log('sort desning');
           console.log(3);
         default:
           console.log('default');
@@ -164,7 +181,8 @@ export default function DetailsScreen({ navigation }) {
                   <View style={{flexDirection: 'row', width: WIDTH/1.9, justifyContent: 'space-between'}}>
                     <TouchableOpacity
                       onPress={() => {
-                        console.log('1 sao');
+                        setStar1(!star1);
+                        dispatch(starHotel(1));
                       }}
                     >
                       <View style={{paddingHorizontal: 15, paddingVertical: 7,  borderColor: star1 ? '#f0a500' : 'grey', borderWidth: 1, borderRadius: 5}} >
@@ -182,6 +200,7 @@ export default function DetailsScreen({ navigation }) {
                       }}
                       onPress={() => {
                         setStar2(!star2);
+                        dispatch(starHotel(2));
                         console.log('2 sao');
                       }}
                     >
@@ -199,6 +218,7 @@ export default function DetailsScreen({ navigation }) {
                       }}
                       onPress={() => {
                         setStar3(!star3);
+                        dispatch(starHotel(3));
                         console.log('3 sao')
                       }}
                     >
@@ -219,6 +239,7 @@ export default function DetailsScreen({ navigation }) {
                       }}
                       onPress={() => {
                         setStar4(!star4);
+                        dispatch(starHotel(4));
                         console.log('4 sao')
                       }}
                     >
@@ -238,6 +259,7 @@ export default function DetailsScreen({ navigation }) {
                       }}
                       onPress={() => {
                         setStar5(!star5);
+                        dispatch(starHotel(5));
                         console.log('5 sao')
                       }}  
                     >
@@ -349,69 +371,120 @@ export default function DetailsScreen({ navigation }) {
                   <View style={{flexDirection: 'row', width: WIDTH/1.42, justifyContent: 'space-between'}}>
                     <TouchableOpacity
                       onPress={() => {
+                        setService1(!service1)
                         dispatch(serviceHotel(14));
                       }}
                     >
-                      <View style={styles.star_ratting}>
-                        <Text style={{fontSize: 12}}>Bể bơi ngoài trời</Text>
+                      <View style={{ flexDirection: 'row', 
+                                      paddingVertical: 7,
+                                      paddingHorizontal: 15,
+                                      borderWidth: 1,
+                                      borderColor: service1 ? '#f0a500' : 'grey',
+                                      borderRadius: 5,
+                                    }}
+                      >
+                        <Text style={service1 ? {fontSize: 12, color: '#f0a500'} : {fontSize: 12}}>Bể bơi ngoài trời</Text>
                       </View>
                     </TouchableOpacity>
                     <TouchableOpacity
                       onPress={() => {
+                        setService2(!service2);
                         dispatch(serviceHotel(13));
                       }}
                     >
-                      <View style={styles.star_ratting}>
-                        <Text style={{fontSize: 12}}>Dịch vụ tour</Text>
+                      <View style={{ flexDirection: 'row', 
+                                      paddingVertical: 7,
+                                      paddingHorizontal: 15,
+                                      borderWidth: 1,
+                                      borderColor: service2 ? '#f0a500' : 'grey',
+                                      borderRadius: 5,
+                                    }}
+                      >
+                        <Text style={service2 ? {fontSize: 12, color: '#f0a500'} : {fontSize: 12}}>Dịch vụ tour</Text>
                       </View>
                     </TouchableOpacity>
                   </View>
                   <View style={{flexDirection: 'row', width: WIDTH/1.42, justifyContent: 'space-between'}}>
                     <TouchableOpacity
                       onPress={() => {
-                        dispatch(serviceHotel(13));
-                      }}
-                    >
-                      <View style={styles.star_ratting}>
-                        <Text style={{fontSize: 12}}>Wifi/Internet</Text>
-                      </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={() => {
-                        dispatch(serviceHotel(13));
-                      }}
-                    >
-                      <View style={styles.star_ratting}>
-                        <Text style={{fontSize: 12}}>Giặt ủi</Text>
-                      </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={() => {
+                        setService3(!service3);
                         dispatch(serviceHotel(12));
                       }}
                     >
-                      <View style={styles.star_ratting}>
-                        <Text style={{fontSize: 12}}>Quầy bar</Text>
+                      <View style={{ flexDirection: 'row', 
+                                      paddingVertical: 7,
+                                      paddingHorizontal: 15,
+                                      borderWidth: 1,
+                                      borderColor: service3 ? '#f0a500' : 'grey',
+                                      borderRadius: 5,
+                                    }}>
+                        <Text style={service3 ? {fontSize: 12, color: '#f0a500'} : {fontSize: 12}}>Wifi/Internet</Text>
+                      </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => {
+                        setService4(!service4);
+                        dispatch(serviceHotel(11));
+                      }}
+                    >
+                      <View style={{ flexDirection: 'row', 
+                                      paddingVertical: 7,
+                                      paddingHorizontal: 15,
+                                      borderWidth: 1,
+                                      borderColor: service4 ? '#f0a500' : 'grey',
+                                      borderRadius: 5,
+                                    }}>
+                        <Text style={service4 ? {fontSize: 12, color: '#f0a500'} : {fontSize: 12}}>Giặt ủi</Text>
+                      </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => {
+                        setService5(!service5);
+                        dispatch(serviceHotel(10));
+                      }}
+                    >
+                      <View style={{ flexDirection: 'row', 
+                                      paddingVertical: 7,
+                                      paddingHorizontal: 15,
+                                      borderWidth: 1,
+                                      borderColor: service5 ? '#f0a500' : 'grey',
+                                      borderRadius: 5,
+                                    }}>
+                        <Text style={service5 ? {fontSize: 12, color: '#f0a500'} : {fontSize: 12}}>Quầy bar</Text>
                       </View>
                     </TouchableOpacity>
                   </View>
                   <View style={{flexDirection: 'row', width: WIDTH/1.42, justifyContent: 'space-between'}}>
                     <TouchableOpacity
                       onPress={() => {
-                        dispatch(serviceHotel(8))
+                        setService6(!service6);
+                        dispatch(serviceHotel(8));
                       }}
                     >
-                      <View style={styles.star_ratting}>
-                        <Text style={{fontSize: 12}}>Hướng dẫn viên du lịch</Text>
+                      <View style={{ flexDirection: 'row', 
+                                      paddingVertical: 7,
+                                      paddingHorizontal: 15,
+                                      borderWidth: 1,
+                                      borderColor: service6 ? '#f0a500' : 'grey',
+                                      borderRadius: 5,
+                                    }}>
+                        <Text style={service6 ? {fontSize: 12, color: '#f0a500'} : {fontSize: 12}}>Hướng dẫn viên du lịch</Text>
                       </View>
                     </TouchableOpacity>
                     <TouchableOpacity
                       onPress={() => {
+                        setService7(!service7)
                         dispatch(serviceHotel(7))
                       }}
                     >
-                      <View style={styles.star_ratting}>
-                        <Text style={{fontSize: 12}}>Nhà hàng</Text>
+                      <View style={{ flexDirection: 'row', 
+                                      paddingVertical: 7,
+                                      paddingHorizontal: 15,
+                                      borderWidth: 1,
+                                      borderColor: service7 ? '#f0a500' : 'grey',
+                                      borderRadius: 5,
+                                    }}>
+                        <Text style={service7 ? {fontSize: 12, color: '#f0a500'} : {fontSize: 12}}>Nhà hàng</Text>
                       </View>
                     </TouchableOpacity>
                   </View>
@@ -425,7 +498,7 @@ export default function DetailsScreen({ navigation }) {
             style={styles.Bottomsheet_Button}
             onPress={ () => {
               bottomSheet.current.close();
-              
+              dispatch(getHotels({ type_code, search_id, star, service }))
             }}
           >
             <Text style={{color: "#fff", fontSize: 20, fontWeight: '400',}}>Áp Dụng</Text>
@@ -479,7 +552,7 @@ export default function DetailsScreen({ navigation }) {
                       </View>
                     </View>
                     <View style={styles.card_row_2}>
-                      <Text style={{fontSize: 15, fontWeight: 'bold'}}> {(item.minPrice.minPrice === 20000000000) ? '???' : convertVND(item.minPrice.minPrice)} </Text>
+                      <Text style={{fontSize: 15, fontWeight: 'bold'}}> {(item.minPrice.minPrice === 20000000000 || item.minPrice.minPrice === -1) ? '???' : convertVND(item.minPrice.minPrice)} </Text>
                       <Text style={{}}>/Đêm</Text>
                     </View>
                   </View> 
