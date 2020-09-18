@@ -181,8 +181,8 @@ export default function Hotel_info_screens({ route, props }) {
                   </View>
                 </View>
                 <View style={styles.Best_price}>
-                <Image source={imagelogo(allPrice[0].domain_id)} resizeMode='cover' style={{height:'100%', width: '50%'}}/>
-                <Text style={{fontWeight: 'bold', fontSize: 24}}> {convertVND(allPrice[0].final_amount) || "???"} </Text>
+                <Image source={allPrice[0]?.domain_id ? imagelogo(allPrice[0].domain_id) : 'Hết phòng'} resizeMode='cover' style={{height:'100%', width: '50%'}}/>
+                <Text style={{fontWeight: 'bold', fontSize: 24}}> {allPrice[0]?.final_amount ?  convertVND(allPrice[0].final_amount) : "???"} </Text>
                 </View>
                 <View style={styles.Price_footer}>
                   <Text style={{color: 'grey', fontSize: 10}}>
