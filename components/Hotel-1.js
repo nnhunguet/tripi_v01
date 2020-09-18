@@ -239,7 +239,7 @@ export default function Hotel_info_screens({ route, props }) {
                 onTextLayout={onTextLayout}
                 numberOfLines={textShown ? undefined : 5}
                 style={{ lineHeight: 21 }}>
-                {inforHotel.description.replace(regex, '')}
+                {inforHotel.description} ? {inforHotel.description.replace(regex, '')} : {null}
                 </Text>
                 {
                     lengthMore ? <Text
