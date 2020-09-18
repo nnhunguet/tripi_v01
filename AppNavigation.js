@@ -41,12 +41,14 @@ function Trips() {
     </View>
   );
 }
-function LogoTitle() {
+function LogoTitle(props) {
+  let name = props.name;
+  let room = props.room;
+  let person = props.person;
   return (
     <View style={{justifyContent: 'center', alignItems:'center'}}>
-
-      <Text style={{fontSize: 16, fontWeight: '400'}}>Hà nội</Text>
-      <Text style={{fontSize: 10}}>13/9 - 15/9 * 1 phòng * 2 người</Text>
+      <Text style={{fontSize: 16, fontWeight: '400'}} numberOfLines={1}>{name}</Text>
+      <Text style={{fontSize: 10}}>13/9 - 15/9 * {room} phòng * {person} khách</Text>
     </View>
   );
 }
@@ -95,17 +97,19 @@ function ExploreStackScreen({ props }) {
       <ExploreStack.Screen 
         name="Detail" 
         component={Detail} 
-        options={{
+        options={({ route }) => ({
           headerTransparent: false,
           headerTintColor: Color.primary,
           headerTitleAlign: "center",
           headerTruncatedBackTitle: null,
           headerLeftContainerStyle: {paddingLeft: wp/30},
-          headerTitle: 'Hotels',
           headerTitleStyle: {
             color: '#111',
           },
-        }}
+          //headerTitle: route.params.name
+          headerTitle:  props => <LogoTitle  name = {route.params.name} room = {route.params.room} person = {route.params.person}/>
+        })
+      }
       />
       <ExploreStack.Screen 
       name="Hotel" 
@@ -148,7 +152,7 @@ function AppNavigation() {
         }}
       >
         <Tab.Screen name="Explore" component={ExploreStackScreen}/>
-        <Tab.Screen name="Trips" component={Trips} />
+        {/* <Tab.Screen name="Trips" component={Trips} /> */}
         <Tab.Screen name="Profile" component={ProfileStackScreen}/>
       </Tab.Navigator>
     </NavigationContainer> )

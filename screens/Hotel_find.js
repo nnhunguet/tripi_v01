@@ -61,7 +61,7 @@ export default function Hotel_find({ navigation }) {
       <TouchableOpacity
         onPress={() => {
           dispath(getHotels(item.title)); 
-          navigation.navigate('Detail', { type_code: 0, search_id: item.title});
+          navigation.navigate('Detail', { type_code: 0, search_id: item.title, name: item.title, room: rooms, person: adults});
         }}
       >
       <View style={styles.city_background}> 
@@ -134,7 +134,7 @@ export default function Hotel_find({ navigation }) {
                 <TouchableOpacity
                   style={styles.Bottomsheet_Button}
                   onPress={
-                    () => {setRooms(room), setAdults(person),  bottomSheet.current.close()}     
+                    () => {setRooms(room), setAdults(person + kid),  bottomSheet.current.close()}     
                 }
                 >
                   <Text style={{color: "#fff", fontSize: 20, fontWeight: '400'}}>Áp Dụng</Text>
@@ -168,7 +168,7 @@ export default function Hotel_find({ navigation }) {
                 <TouchableOpacity
                   onPress={ () => {
                     dispath(getHotels(item)); 
-                    navigation.navigate('Detail', { type_code: item.type_code, search_id: item.search_id});
+                    navigation.navigate('Detail', { type_code: item.type_code, search_id: item.search_id, name: item.name, room: rooms, person: adults});
                   }}
                   style={{padding: 8, backgroundColor: '#fff', width: wp*(8/10), position: 'relative', zIndex: 3}}
                 >
@@ -210,8 +210,10 @@ export default function Hotel_find({ navigation }) {
           </View>
           <TouchableOpacity
             onPress={() => {
+              if(textInput.length > 0){
               dispath(getHotels(textInput)); 
-              navigation.navigate('Detail');
+              navigation.navigate('Detail', {name: textInput, room: rooms, person: adults});
+              }
             }}
           >
             <View style={styles.loginButton}>
