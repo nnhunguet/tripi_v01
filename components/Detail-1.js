@@ -23,9 +23,9 @@ import { Feather } from '@expo/vector-icons';
 import  { Color }  from './Color'; 
 import { TouchableWithoutFeedback, FlatList } from 'react-native-gesture-handler';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
-
 const convertVND = (price) => {
   return price.toLocaleString('en-US', {style : 'currency', currency : 'VND'});
 }
@@ -38,7 +38,6 @@ export default function DetailsScreen({ navigation, route }) {
   const multiSliderValuesChange = (values) => setMultiSliderValue(values);
   const [priceValue, setPriceValue] = useState([0, 50]);
   const PriceValuesChange = (values) => setPriceValue(values);
-
   const [star1, setStar1] = useState(false);
   const [star2, setStar2] = useState(false);
   const [star3, setStar3] = useState(false);
@@ -56,7 +55,7 @@ export default function DetailsScreen({ navigation, route }) {
   const [service9, setService9] = useState(false);
   const [service10, setService10] = useState(false);
 
-
+  const safeArea = useSafeAreaInsets();
   const dataHotels = useSelector(state => state.getHotelReducer.data);
 
   // console.log('data Hotel', dataHotels);
@@ -185,8 +184,8 @@ export default function DetailsScreen({ navigation, route }) {
                         dispatch(starHotel(1));
                       }}
                     >
-                      <View style={{paddingHorizontal: 15, paddingVertical: 7,  borderColor: star1 ? '#f0a500' : 'grey', borderWidth: 1, borderRadius: 5}} >
-                        <FontAwesome name="star" size={13} color={star1 ?'#f0a500' : 'grey'}/>
+                      <View style={{paddingHorizontal: 15, paddingVertical: 7,  borderColor: star1 ? Color.primary : 'grey', borderWidth: 1, borderRadius: 5}} >
+                        <FontAwesome name="star" size={13} color={star1 ? Color.primary : 'grey'}/>
                       </View>
                     </TouchableOpacity>
                     <TouchableOpacity 
@@ -195,7 +194,7 @@ export default function DetailsScreen({ navigation, route }) {
                         paddingVertical: 7,
                         paddingHorizontal: 15,
                         borderWidth: 1,
-                        borderColor: star2 ? '#f0a500' :'grey',
+                        borderColor: star2 ? Color.primary :'grey',
                         borderRadius: 5,
                       }}
                       onPress={() => {
@@ -204,8 +203,8 @@ export default function DetailsScreen({ navigation, route }) {
                         console.log('2 sao');
                       }}
                     >
-                      <FontAwesome name="star" size={13} color={star2 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
-                      <FontAwesome name="star" size={13} color={star2 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star2 ? Color.primary :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star2 ? Color.primary :'grey'} style={{paddingRight: 1}}/> 
                     </TouchableOpacity>
                     <TouchableOpacity 
                       style={{
@@ -213,7 +212,7 @@ export default function DetailsScreen({ navigation, route }) {
                         paddingVertical: 7,
                         paddingHorizontal: 15,
                         borderWidth: 1,
-                        borderColor: star3 ? '#f0a500' :'grey',
+                        borderColor: star3 ? Color.primary :'grey',
                         borderRadius: 5,
                       }}
                       onPress={() => {
@@ -222,9 +221,9 @@ export default function DetailsScreen({ navigation, route }) {
                         console.log('3 sao')
                       }}
                     >
-                      <FontAwesome name="star" size={13} color={star3 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
-                      <FontAwesome name="star" size={13} color={star3 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
-                      <FontAwesome name="star" size={13} color={star3 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star3 ? Color.primary :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star3 ? Color.primary :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star3 ? Color.primary :'grey'} style={{paddingRight: 1}}/> 
                     </TouchableOpacity>
                   </View>
                   <View style={{flexDirection: 'row', width: WIDTH/1.9, justifyContent: 'space-between'}}>
@@ -234,7 +233,7 @@ export default function DetailsScreen({ navigation, route }) {
                         paddingVertical: 7,
                         paddingHorizontal: 15,
                         borderWidth: 1,
-                        borderColor: star4 ? '#f0a500' :'grey',
+                        borderColor: star4 ? Color.primary :'grey',
                         borderRadius: 5,
                       }}
                       onPress={() => {
@@ -243,10 +242,10 @@ export default function DetailsScreen({ navigation, route }) {
                         console.log('4 sao')
                       }}
                     >
-                      <FontAwesome name="star" size={13} color={star4 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
-                      <FontAwesome name="star" size={13} color={star4 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
-                      <FontAwesome name="star" size={13} color={star4 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
-                      <FontAwesome name="star" size={13} color={star4 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star4 ? Color.primary :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star4 ? Color.primary :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star4 ? Color.primary :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star4 ? Color.primary :'grey'} style={{paddingRight: 1}}/> 
                     </TouchableOpacity>
                     <TouchableOpacity 
                       style={{
@@ -254,7 +253,7 @@ export default function DetailsScreen({ navigation, route }) {
                         paddingVertical: 7,
                         paddingHorizontal: 15,
                         borderWidth: 1,
-                        borderColor: star5 ? '#f0a500' :'grey',
+                        borderColor: star5 ? Color.primary :'grey',
                         borderRadius: 5,
                       }}
                       onPress={() => {
@@ -263,11 +262,11 @@ export default function DetailsScreen({ navigation, route }) {
                         console.log('5 sao')
                       }}  
                     >
-                      <FontAwesome name="star" size={13} color={star5 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
-                      <FontAwesome name="star" size={13} color={star5 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
-                      <FontAwesome name="star" size={13} color={star5 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
-                      <FontAwesome name="star" size={13} color={star5 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
-                      <FontAwesome name="star" size={13} color={star5 ? '#f0a500' :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star5 ? Color.primary :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star5 ? Color.primary :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star5 ? Color.primary :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star5 ? Color.primary :'grey'} style={{paddingRight: 1}}/> 
+                      <FontAwesome name="star" size={13} color={star5 ? Color.primary :'grey'} style={{paddingRight: 1}}/> 
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -379,11 +378,11 @@ export default function DetailsScreen({ navigation, route }) {
                                       paddingVertical: 7,
                                       paddingHorizontal: 15,
                                       borderWidth: 1,
-                                      borderColor: service1 ? '#f0a500' : 'grey',
+                                      borderColor: service1 ? Color.primary : 'grey',
                                       borderRadius: 5,
                                     }}
                       >
-                        <Text style={service1 ? {fontSize: 12, color: '#f0a500'} : {fontSize: 12}}>Bể bơi ngoài trời</Text>
+                        <Text style={service1 ? {fontSize: 12, color: Color.primary} : {fontSize: 12}}>Bể bơi ngoài trời</Text>
                       </View>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -396,11 +395,11 @@ export default function DetailsScreen({ navigation, route }) {
                                       paddingVertical: 7,
                                       paddingHorizontal: 15,
                                       borderWidth: 1,
-                                      borderColor: service2 ? '#f0a500' : 'grey',
+                                      borderColor: service2 ? Color.primary : 'grey',
                                       borderRadius: 5,
                                     }}
                       >
-                        <Text style={service2 ? {fontSize: 12, color: '#f0a500'} : {fontSize: 12}}>Dịch vụ tour</Text>
+                        <Text style={service2 ? {fontSize: 12, color: Color.primary} : {fontSize: 12}}>Dịch vụ tour</Text>
                       </View>
                     </TouchableOpacity>
                   </View>
@@ -418,7 +417,7 @@ export default function DetailsScreen({ navigation, route }) {
                                       borderColor: service3 ? '#f0a500' : 'grey',
                                       borderRadius: 5,
                                     }}>
-                        <Text style={service3 ? {fontSize: 12, color: '#f0a500'} : {fontSize: 12}}>Wifi/Internet</Text>
+                        <Text style={service3 ? {fontSize: 12, color: Color.primary} : {fontSize: 12}}>Wifi/Internet</Text>
                       </View>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -431,10 +430,10 @@ export default function DetailsScreen({ navigation, route }) {
                                       paddingVertical: 7,
                                       paddingHorizontal: 15,
                                       borderWidth: 1,
-                                      borderColor: service4 ? '#f0a500' : 'grey',
+                                      borderColor: service4 ? Color.primary : 'grey',
                                       borderRadius: 5,
                                     }}>
-                        <Text style={service4 ? {fontSize: 12, color: '#f0a500'} : {fontSize: 12}}>Giặt ủi</Text>
+                        <Text style={service4 ? {fontSize: 12, color: Color.primary} : {fontSize: 12}}>Giặt ủi</Text>
                       </View>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -447,10 +446,10 @@ export default function DetailsScreen({ navigation, route }) {
                                       paddingVertical: 7,
                                       paddingHorizontal: 15,
                                       borderWidth: 1,
-                                      borderColor: service5 ? '#f0a500' : 'grey',
+                                      borderColor: service5 ? Color.primary : 'grey',
                                       borderRadius: 5,
                                     }}>
-                        <Text style={service5 ? {fontSize: 12, color: '#f0a500'} : {fontSize: 12}}>Quầy bar</Text>
+                        <Text style={service5 ? {fontSize: 12, color: Color.primary} : {fontSize: 12}}>Quầy bar</Text>
                       </View>
                     </TouchableOpacity>
                   </View>
@@ -465,10 +464,10 @@ export default function DetailsScreen({ navigation, route }) {
                                       paddingVertical: 7,
                                       paddingHorizontal: 15,
                                       borderWidth: 1,
-                                      borderColor: service6 ? '#f0a500' : 'grey',
+                                      borderColor: service6 ? Color.primary : 'grey',
                                       borderRadius: 5,
                                     }}>
-                        <Text style={service6 ? {fontSize: 12, color: '#f0a500'} : {fontSize: 12}}>Hướng dẫn viên du lịch</Text>
+                        <Text style={service6 ? {fontSize: 12, color: Color.primary} : {fontSize: 12}}>Hướng dẫn viên du lịch</Text>
                       </View>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -481,10 +480,10 @@ export default function DetailsScreen({ navigation, route }) {
                                       paddingVertical: 7,
                                       paddingHorizontal: 15,
                                       borderWidth: 1,
-                                      borderColor: service7 ? '#f0a500' : 'grey',
+                                      borderColor: service7 ? Color.primary : 'grey',
                                       borderRadius: 5,
                                     }}>
-                        <Text style={service7 ? {fontSize: 12, color: '#f0a500'} : {fontSize: 12}}>Nhà hàng</Text>
+                        <Text style={service7 ? {fontSize: 12, color: Color.primary} : {fontSize: 12}}>Nhà hàng</Text>
                       </View>
                     </TouchableOpacity>
                   </View>
@@ -505,7 +504,7 @@ export default function DetailsScreen({ navigation, route }) {
           </TouchableOpacity>
         </View>
       </BottomSheet>
-        <View style={styles.menu_chose}>
+        <View style={styles.menu_chose(safeArea)}>
             <TouchableWithoutFeedback onPress={action}>
               <View style={{flexDirection: 'row', alignItems: "center"}}>
                 <MaterialCommunityIcons name="sort-descending" size={24} color={Color.primary} />
@@ -533,7 +532,7 @@ export default function DetailsScreen({ navigation, route }) {
             >
               <View style={styles.card}>
                 <View style={styles.card_Img}>
-                  <Image style={styles.Image} source={{uri: item.logo ? item.logo : 'https://scontent.fhan2-2.fna.fbcdn.net/v/t1.0-0/p640x640/68401906_157744848700465_7740565304106811392_o.jpg?_nc_cat=111&_nc_sid=e3f864&_nc_ohc=K-qqLuKEe3QAX8rTOUz&_nc_ht=scontent.fhan2-2.fna&tp=6&oh=498085993b02cf8a7c1670bd50660e5c&oe=5F7D0E5C'}}/>
+                  <Image style={styles.Image} source={{uri: item.logo ? item.logo : 'https://secure.s.forbestravelguide.com/img/properties/monterey-plaza-hotel-spa/monterey-plaza-hotel-spa-presidential-suite-bedroom.jpg'}}/>
                   <View style={styles.card_heart}>
                     <AntDesign name="hearto" size={14} color={Color.primary} style={{padding: 10}}/>
                   </View>
@@ -575,12 +574,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  menu_chose:{
+  menu_chose: (safeArea) => ({
     paddingHorizontal: 20,
     flex: 0.078,
     backgroundColor: "#fff",
     flexDirection: 'row',
-    marginTop: -19,
+    marginTop: - safeArea.top,
     alignItems: "center",
     shadowColor: "#000",
     justifyContent: 'space-between',
@@ -591,7 +590,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
     elevation: 7,
-  },
+  }),
   menu_chose_first: {
     flex: 0.5,
     justifyContent: "space-around",
@@ -785,8 +784,8 @@ const styles = StyleSheet.create({
     width: WIDTH,
     height: HEIGHT/8,
     backgroundColor: '#fff',
-    position: 'relative',
-    bottom: HEIGHT/8.7,
+    position: 'absolute',
+    bottom:0,
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: "#000",
