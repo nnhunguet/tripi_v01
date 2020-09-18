@@ -181,7 +181,6 @@ export default function DetailsScreen({ navigation, route }) {
                   <View style={{flexDirection: 'row', width: WIDTH/1.9, justifyContent: 'space-between'}}>
                     <TouchableOpacity
                       onPress={() => {
-                        console.log('1 sao');
                         setStar1(!star1);
                         dispatch(starHotel(1));
                       }}
@@ -372,69 +371,120 @@ export default function DetailsScreen({ navigation, route }) {
                   <View style={{flexDirection: 'row', width: WIDTH/1.42, justifyContent: 'space-between'}}>
                     <TouchableOpacity
                       onPress={() => {
+                        setService1(!service1)
                         dispatch(serviceHotel(14));
                       }}
                     >
-                      <View style={styles.star_ratting}>
-                        <Text style={{fontSize: 12}}>Bể bơi ngoài trời</Text>
+                      <View style={{ flexDirection: 'row', 
+                                      paddingVertical: 7,
+                                      paddingHorizontal: 15,
+                                      borderWidth: 1,
+                                      borderColor: service1 ? '#f0a500' : 'grey',
+                                      borderRadius: 5,
+                                    }}
+                      >
+                        <Text style={service1 ? {fontSize: 12, color: '#f0a500'} : {fontSize: 12}}>Bể bơi ngoài trời</Text>
                       </View>
                     </TouchableOpacity>
                     <TouchableOpacity
                       onPress={() => {
+                        setService2(!service2);
                         dispatch(serviceHotel(13));
                       }}
                     >
-                      <View style={styles.star_ratting}>
-                        <Text style={{fontSize: 12}}>Dịch vụ tour</Text>
+                      <View style={{ flexDirection: 'row', 
+                                      paddingVertical: 7,
+                                      paddingHorizontal: 15,
+                                      borderWidth: 1,
+                                      borderColor: service2 ? '#f0a500' : 'grey',
+                                      borderRadius: 5,
+                                    }}
+                      >
+                        <Text style={service2 ? {fontSize: 12, color: '#f0a500'} : {fontSize: 12}}>Dịch vụ tour</Text>
                       </View>
                     </TouchableOpacity>
                   </View>
                   <View style={{flexDirection: 'row', width: WIDTH/1.42, justifyContent: 'space-between'}}>
                     <TouchableOpacity
                       onPress={() => {
+                        setService3(!service3);
                         dispatch(serviceHotel(12));
                       }}
                     >
-                      <View style={styles.star_ratting}>
-                        <Text style={{fontSize: 12}}>Wifi/Internet</Text>
+                      <View style={{ flexDirection: 'row', 
+                                      paddingVertical: 7,
+                                      paddingHorizontal: 15,
+                                      borderWidth: 1,
+                                      borderColor: service3 ? '#f0a500' : 'grey',
+                                      borderRadius: 5,
+                                    }}>
+                        <Text style={service3 ? {fontSize: 12, color: '#f0a500'} : {fontSize: 12}}>Wifi/Internet</Text>
                       </View>
                     </TouchableOpacity>
                     <TouchableOpacity
                       onPress={() => {
+                        setService4(!service4);
                         dispatch(serviceHotel(11));
                       }}
                     >
-                      <View style={styles.star_ratting}>
-                        <Text style={{fontSize: 12}}>Giặt ủi</Text>
+                      <View style={{ flexDirection: 'row', 
+                                      paddingVertical: 7,
+                                      paddingHorizontal: 15,
+                                      borderWidth: 1,
+                                      borderColor: service4 ? '#f0a500' : 'grey',
+                                      borderRadius: 5,
+                                    }}>
+                        <Text style={service4 ? {fontSize: 12, color: '#f0a500'} : {fontSize: 12}}>Giặt ủi</Text>
                       </View>
                     </TouchableOpacity>
                     <TouchableOpacity
                       onPress={() => {
+                        setService5(!service5);
                         dispatch(serviceHotel(10));
                       }}
                     >
-                      <View style={styles.star_ratting}>
-                        <Text style={{fontSize: 12}}>Quầy bar</Text>
+                      <View style={{ flexDirection: 'row', 
+                                      paddingVertical: 7,
+                                      paddingHorizontal: 15,
+                                      borderWidth: 1,
+                                      borderColor: service5 ? '#f0a500' : 'grey',
+                                      borderRadius: 5,
+                                    }}>
+                        <Text style={service5 ? {fontSize: 12, color: '#f0a500'} : {fontSize: 12}}>Quầy bar</Text>
                       </View>
                     </TouchableOpacity>
                   </View>
                   <View style={{flexDirection: 'row', width: WIDTH/1.42, justifyContent: 'space-between'}}>
                     <TouchableOpacity
                       onPress={() => {
-                        dispatch(serviceHotel(8))
+                        setService6(!service6);
+                        dispatch(serviceHotel(8));
                       }}
                     >
-                      <View style={styles.star_ratting}>
-                        <Text style={{fontSize: 12}}>Hướng dẫn viên du lịch</Text>
+                      <View style={{ flexDirection: 'row', 
+                                      paddingVertical: 7,
+                                      paddingHorizontal: 15,
+                                      borderWidth: 1,
+                                      borderColor: service6 ? '#f0a500' : 'grey',
+                                      borderRadius: 5,
+                                    }}>
+                        <Text style={service6 ? {fontSize: 12, color: '#f0a500'} : {fontSize: 12}}>Hướng dẫn viên du lịch</Text>
                       </View>
                     </TouchableOpacity>
                     <TouchableOpacity
                       onPress={() => {
+                        setService7(!service7)
                         dispatch(serviceHotel(7))
                       }}
                     >
-                      <View style={styles.star_ratting}>
-                        <Text style={{fontSize: 12}}>Nhà hàng</Text>
+                      <View style={{ flexDirection: 'row', 
+                                      paddingVertical: 7,
+                                      paddingHorizontal: 15,
+                                      borderWidth: 1,
+                                      borderColor: service7 ? '#f0a500' : 'grey',
+                                      borderRadius: 5,
+                                    }}>
+                        <Text style={service7 ? {fontSize: 12, color: '#f0a500'} : {fontSize: 12}}>Nhà hàng</Text>
                       </View>
                     </TouchableOpacity>
                   </View>

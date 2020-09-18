@@ -4,6 +4,7 @@ import { watchFetchKeyWord } from './keyWordSaga';
 import { watchGetHotels } from './getHotelsSaga';
 import { watchGetInforHotel } from './getInforHotelSaga'
 import { watchGetAllPrices } from './getAllPriceSaga'
+import { watchGetUrlHotel } from './getUrlHotel'
 
 export default function* rootSaga() {
   
@@ -12,5 +13,6 @@ export default function* rootSaga() {
     watchGetHotels(),
     watchGetInforHotel(),
     watchGetAllPrices(),
+    watchGetUrlHotel(),
   ])
 }

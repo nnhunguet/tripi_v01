@@ -25,12 +25,14 @@ const wp = Dimensions.get('window').width;
 const hp = Dimensions.get('window').height;
 const LATITUDE = 21.037814;
 const LONGITUDE = 105.781468;
-import { useSelector } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import StarRating from './star-rating';
 const convertVND = (price) => {
   return price.toLocaleString('en-US', {style : 'currency', currency : 'VND'});
 }
+
+import { useSelector, useDispatch } from 'react-redux';
+import { getUrl } from '../redux/actions';
 
 const stringDomain = (domain_id) => {
   switch(domain_id) {
@@ -64,9 +66,12 @@ const imagelogo = (domain_id) => {
 }
  
 export default function Hotel_info_screens({ route, props }) {
+  const dispatch = useDispatch();
   const inforHotel = useSelector(state => state.getInforHotelReducer.data[0]);
   const { minPrice, domain_id } = route.params;
   let allPrice = useSelector(state => state.getInforHotelReducer.allPrice);
+  let urlHotel = useSelector(state => state.getUrlHotelReducer);
+  console.log('url', urlHotel);
   const regex = /(<([^>]+)>)/ig;
   const bottomSheet = useRef();
   const [textShown, setTextShown] = useState(false);
@@ -98,7 +103,11 @@ export default function Hotel_info_screens({ route, props }) {
             data={allPrice}
             renderItem={ ({ item }) => (
               <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center' ,paddingHorizontal: 20}}>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    console.log(urlHotel);
+                  }}
+                >
                 <View style={{height: hp/6, width: '100%', borderBottomColor: '#d3d3d3', borderBottomWidth: 1, flexDirection: 'row'}}>
                   <View style={{width: '60%'}}>
                     <Image source={imagelogo(item.domain_id)} resizeMode='cover' style={{height:'60%', width: '60%'}}/>
@@ -188,7 +197,8 @@ export default function Hotel_info_screens({ route, props }) {
                   <TouchableOpacity
                     onPress={() => {
                       if(minPrice !== 20000000000){
-                        bottomSheet.current.show()
+                        dispatch(getUrl(inforHotel.hotel_id));
+                        bottomSheet.current.show();
                       } else {
                         alert('Hết Phòng');
                       }
