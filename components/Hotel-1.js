@@ -93,7 +93,7 @@ export default function Hotel_info_screens({ route, props }) {
             ListHeaderComponent={() => {
               return (
                 <View>
-                  <Text style={{textAlign: 'center', fontSize: 30, }}>
+                  <Text style={{textAlign: 'center', fontSize: 30 }}>
                     BẢNG GIÁ
                   </Text>
                 </View>
