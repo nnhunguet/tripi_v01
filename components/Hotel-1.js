@@ -133,7 +133,7 @@ export default function Hotel_info_screens({ route, props }) {
             scrollEventThrottle = {16}
          > 
           <View style={styles.Img_Background}>
-            <Animated.Image style={styles.background(scrollA)} source={{uri: inforHotel.logo || "https://scontent.fhan2-2.fna.fbcdn.net/v/t1.0-0/p640x640/68401906_157744848700465_7740565304106811392_o.jpg?_nc_cat=111&_nc_sid=e3f864&_nc_ohc=ALSx5Ro_F-cAX-Q4xwi&_nc_ht=scontent.fhan2-2.fna&tp=6&oh=6071894881c03d120497e3f8a844b4f1&oe=5F7D0E5C"}} resizeMode={'cover'} >
+            <Animated.Image style={styles.background(scrollA)} source={{uri: inforHotel.logo || "https://secure.s.forbestravelguide.com/img/properties/monterey-plaza-hotel-spa/monterey-plaza-hotel-spa-presidential-suite-bedroom.jpg"}} resizeMode={'cover'} >
             </Animated.Image>   
           </View>
           <View style={styles.Info_container}> 
@@ -205,7 +205,7 @@ export default function Hotel_info_screens({ route, props }) {
                     }}
                   >
                     <View style={styles.Price_more}>
-                      <Text style={{fontSize: 16, fontWeight: '600', color: Color.primary}}>Xem tất cả giá cả</Text>
+                      <Text style={{fontSize: 16, fontWeight: '600', color: Color.primary}}>Xem tất cả giá</Text>
                     </View>
                   </TouchableOpacity>
                 </View>
@@ -325,22 +325,22 @@ export default function Hotel_info_screens({ route, props }) {
               </View>
                 </View>
             </View>
-            <View style={{height: hp/1.3}}>
+            <View style={{height: 500}}>
               <MapView style={styles.mapView}
                 region={
                   {
-                    latitude: LATITUDE,
-                    longitude: LONGITUDE,
-                    latitudeDelta: 0.0922,
-                    longitudeDelta: 0.0421,
+                    latitude: inforHotel.latitude,
+                    longitude: inforHotel.longitude,
+                    latitudeDelta: 0.0522,
+                    longitudeDelta: 0.0121,
                   }
                 }
                 provider='google'>
                 <Marker 
-                  coordinate={{latitude: LATITUDE, longitude: LONGITUDE}}
+                  coordinate={{latitude: inforHotel.latitude, longitude: inforHotel.longitude}}
                 />    
               </MapView> 
-              <View style={{flex: 1}}>
+              <View>
                 <Text style={{paddingTop: 20, paddingBottom: 5}}><FontAwesome name="map-marker" size={16} color={Color.primary} />  {inforHotel.address} </Text>
                 <Text style={{paddingTop: 5, paddingBottom: 5}}><Entypo name="old-phone" size={16} color={Color.primary} />  0907512750</Text>
                 <Text style={{paddingTop: 5, paddingBottom: 5, color: Color.primary}}><MaterialCommunityIcons name="web" size={16} color={Color.primary} /> Truy cập Trang web của khách sạn</Text>
@@ -438,7 +438,7 @@ const styles = StyleSheet.create({
   },  
   Button_container: {
     justifyContent: "space-between",
-    height: hp/7,
+    height: 90,
   },
   Price_sell: {
     width: "100%",
@@ -459,7 +459,7 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   Rating: {
-    marginTop: 25,
+    marginTop: 50,
     height: hp/3.5,
     width: '100%',
     backgroundColor: '#fff',
