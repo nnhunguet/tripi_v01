@@ -8,9 +8,9 @@ function* fetchKeyWord({payload}) {
   yield delay(1000);
   console.log('fetch key word', payload);
   try {
-    yield put(showLoading());
+    // yield put(showLoading());
     const receivedKeyWord = yield Api.getKeyWordSuggestion(payload.keyword);
-    yield put(hideLoading());
+    // yield put(hideLoading());
     if(payload.keyword !== '') {
       yield put({ type: FETCH_SUCCEEDED, payload: { data: receivedKeyWord } });  
     } else {
