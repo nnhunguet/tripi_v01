@@ -12,9 +12,6 @@ function* getUrlHotels(id) {
     // handle error
     console.log(error);
   })
-  .then(function () {
-    return response;
-  });
   return response;
 }
 

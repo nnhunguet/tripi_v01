@@ -22,6 +22,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { 
   keyWordSuggestion, 
   getHotels,
+  getInforHotelAction
 } from '../redux/actions'
 import { 
   FlatList, 
@@ -238,34 +239,46 @@ export default function Hotel_find({ navigation }) {
             <View>
               <View style={styles.hot_deal_items}>
                 <View style={styles.hot_deal_img}>
-                  <Image style={{width:'100%', height:'100%', borderTopLeftRadius: 15, borderBottomLeftRadius: 15,}} source={require('../assets/Welcome.jpg') }></Image>
+                  <Image style={{width:'100%', height:'100%', borderTopLeftRadius: 15, borderBottomLeftRadius: 15,}} source={{uri: 'https://www.googleapis.com/download/storage/v1/b/hotel_image/o/logo%2F4%2F7023241.jpg?generation=1563769856723677&alt=media'}}></Image>
                 </View>
-                <View style={styles.hot_deal_info}>
-                  <Text numberOfLines= {2} style={styles.suggestion_name}>Cereja Hotel {'&'} Resort Đà Lạt by alibaba và 40 tên cướp alibaba</Text> 
-                  <Text numberOfLines= {2} style={{fontSize: 12, color: 'grey', paddingLeft: 10, marginTop: 15, paddingBottom: 10}}>73 Trương Định, Quận 3, Hồ Chí ah</Text>
-                  <View style={{flexDirection: 'row'}}>
-                    <View style={{flex: 0.4}}>
-                      <View style={{flexDirection: 'row', paddingLeft: 10, marginTop: 10}}>
-                        <StarRating rating={3}/>   
-                      </View>    
-                      <View style={{marginLeft: 10,borderColor: 'black',backgroundColor: Color.primary,width: 50, marginTop: 10, alignItems:"center" }}>  
-                      <Text style={{color:'white',  fontSize: 12}}>9.0</Text>        
-                      </View> 
-                    </View>
-                    <View style={{flex: 0.6,alignItems: "center", justifyContent: "center", marginTop: 5}}>
-                      <Text style={{fontSize: 15, fontWeight: 'bold'}}>435.000 đ</Text>
-                      <Text style={{}}>/Đêm</Text>
-                    </View>
-                  </View>    
-                </View>
+                <TouchableOpacity
+                  onPress={() => {
+                    dispath(getInforHotelAction(32701));
+                    navigation.navigate('Hotel', { minPrice: 139000, domain_id: 3});
+                  }}
+                  style={styles.hot_deal_info}
+                >
+                    <Text numberOfLines= {2} style={styles.suggestion_name}>VINH HUNG 2</Text> 
+                    <Text numberOfLines= {2} style={{fontSize: 12, color: 'grey', paddingLeft: 10, marginTop: 15, paddingBottom: 10}}>114/2A, KP2, P. Tân Thới Hiệp, Quận 12, Hồ Chí Minh, Việt Nam</Text>
+                    <View style={{flexDirection: 'row'}}>
+                      <View style={{flex: 0.4}}>
+                        <View style={{flexDirection: 'row', paddingLeft: 10, marginTop: 10}}>
+                          <StarRating rating={3}/>   
+                        </View>    
+                        <View style={{marginLeft: 10,borderColor: 'black',backgroundColor: Color.primary,width: 50, marginTop: 10, alignItems:"center" }}>  
+                        <Text style={{color:'white',  fontSize: 12}}>9.0</Text>        
+                        </View> 
+                      </View>
+                      <View style={{flex: 0.6,alignItems: "center", justifyContent: "center", marginTop: 5}}>
+                        <Text style={{fontSize: 15, fontWeight: 'bold'}}>139.000 đ</Text>
+                        <Text style={{}}>/Đêm</Text>
+                      </View>
+                    </View>    
+                </TouchableOpacity>
               </View>    
-              <View style={styles.hot_deal_items}>
+              <TouchableOpacity 
+                style={styles.hot_deal_items}
+                onPress={() => {
+                  dispath(getInforHotelAction(37547));
+                  navigation.navigate('Hotel', { minPrice: 69264, domain_id: 3});
+                }}
+              >
                 <View style={styles.hot_deal_img}>
-                  <Image style={{width:'100%', height:'100%', borderTopLeftRadius: 15, borderBottomLeftRadius: 15,}} source={require('../assets/Welcome.jpg') }></Image>
+                  <Image style={{width:'100%', height:'100%', borderTopLeftRadius: 15, borderBottomLeftRadius: 15,}} source={{uri: 'https://www.googleapis.com/download/storage/v1/b/hotel_image/o/logo%2F4%2F2393731.jpg?generation=1563771403739760&alt=media'}}></Image>
                 </View>
                 <View style={styles.hot_deal_info}>
-                  <Text numberOfLines= {2} style={styles.suggestion_name}>Cereja Hotel {'&'} Resort Đà Lạt by alibaba và 40 tên cướp alibaba</Text> 
-                  <Text numberOfLines= {2} style={{fontSize: 12, color: 'grey', paddingLeft: 10, marginTop: 15, paddingBottom: 10}}>73 Trương Định, Quận 3, Hồ Chí ah</Text>
+                  <Text numberOfLines= {2} style={styles.suggestion_name}>Nhat Nam Hotel</Text> 
+                  <Text numberOfLines= {2} style={{fontSize: 12, color: 'grey', paddingLeft: 10, marginTop: 15, paddingBottom: 10}}>6/3 Bà Triệu, Thành Phố Đà Lạt, Lâm Đồng</Text>
                   <View style={{flexDirection: 'row'}}>
                     <View style={{flex: 0.4}}>
                       <View style={{flexDirection: 'row', paddingLeft: 10, marginTop: 10}}>
@@ -276,19 +289,25 @@ export default function Hotel_find({ navigation }) {
                       </View> 
                     </View>
                     <View style={{flex: 0.6,alignItems: "center", justifyContent: "center", marginTop: 5}}>
-                      <Text style={{fontSize: 15, fontWeight: 'bold'}}>435.000 đ</Text>
+                      <Text style={{fontSize: 15, fontWeight: 'bold'}}>69.264 đ</Text>
                       <Text style={{}}>/Đêm</Text>
                     </View>
                   </View>    
                 </View>
-              </View> 
-              <View style={styles.hot_deal_items}>
+              </TouchableOpacity> 
+              <TouchableOpacity 
+                style={styles.hot_deal_items}
+                onPress={() => {
+                  dispath(getInforHotelAction(42444));
+                  navigation.navigate('Hotel', { minPrice: 187000, domain_id: 5});
+                }}
+              >
                 <View style={styles.hot_deal_img}>
-                  <Image style={{width:'100%', height:'100%', borderTopLeftRadius: 15, borderBottomLeftRadius: 15,}} source={require('../assets/Welcome.jpg') }></Image>
+                  <Image style={{width:'100%', height:'100%', borderTopLeftRadius: 15, borderBottomLeftRadius: 15,}} source={{uri: 'https://www.googleapis.com/download/storage/v1/b/hotel_image/o/logo%2F4%2F7923002.jpg?generation=1563773334736526&alt=media'}}></Image>
                 </View>
                 <View style={styles.hot_deal_info}>
-                  <Text numberOfLines= {2} style={styles.suggestion_name}>Cereja Hotel {'&'} Resort Đà Lạt by alibaba và 40 tên cướp alibaba</Text> 
-                  <Text numberOfLines= {2} style={{fontSize: 12, color: 'grey', paddingLeft: 10, marginTop: 15, paddingBottom: 10}}>73 Trương Định, Quận 3, Hồ Chí ah</Text>
+                  <Text numberOfLines= {2} style={styles.suggestion_name}>Letters' Homestay</Text> 
+                  <Text numberOfLines= {2} style={{fontSize: 12, color: 'grey', paddingLeft: 10, marginTop: 15, paddingBottom: 10}}>237 Bà Triệu, Biển Tuy Hòa, Tuy Hòa (Phú Yên), Việt Nam</Text>
                   <View style={{flexDirection: 'row'}}>
                     <View style={{flex: 0.4}}>
                       <View style={{flexDirection: 'row', paddingLeft: 10, marginTop: 10}}>
@@ -299,12 +318,12 @@ export default function Hotel_find({ navigation }) {
                       </View> 
                     </View>
                     <View style={{flex: 0.6,alignItems: "center", justifyContent: "center", marginTop: 5}}>
-                      <Text style={{fontSize: 15, fontWeight: 'bold'}}>435.000 đ</Text>
+                      <Text style={{fontSize: 15, fontWeight: 'bold'}}>187.000 đ</Text>
                       <Text style={{}}>/Đêm</Text>
                     </View>
                   </View>    
                 </View>
-              </View>       
+              </TouchableOpacity>       
             </View>
         </View>
       </ScrollView>

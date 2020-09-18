@@ -7,7 +7,8 @@ import {
   ScrollView, 
   Dimensions, 
   FlatList,
-  Animated
+  Animated,
+  Linking
 } from 'react-native';
 import { PricingCard } from 'react-native-elements';
 import { Color } from './Color'; 
@@ -70,7 +71,7 @@ export default function Hotel_info_screens({ route, props }) {
   const inforHotel = useSelector(state => state.getInforHotelReducer.data[0]);
   const { minPrice, domain_id } = route.params;
   let allPrice = useSelector(state => state.getInforHotelReducer.allPrice);
-  let urlHotel = useSelector(state => state.getUrlHotelReducer);
+  let urlHotel = useSelector(state => state.getUrlHotelReducer.data);
   console.log('url', urlHotel);
   const regex = /(<([^>]+)>)/ig;
   const bottomSheet = useRef();
@@ -105,7 +106,11 @@ export default function Hotel_info_screens({ route, props }) {
               <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center' ,paddingHorizontal: 20}}>
                 <TouchableOpacity
                   onPress={() => {
-                    console.log(urlHotel);
+                    let url = urlHotel.find(ele => ele.domain_id === item.domain_id).hotel_url;
+                    if(item.domain_id === 3) {
+                      url = `https://www.agoda.com${url}`;
+                    }
+                    Linking.openURL(url);
                   }}
                 >
                 <View style={{height: hp/6, width: '100%', borderBottomColor: '#d3d3d3', borderBottomWidth: 1, flexDirection: 'row'}}>
